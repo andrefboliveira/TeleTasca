@@ -9,7 +9,11 @@ package fcul.pco.teletasca.domain;
  */
 public class Dish {
    
-    /**
+    private static int id = 0;
+	private String name;
+	private double price;
+
+	/**
      * Initialize a Dish instance
      * 
      * @param name the description of the dish
@@ -18,10 +22,15 @@ public class Dish {
         
     public Dish(String name, double price) {
         // TODO
+    	this(id, name, price);
+    	id++;
     }
     
     private Dish(int id, String name, double price) {
         // TODO
+    	Dish.id = id;
+    	this.name = name;
+    	this.price = price;
     }
     
     /**
@@ -29,8 +38,7 @@ public class Dish {
      * @return the dish Id 
      */
     public int getId()  {
-        // TODO
-        return 0;
+        return id;
     }
     
     /**
@@ -38,8 +46,7 @@ public class Dish {
      * @return the dish description 
      */
     public String getName() {
-        // TODO
-        return "";
+        return this.name;
     }
     
     @Override
@@ -65,5 +72,15 @@ public class Dish {
         return null;
     }
     
+    public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Dish a = new Dish("Bacalhau à Brás", 5.95);
+		System.out.println(a.getId());
+		System.out.println(a.getName());
+		Dish b = new Dish("Bolonhesa", 7.0);
+		System.out.println(b.getId());
+		System.out.println(b.getName());
+
+	}
 
 }
