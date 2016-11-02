@@ -68,8 +68,15 @@ public class Dish {
      * 
      */
     public static Dish fromString(String s) {
-        // TODO
-        return null;
+        String[] stringlist = s.split(",");
+        int dishid = Integer.parseInt(stringlist[0].trim());
+        String dishname = stringlist[1].trim();
+        double dishprice = Double.parseDouble(stringlist[2].trim());
+        
+        return new Dish(dishid, dishname, dishprice);
+
+        //fromString("0, Bacalhau, 5.95");
+        //return new Dish(0, "Bacalhau", 5.95);
     }
     
     public static void main(String[] args) {
@@ -80,7 +87,6 @@ public class Dish {
 		Dish b = new Dish("Bolonhesa", 7.0);
 		System.out.println(b.getId());
 		System.out.println(b.getName());
-
 	}
 
 }
