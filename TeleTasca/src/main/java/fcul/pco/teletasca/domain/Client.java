@@ -4,6 +4,7 @@ package fcul.pco.teletasca.domain;
  * can log in, order dishes, and consult the list his list of orders.
  * 
  * @author Thibault Langlois
+ * @author Tânia Maldonado 44745
  */
 public class Client {
     
