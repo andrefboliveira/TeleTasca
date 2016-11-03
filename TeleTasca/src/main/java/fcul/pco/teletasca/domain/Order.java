@@ -6,7 +6,7 @@ import java.util.Calendar;
  * This class represents an order composed by a date, a client and a list 
  * of dishes.
  * 
- * @author Thibault Langlois
+ * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
  */
 public class Order {
 

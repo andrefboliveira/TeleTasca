@@ -1,21 +1,45 @@
 package fcul.pco.teletasca.domain;
+
+import java.io.IOError;
+import java.util.ArrayList;
+
+import javax.naming.NamingException;
+
 /**
  * The client class represent a restaurant client that, after being registered,
  * can log in, order dishes, and consult the list his list of orders.
  * 
  * @author Thibault Langlois
+ * Alunos:
+ * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  */
 public class Client {
     
-    
-    /**
+    private static ArrayList<String> lista_emails = new ArrayList<String>();
+	
+    private String name;
+	private String email;
+
+
+	/**
      * Initializes an instance of Client
      * @param name : the client's name
      * @param email : the client's email address
      * @requires email address is unique in the system
      */
     public Client(String name, String email) {
+    	
+    	if (!lista_emails.contains(email)) {
+    		this.name = name;
+    		this.email = email;
+    		lista_emails.add(email);    		
+    	} 
+    	// Apagar
+    	//TODO confirmar se está bem email unico
+    	else {
+    		System.out.println("Não criado");;
+    	}
         
     }
     
@@ -24,8 +48,18 @@ public class Client {
      * @return returns the client's email address 
      */
     public String getEmail() {
-        return "";
+        return this.email;
     }
+    
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+     @Override
+     public String toString() {
+         // TODO
+         return "";
+     }
+    
     
     /**
      * Creates an instance of Client from a String.
@@ -40,17 +74,12 @@ public class Client {
      * in s.
      */
     public static Client fromString(String s) {
-        // TODO 
-        return null;
-    }
-    
-    /* (non-Javadoc)
-    * @see java.lang.Object#toString()
-    */
-    @Override
-    public String toString() {
-        // TODO
-        return "";
-    }
+    	String[] stringlist = s.split(",");
+        String clientName = stringlist[0].trim();
+        String clientEmail = stringlist[1].trim();
+        
+        return new Client(clientName, clientEmail);
+ 
+    }   
 
 }

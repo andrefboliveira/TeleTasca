@@ -15,7 +15,7 @@ import java.util.Scanner;
  * It holds an instance of each of the catalogs and an instance of Client that 
  * corresponds to the current user (client).
  * 
- * @author Thibault Langlois
+ * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
  */
 public class App {
 

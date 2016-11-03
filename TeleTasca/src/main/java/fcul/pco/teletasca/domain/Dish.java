@@ -4,14 +4,20 @@ package fcul.pco.teletasca.domain;
 /**
  * This class represents a restaurant dish that can be ordered by a client.
  * 
- * @author Thibault Langlois
+ * @author Thibault Langlois 
+ * Alunos: 
+ * @author André Oliveira 45648
+ * @author Tânia Maldonado 44745
  *
  */
 public class Dish {
    
-    private static int id = 0;
+    private static int counter = 1;
+    
+    private int id;
 	private String name;
 	private double price;
+	
 
 	/**
      * Initialize a Dish instance
@@ -21,14 +27,12 @@ public class Dish {
      */
         
     public Dish(String name, double price) {
-        // TODO
-    	this(id, name, price);
-    	id++;
+    	this(counter, name, price);
+    	counter++;
     }
     
     private Dish(int id, String name, double price) {
-        // TODO
-    	Dish.id = id;
+    	this.id = id;
     	this.name = name;
     	this.price = price;
     }
@@ -38,7 +42,7 @@ public class Dish {
      * @return the dish Id 
      */
     public int getId()  {
-        return id;
+        return this.id;
     }
     
     /**
@@ -69,24 +73,13 @@ public class Dish {
      */
     public static Dish fromString(String s) {
         String[] stringlist = s.split(",");
-        int dishid = Integer.parseInt(stringlist[0].trim());
-        String dishname = stringlist[1].trim();
-        double dishprice = Double.parseDouble(stringlist[2].trim());
+        int dishId = Integer.parseInt(stringlist[0].trim());
+        String dishName = stringlist[1].trim();
+        double dishPrice = Double.parseDouble(stringlist[2].trim());
         
-        return new Dish(dishid, dishname, dishprice);
-
-        //fromString("0, Bacalhau, 5.95");
-        //return new Dish(0, "Bacalhau", 5.95);
+        return new Dish(dishId, dishName, dishPrice);
     }
     
-    public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Dish a = new Dish("Bacalhau à Brás", 5.95);
-		System.out.println(a.getId());
-		System.out.println(a.getName());
-		Dish b = new Dish("Bolonhesa", 7.0);
-		System.out.println(b.getId());
-		System.out.println(b.getName());
-	}
+    
 
 }

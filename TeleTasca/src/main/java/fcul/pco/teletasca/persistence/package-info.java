@@ -11,7 +11,7 @@
  * - static XXX fromString(String s) that receives a string produced by toString 
  * and returns a instance of class XXX.
  * 
- * @author Thibault Langlois
+ * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
  * 
  */
 package fcul.pco.teletasca.persistence;

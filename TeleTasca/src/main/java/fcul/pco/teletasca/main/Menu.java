@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * This class deals with the interactions with the user.
  * 
- * @author Thibault Langlois
+ * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
  */
 public class Menu {
     

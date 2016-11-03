@@ -11,7 +11,7 @@ import java.util.List;
  * "knows" that saving and loading (persistence operations) are actually done in 
  * the persistence package. 
  * 
- * @author Thibault Langlois
+ * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
  */
 public class OrderCatalog {
 
