@@ -15,7 +15,11 @@ import java.util.Map;
 public class DishCatalog {
 
 	public static void save(Map<Integer,Dish> dishes) throws IOException {
-            // TODO
+		// TODO
+		for (Integer dishID : dishes.keySet()) {
+	
+			
+		}
 	}
 
 	public static Map<Integer,Dish> load() throws IOException {

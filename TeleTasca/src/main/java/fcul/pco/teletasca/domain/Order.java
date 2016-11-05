@@ -1,28 +1,47 @@
 package fcul.pco.teletasca.domain;
 
+import java.awt.List;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * This class represents an order composed by a date, a client and a list 
  * of dishes.
  * 
- * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
+ * @author Thibault Langlois
+ * Alunos:
+ * @author André Oliveira 45648
+ * @author Tânia Maldonado 44745
  */
 public class Order {
 
     
-    /**
+    private static int counter = 1;
+	private int id;
+	private Calendar date;
+	private Client client;
+	private ArrayList<Dish> dish_list = new ArrayList<Dish>();
+
+
+	/**
      * Initializes an Order instance
      * 
      * @param date a Calendar instance (with time).
      * @param client an instance of Client.
      */
     public Order(Calendar date, Client client) {
-        // TODO
+    	this(counter , date, client);
+    	counter++;
     }
     
     private Order(int id, Calendar date, Client client) {
-        // TODO
+        this.id = id;
+        this.date = date;
+        this.client = client;
     }
     
     /**
@@ -31,16 +50,7 @@ public class Order {
      * @param d a Dish instance
      */
     public void addDish(Dish d) {
-        // TODO
-    }
-    
-    /**
-     * Returns the client that made this order.
-     * @return a Client instance.
-     */
-    public Client getClient() {
-        // TODO
-        return null;
+        this.dish_list.add(d);
     }
     
     /**
@@ -48,8 +58,32 @@ public class Order {
      * @param d 
      */
     private void removeDish(Dish d) {
-        // TODO
+    	this.dish_list.remove(d);
     }
+    
+    /**
+     * Returns the client that made this order.
+     * @return a Client instance.
+     */
+    public Client getClient() {
+        return this.client;
+    }
+    
+    
+    @Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(this.id);
+		builder.append(",");
+		builder.append(this.client.getEmail());
+		builder.append(",");
+		builder.append(this.date);
+		for (Dish dish : dish_list) {
+			builder.append(",");
+			builder.append(dish);
+		}
+		return builder.toString();
+	}
     
     /**
      * Creates an Order instance from a string.
@@ -61,13 +95,22 @@ public class Order {
      * separated by commas (,). The string must contain at least four commas.
      */
     public static Order fromString(String s) {
-        // TODO
+    	//TODO fazer
+
+    	String[] stringlist = s.split(",");
+        int orderId = Integer.parseInt(stringlist[0].trim());
+        
+                
+        Calendar orderDate = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new Locale("pt", "PT"));
+        //orderDate.setTime(dateFormat.parse(stringlist[1].trim()));
+        
+        String clientEmail = stringlist[2].trim();
+        
+        List dishList;
+        
+        
+        //return new Order(orderId, orderDate, clientEmail);
         return null;
-    }
-    
-    
-    @Override
-    public String toString() {
-       return ""; 
     }
 }

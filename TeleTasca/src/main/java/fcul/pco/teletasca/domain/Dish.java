@@ -53,11 +53,19 @@ public class Dish {
         return this.name;
     }
     
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
-    public String toString() {
-        // TODO
-        return "";
-    }
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(this.id);
+		builder.append(",");
+		builder.append(this.name);
+		builder.append(",");
+		builder.append(this.price);
+		return builder.toString();
+	}
     
     /**
      * Creates a Dish instance from a string.

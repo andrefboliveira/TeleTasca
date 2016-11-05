@@ -1,9 +1,7 @@
 package fcul.pco.teletasca.domain;
 
-import java.io.IOError;
 import java.util.ArrayList;
 
-import javax.naming.NamingException;
 
 /**
  * The client class represent a restaurant client that, after being registered,
@@ -13,10 +11,11 @@ import javax.naming.NamingException;
  * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
+ * 
  */
 public class Client {
     
-    private static ArrayList<String> lista_emails = new ArrayList<String>();
+    private static ArrayList<String> email_list = new ArrayList<String>();
 	
     private String name;
 	private String email;
@@ -30,10 +29,10 @@ public class Client {
      */
     public Client(String name, String email) {
     	
-    	if (!lista_emails.contains(email)) {
+    	if (!email_list.contains(email)) {
     		this.name = name;
     		this.email = email;
-    		lista_emails.add(email);    		
+    		email_list.add(email);    		
     	} 
     	// Apagar
     	//TODO confirmar se está bem email unico
@@ -51,14 +50,18 @@ public class Client {
         return this.email;
     }
     
+    
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
-     @Override
-     public String toString() {
-         // TODO
-         return "";
-     }
+    @Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(this.email);
+		builder.append(",");
+		builder.append(this.name);
+		return builder.toString();
+	}
     
     
     /**

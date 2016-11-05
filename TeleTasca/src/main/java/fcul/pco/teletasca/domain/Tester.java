@@ -2,7 +2,7 @@ package fcul.pco.teletasca.domain;
 // DELETE
 public class Tester {
 	public static void main(String[] args) {
-		/*
+		
 		// Test Dish
 		Dish d1 = new Dish("Cozido", 5.95);
 		Dish d2 = new Dish("Bolonhesa", 7.0);
@@ -10,14 +10,18 @@ public class Tester {
 		
 		System.out.println(d1.getId());
 		System.out.println(d1.getName());
+		System.out.println(d1.toString());
 		
 		System.out.println(d2.getId());
 		System.out.println(d2.getName());
+		System.out.println(d2.toString());
 		
 		System.out.println(d3.getId());
 		System.out.println(d3.getName());
-		 */
+		System.out.println(d3.toString());
 		
+		
+		/*
 		// Test Client
 		Client c1 = new Client("André", "andrefboliveira@gmail.com");
 		Client c2 = new Client("Tânia", "tanmald@hotmail.com");
@@ -31,7 +35,7 @@ public class Tester {
 		System.out.println(c4.getEmail());
 		System.out.println(c5.getEmail());
 		
-		
+		*/
 		
 	}
 
