@@ -1,6 +1,8 @@
 // -*- coding: utf-8 -*-
 package fcul.pco.teletasca.domain;
 
+import java.util.ArrayList;
+
 /**
  * This class represents a restaurant dish that can be ordered by a client.
  * 
@@ -13,6 +15,7 @@ package fcul.pco.teletasca.domain;
 public class Dish {
    
     private static int counter = 1;
+    private static ArrayList<Integer> list_id = new ArrayList<Integer>();
     
     private int id;
 	private String name;
@@ -32,9 +35,15 @@ public class Dish {
     }
     
     private Dish(int id, String name, double price) {
-    	this.id = id;
-    	this.name = name;
-    	this.price = price;
+    	if (!list_id.contains(id)){
+    		this.id = id;
+        	this.name = name;
+        	this.price = price;
+        	list_id.add(id);
+    	} else {
+    		System.err.println("Prato " + id + " já existe.");
+    	}
+    	
     }
     
     /**
