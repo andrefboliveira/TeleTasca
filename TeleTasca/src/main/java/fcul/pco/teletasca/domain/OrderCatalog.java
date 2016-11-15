@@ -33,7 +33,6 @@ public class OrderCatalog {
 
         /**
          * Saves the catalog to a file.
-         * 
          * @throws IOException 
          */
 	public void save() throws IOException {
@@ -50,7 +49,6 @@ public class OrderCatalog {
 
         /**
          * Adds an Order instance to the catalog.
-         * 
          * @param o an Order instance 
          */
         public void addOrder(Order o) {
@@ -60,25 +58,23 @@ public class OrderCatalog {
         
         /**
          * Returns a list of orders made by the client c.
-         * 
          * @param c a Client instance
-         * @return A list of Orders.
+         * @return list of Orders.
          */
         public List<Order> getClientOrders(Client c) {
         	Client client;
-        	ArrayList<Order> ListaDeOrders = new ArrayList<Order>();
+        	ArrayList<Order> listOfOrders = new ArrayList<Order>();
         	for (Order order : ordersCatalog.values()) {
 				client = order.getClient();
 				if (client.equals(c)) {
-					ListaDeOrders.add(order);
+					listOfOrders.add(order);
 				}			
 			}
-            return ListaDeOrders;
+            return listOfOrders;
         } 
         
         /**
          * Returns the list of all orders.
-         * 
          * @return A list of Orders.
          */
         public List<Order> getOrders() {
