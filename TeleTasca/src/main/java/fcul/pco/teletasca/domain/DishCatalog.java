@@ -11,7 +11,10 @@ import java.util.Collection;
  * "knows" that saving and loading (persistence operations) are actually done in 
  * the persistence package. 
  * 
- * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
+ * @author Thibault Langlois 
+ * Alunos: 
+ * @author André Oliveira 45648 
+ * @author Tânia Maldonado 44745
  */
 public class DishCatalog {
 	

@@ -93,7 +93,7 @@ public class Menu {
                 s = sc.next();
             }
         }
-        System.out.println("next int " + s);
+        // System.out.println("next int " + s);
         return Integer.parseInt(s);
     }
     
@@ -107,7 +107,7 @@ public class Menu {
                 s = sc.next();
             }
         }
-        System.out.println("next double " + s);
+        // System.out.println("next double " + s);
         return Double.parseDouble(s);
     }
     
@@ -120,7 +120,7 @@ public class Menu {
             int p = s.indexOf("#");
             s = s.substring(0, p).trim();
         }
-        System.out.println("next line " + s);
+        // System.out.println("next line " + s);
         return s;
     }
     

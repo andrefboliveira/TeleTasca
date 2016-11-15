@@ -10,7 +10,10 @@ import java.util.Map;
  * This class is responsible for saving and loading the Dish catalog.
  * The filenames are defined in the ApplicationConfiguration class.
  * 
- * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
+ * @author Thibault Langlois 
+ * Alunos: 
+ * @author André Oliveira 45648 
+ * @author Tânia Maldonado 44745
  */
 public class DishCatalog {
 

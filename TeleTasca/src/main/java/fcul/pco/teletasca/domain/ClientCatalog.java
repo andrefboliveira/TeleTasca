@@ -4,6 +4,8 @@ package fcul.pco.teletasca.domain;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The class represents the sets of Clients known (registered) on the system.
@@ -20,35 +22,14 @@ import java.util.ArrayList;
  */
 public class ClientCatalog {
     
-    private ArrayList <Client> clients;
+    private Map<String, Client> Clients;
 
 	/**
      * Creates an empty catalog.
      */
     public ClientCatalog() {
-    	clients = new ArrayList <Client>();
+    	Clients = new HashMap<String, Client>();
     }
-    
-//interface Book {
-//	String getTitle();
-//	String getAuthor();
-//	String getTextAtTheBack();
-//	Long getWeight(); // in grams, can be very heavy!
-//}
-//
-//public class Catalog {
-//	private ArrayList<Book> catalogue;
-//	public Book createPaperback(final String title, final String author, 
-//  	                          final String tatb, final Long weight) {
-// 	Book b = new Book() {
-//   	String getTitle() { return title; }
-//  	String getAuthor() {return author; }
-//    	String getTextAtTheBack() {return tatb;}
-//    	Long getWeight() {return weight;}
-//  }
-//  catalogue.add(b);
-//  return b;
-//}
     
     
     
@@ -79,8 +60,7 @@ public class ClientCatalog {
      * 
      */
     public Client getClientByEmail(String email) {
-        // TODO
-        return null;
+        return Clients.get(email);
     }
     
     /**
@@ -90,9 +70,8 @@ public class ClientCatalog {
      * @ensures ESPECIFICAR AQUI O CONTRATO.
      */
     public void addClient(Client c) {
-    	Client c = new Client();	//como é que eu uso o client que criei na outra classe?
-        clients.add(c); 	
-        
+    	String c_email = c.getEmail();
+    	Clients.put(c_email, c);
     }
 
 }
