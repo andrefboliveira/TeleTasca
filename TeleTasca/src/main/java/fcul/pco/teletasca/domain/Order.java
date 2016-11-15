@@ -38,6 +38,13 @@ public class Order {
     	counter++;
     }
     
+    /**
+     * Creates an Order instance.
+     * 
+     * @param id of the order
+     * @param date of order
+     * @param client who made the order.
+     */
     private Order(int id, Calendar date, Client client) {
         this.id = id;
         this.date = date;
@@ -46,7 +53,6 @@ public class Order {
     
     /**
      * Adds a dish to the order.
-     * 
      * @param d a Dish instance
      */
     public void addDish(Dish d) {
@@ -71,12 +77,19 @@ public class Order {
     
     
     /**
+     * A getter for the order Id.
 	 * @return the id
 	 */
 	public int getId() {
 		return this.id;
 	}
 
+    /**
+     * Prints correctly to the .csv file.
+     * @requires and id, the client email and a date.
+     * @return a string that contains the id, the client's email address, 
+     * the date and the list of Dishes ids that compose the order, following .csv format.
+     */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
