@@ -23,67 +23,63 @@ import java.util.Map;
 public class OrderCatalog {
 
 	private Map<Integer, Order> ordersCatalog;
-	
+
 	/**
 	 * Creates an empty Order catalog.
 	 */
 	public OrderCatalog() {
-			ordersCatalog = new HashMap<Integer, Order>();
-        }
+		ordersCatalog = new HashMap<Integer, Order>();
+	}
 
-        /**
-         * Saves the catalog to a file.
-         * 
-         * @throws IOException 
-         */
+	/**
+	 * Saves the catalog to a file.
+	 * @throws IOException 
+	 */
 	public void save() throws IOException {
-            // TODO
-        }
+		// TODO
+	}
 
-        /**
-         * Loads the catalog from a file.
-         * @throws FileNotFoundException 
-         */
+	/**
+	 * Loads the catalog from a file.
+	 * @throws FileNotFoundException 
+	 */
 	public void load() throws FileNotFoundException {
-        // TODO
-        }
+		// TODO
+	}
 
-        /**
-         * Adds an Order instance to the catalog.
-         * 
-         * @param o an Order instance 
-         */
-        public void addOrder(Order o) {
-        	int order_id = o.getId();
-        	ordersCatalog.put(order_id, o);
-        }
-        
-        /**
-         * Returns a list of orders made by the client c.
-         * 
-         * @param c a Client instance
-         * @return A list of Orders.
-         */
-        public List<Order> getClientOrders(Client c) {
-        	Client client;
-        	ArrayList<Order> listaOrders = new ArrayList<Order>();
-        	for (Order order : ordersCatalog.values()) {
-				client = order.getClient();
-				if (client.equals(c)) {
-					listaOrders.add(order);
-				}			
-			}
-            return listaOrders;
-        } 
-        
-        /**
-         * Returns the list of all orders.
-         * 
-         * @return A list of Orders.
-         */
-        public List<Order> getOrders() {
-            return new ArrayList<Order>(ordersCatalog.values());
-        }
-        
-	
+	/**
+	 * Adds an Order instance to the catalog.
+	 * @param o an Order instance 
+	 */
+	public void addOrder(Order o) {
+		int order_id = o.getId();
+		ordersCatalog.put(order_id, o);
+	}
+
+	/**
+	 * Returns a list of orders made by the client c.
+	 * @param c a Client instance
+	 * @return list of Orders.
+	 */
+	public List<Order> getClientOrders(Client c) {
+		Client client;
+		ArrayList<Order> listOrders = new ArrayList<Order>();
+		for (Order order : ordersCatalog.values()) {
+			client = order.getClient();
+			if (client.equals(c)) {
+				listOrders.add(order);
+			}			
+		}
+		return listOrders;
+	} 
+
+	/**
+	 * Returns the list of all orders.
+	 * @return A list of Orders.
+	 */
+	public List<Order> getOrders() {
+		return new ArrayList<Order>(ordersCatalog.values());
+	}
+
+
 }
