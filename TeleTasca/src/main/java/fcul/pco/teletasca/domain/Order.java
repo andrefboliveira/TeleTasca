@@ -70,7 +70,14 @@ public class Order {
     }
     
     
-    @Override
+    /**
+	 * @return the id
+	 */
+	public int getId() {
+		return this.id;
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(this.id);
@@ -113,4 +120,5 @@ public class Order {
         //return new Order(orderId, orderDate, clientEmail);
         return null;
     }
+
 }

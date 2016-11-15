@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Client {
     
-    private static ArrayList<String> email_list = new ArrayList<String>();
+    private static ArrayList<String> email_list = new ArrayList<String>(); 
 	
     private String name;
 	private String email;
@@ -37,7 +37,7 @@ public class Client {
     	// Apagar
     	//TODO confirmar se está bem email unico
     	else {
-    		System.out.println("Não criado");;
+    		System.err.println("Cliente " + email + " já existe");
     	}
         
     }
