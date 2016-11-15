@@ -22,15 +22,14 @@ import java.util.Map;
  */
 public class ClientCatalog {
     
-    private Map<String, Client> Clients;
+    private Map<String, Client> clientsCatalog;
 
 	/**
      * Creates an empty catalog.
      */
     public ClientCatalog() {
-    	Clients = new HashMap<String, Client>();
+    	clientsCatalog = new HashMap<String, Client>();
     }
-    
     
     
     /**
@@ -60,7 +59,7 @@ public class ClientCatalog {
      * 
      */
     public Client getClientByEmail(String email) {
-        return Clients.get(email);
+        return clientsCatalog.get(email);
     }
     
     /**
@@ -71,7 +70,7 @@ public class ClientCatalog {
      */
     public void addClient(Client c) {
     	String c_email = c.getEmail();
-    	Clients.put(c_email, c);
+    	clientsCatalog.put(c_email, c);
     }
 
 }

@@ -66,14 +66,14 @@ public class OrderCatalog {
          */
         public List<Order> getClientOrders(Client c) {
         	Client client;
-        	ArrayList<Order> ListaDeOrders = new ArrayList<Order>();
+        	ArrayList<Order> listaOrders = new ArrayList<Order>();
         	for (Order order : ordersCatalog.values()) {
 				client = order.getClient();
 				if (client.equals(c)) {
-					ListaDeOrders.add(order);
+					listaOrders.add(order);
 				}			
 			}
-            return ListaDeOrders;
+            return listaOrders;
         } 
         
         /**

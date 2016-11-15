@@ -3,6 +3,8 @@ package fcul.pco.teletasca.domain;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 /**
  * The class represents the sets of Dishes of the restaurant.
  * Note that load and save operations are actually done by the class 
@@ -18,11 +20,13 @@ import java.util.Collection;
  */
 public class DishCatalog {
 	
-    /**
+    private Map<Integer, Dish> dishesCatalog;
+
+	/**
      * Creates an empty catalog.
      */
     public DishCatalog() {
-        // TODO
+        dishesCatalog = new HashMap<Integer, Dish>();
     }
     
     /**
@@ -52,7 +56,8 @@ public class DishCatalog {
      * @ensures ESPECIFICAR O CONTRATO
      */
     public void addDish(Dish d) {
-        // TODO
+    	int dish_id = d.getId();
+    	dishesCatalog.put(dish_id, d);
     }
     
     /**
@@ -64,8 +69,7 @@ public class DishCatalog {
      * 
      */
     public Dish getDishById(int id) {
-        // TODO
-        return null;
+        return dishesCatalog.get(id);
     }
     
     /**
@@ -73,8 +77,7 @@ public class DishCatalog {
      * @return a Collection of Dish(es)
      */
     public Collection<Dish> getDishes() {
-        // TODO
-        return null;
+        return dishesCatalog.values();
     }
     
     /**
@@ -85,7 +88,7 @@ public class DishCatalog {
      * @ensures ESPECIFICAR O CONTRATO 
      */
     public void removeDish(int dishId) {
-        // TODO
+    	dishesCatalog.remove(dishId);
     }  
 	
 }
