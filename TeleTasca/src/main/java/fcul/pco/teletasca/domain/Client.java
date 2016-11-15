@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Client {
     
-    private static ArrayList<String> email_list = new ArrayList<String>();
+    private static ArrayList<String> email_list = new ArrayList<String>(); //corrigir?
 	
     private String name;
 	private String email;

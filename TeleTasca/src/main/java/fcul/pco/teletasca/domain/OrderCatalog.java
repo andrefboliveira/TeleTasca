@@ -2,7 +2,11 @@ package fcul.pco.teletasca.domain;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 /**
  * The class represents the sets of Orders known on the system.
  * Note that load and save operations are actually done by the class 
@@ -11,15 +15,20 @@ import java.util.List;
  * "knows" that saving and loading (persistence operations) are actually done in 
  * the persistence package. 
  * 
- * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
+ * @author Thibault Langlois 
+ * Alunos: 
+ * @author André Oliveira 45648 
+ * @author Tânia Maldonado 44745
  */
 public class OrderCatalog {
 
+	private Map<Integer, Order> ordersCatalog;
+	
 	/**
 	 * Creates an empty Order catalog.
 	 */
 	public OrderCatalog() {
-            // TODO
+			ordersCatalog = new HashMap<Integer, Order>();
         }
 
         /**
@@ -45,7 +54,8 @@ public class OrderCatalog {
          * @param o an Order instance 
          */
         public void addOrder(Order o) {
-            // TODO
+        	int order_id = o.getId();
+        	ordersCatalog.put(order_id, o);
         }
         
         /**
@@ -55,8 +65,15 @@ public class OrderCatalog {
          * @return A list of Orders.
          */
         public List<Order> getClientOrders(Client c) {
-            // TODO
-            return null;
+        	Client client;
+        	ArrayList<Order> ListaDeOrders = new ArrayList<Order>();
+        	for (Order order : ordersCatalog.values()) {
+				client = order.getClient();
+				if (client.equals(c)) {
+					ListaDeOrders.add(order);
+				}			
+			}
+            return ListaDeOrders;
         } 
         
         /**
@@ -65,8 +82,7 @@ public class OrderCatalog {
          * @return A list of Orders.
          */
         public List<Order> getOrders() {
-            // TODO
-            return null;
+            return new ArrayList<Order>(ordersCatalog.values());
         }
         
 	
