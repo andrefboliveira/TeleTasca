@@ -15,7 +15,10 @@ import java.util.Scanner;
  * It holds an instance of each of the catalogs and an instance of Client that 
  * corresponds to the current user (client).
  * 
- * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
+ * @author Thibault Langlois 
+ * Alunos: 
+ * @author André Oliveira 45648 
+ * @author Tânia Maldonado 44745
  */
 public class App {
 
@@ -80,11 +83,16 @@ public class App {
         in.close();
     }
     
+    /**
+     * 
+     * @throws IOException
+     */
     public static void executeAllUseCases() throws IOException {
         executeUseCase("data/usecase1.dat");
         executeUseCase("data/usecase2.dat");
-        // ...
-        // colocar aqui todos os use-case 
+        executeUseCase("data/usecase3.dat");
+        executeUseCase("data/usecase4.dat");
+        executeUseCase("data/usecase5.dat");
     }
     
     public static void main(String [] args) throws IOException {
@@ -93,7 +101,8 @@ public class App {
         // clientCatalog.load();
         // orderCatalog.load();
         // interactiveMode();
-        executeAllUseCases();
+//        executeAllUseCases();
+        interactiveMode();
     }
     
 }

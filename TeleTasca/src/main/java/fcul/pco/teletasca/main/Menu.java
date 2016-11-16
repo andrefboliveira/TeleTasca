@@ -2,13 +2,28 @@
 package fcul.pco.teletasca.main;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Scanner;
+
+import fcul.pco.teletasca.domain.Client;
+import fcul.pco.teletasca.domain.ClientCatalog;
 
 /**
  * This class deals with the interactions with the user.
  * 
- * @author Thibault Langlois * Alunos: * @author André Oliveira 45648 * @author Tânia Maldonado 44745
+ * @author Thibault Langlois 
+ * Alunos: 
+ * @author André Oliveira 45648 
+ * @author Tânia Maldonado 44745
  */
+
+// A classe Menu contém os menus e a interação com utilizador. 
+// Deve ser completada (falta por exemplo a leitura dos dados),
+// mas não deve alterar os menus !
+// Para poder ler ficheiros de caso de uso com comentários deverá usar 
+// os métodos (fornecidos) nextInt(Scanner in), nextDouble(Scanner in), 
+// nextLine(Scanner in), nextDate(Scanner in) e nextTime(Scanner in).
+
 public class Menu {
     
     /**
@@ -28,6 +43,20 @@ public class Menu {
             System.out.println("Terminar..................3");
             System.out.println("> ");
             // TODO
+            int option = Menu.nextInt(in);
+            switch (option) {
+			case 1:
+				clientMenu(in);
+				break;
+			case 2:
+				managerMenu(in);
+				break;
+			case 3:
+				break;
+			default:
+				mainMenu(in);
+				break;
+			}
         } while (!end);
     }
  
@@ -46,13 +75,43 @@ public class Menu {
             System.out.println("Consultar as encomendas....4");
             System.out.println("Terminar...................5");
             System.out.println("> ");
-            // TODO
+            int option = Menu.nextInt(in);
+            switch (option) {
+			case 1:
+				//TODO aceder ao menu dos pratos para adicionar
+				break;
+			case 2:
+				//TODO aceder ao menu dos pratos para remover
+				break;
+			case 3:
+				//TODO mostrar lista de encomendas
+				break;
+			case 4:
+				mainMenu(in);
+				break;
+			default:
+				managerMenu(in);
+				break;
+			}
         } while (!end);
     }
+    
+//    private static void dishesMenu(Scanner in) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	private static void removeDishMenu(Scanner in) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	private static void addDishMenu(Scanner in) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
-    
-    
-    /**
+	/**
      * A Client may open an account, log in, order dishes and consult his 
      * list of orders.
      * 
@@ -70,8 +129,90 @@ public class Menu {
             System.out.println("Terminar...................5");
             System.out.println("> ");
             // TODO
+            int option = Menu.nextInt(in);
+            switch (option) {
+			case 1:
+				clientRegistrationMenu(in);
+				break;
+			case 2:
+				clientLoginMenu(in);
+				break;
+			case 3:
+				clientOrderMenu(in);
+				break;
+			case 4:
+				//TODO acessar lista de encomendas
+				break;
+			default:
+				clientMenu(in);
+				break;
+			}
         } while (!end);
     }
+	
+
+	/**
+     * A menu for the registration of the client's account. 
+     * 
+     * @param in
+     * @return
+     * @throws IOException 
+     */
+    private static void clientRegistrationMenu(Scanner in) throws IOException {
+//        boolean end = false;
+        System.out.println("Nome:");
+        String name = Menu.nextLine(in);
+        System.out.println("Email:");
+        String email = Menu.nextLine(in);
+        //TODO guardar nome e email no catálogo de clientes
+        Client c = new Client(name, email);
+        ClientCatalog catalog = new ClientCatalog();
+        //
+        if (ClientCatalog.getClientByEmail(email) != null) {
+               // Okay, there's a key but the value is null
+        } else {
+               // Definitely no such key
+        }
+        }
+        catalog.addClient(c);
+		
+        
+    }
+//        do {
+//            
+//            System.out.println("Log in.....................2");
+//            System.out.println("Encomendar pratos..........3");
+//            System.out.println("Lista de encomendas........4");
+//            System.out.println("Terminar...................5");
+//            System.out.println("> ");
+//            // TODO
+//        } while (!end);
+    
+    
+    /**
+     * The log in menu.
+     * 
+     * @param in
+     * @throws IOException
+     */
+	private static void clientLoginMenu(Scanner in) throws IOException {
+		// TODO 
+		System.out.println("Email:");
+		String email = Menu.nextLine(in);
+		//ver se o email inserido está no catálogo de clientes
+	}
+	
+	
+	/**
+	 * The menu to choose the dishes to order.
+	 * @param in
+	 * @throws IOException
+	 */
+    private static void clientOrderMenu(Scanner in) throws IOException {
+		// TODO Auto-generated method stub	
+	}
+    
+    
     
     /*
      * The following methods read several kinds of values from a Scanner. 
