@@ -3,8 +3,8 @@ package fcul.pco.teletasca.domain;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 /**
  * The class represents the sets of Dishes of the restaurant.
  * Note that load and save operations are actually done by the class 
@@ -26,7 +26,7 @@ public class DishCatalog {
      * Creates an empty catalog.
      */
     public DishCatalog() {
-        dishesCatalog = new HashMap<Integer, Dish>();
+        dishesCatalog = new TreeMap<Integer, Dish>();
     }
     
     /**
@@ -35,7 +35,7 @@ public class DishCatalog {
      * @throws IOException 
      */
     public void save() throws IOException {
-        // TODO
+    	fcul.pco.teletasca.persistence.DishCatalog.save(dishesCatalog);
     }
     
     /**
@@ -44,7 +44,7 @@ public class DishCatalog {
      * @throws IOException 
      */
     public void load() throws IOException {
-        // TODO
+    	dishesCatalog = fcul.pco.teletasca.persistence.DishCatalog.load();
     }
     
     

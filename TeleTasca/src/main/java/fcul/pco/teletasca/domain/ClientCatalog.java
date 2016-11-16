@@ -38,6 +38,7 @@ public class ClientCatalog {
      * @throws IOException 
      */
     public void save() throws IOException {
+    	fcul.pco.teletasca.persistence.ClientCatalog.save(clientsCatalog);
     }
 
     /**
@@ -46,6 +47,7 @@ public class ClientCatalog {
      * @throws FileNotFoundException 
      */
     public void load() throws FileNotFoundException {
+    	clientsCatalog = fcul.pco.teletasca.persistence.ClientCatalog.load();
     }
 
     /**

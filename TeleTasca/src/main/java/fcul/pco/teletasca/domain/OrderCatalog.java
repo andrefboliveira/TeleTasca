@@ -36,7 +36,7 @@ public class OrderCatalog {
 	 * @throws IOException 
 	 */
 	public void save() throws IOException {
-		// TODO
+    	fcul.pco.teletasca.persistence.OrderCatalog.save(this.getOrders());
 	}
 
 	/**
@@ -44,7 +44,8 @@ public class OrderCatalog {
 	 * @throws FileNotFoundException 
 	 */
 	public void load() throws FileNotFoundException {
-		// TODO
+		List<Order> listOrders = fcul.pco.teletasca.persistence.OrderCatalog.load();
+		this.setOrders(listOrders);
 	}
 
 	/**
@@ -62,10 +63,9 @@ public class OrderCatalog {
 	 * @return list of Orders.
 	 */
 	public List<Order> getClientOrders(Client c) {
-		Client client;
 		ArrayList<Order> listOrders = new ArrayList<Order>();
 		for (Order order : ordersCatalog.values()) {
-			client = order.getClient();
+			Client client = order.getClient();
 			if (client.equals(c)) {
 				listOrders.add(order);
 			}			
@@ -79,6 +79,13 @@ public class OrderCatalog {
 	 */
 	public List<Order> getOrders() {
 		return new ArrayList<Order>(ordersCatalog.values());
+	}
+	
+	
+	public void setOrders(List<Order> listOrders) {
+		for (Order order : listOrders) {
+			this.addOrder(order);
+		}
 	}
 
 

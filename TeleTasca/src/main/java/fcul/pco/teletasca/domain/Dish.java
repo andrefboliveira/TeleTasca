@@ -35,14 +35,19 @@ public class Dish {
     }
     
     private Dish(int id, String name, double price) {
-    	if (!list_id.contains(id)){
+//    	if (!list_id.contains(id)){
+//    		this.id = id;
+//        	this.name = name;
+//        	this.price = price;
+//        	list_id.add(id);
+//    	} else {
+//    		System.err.println("Prato " + id + " já existe.");
+//    	}
+    	
     		this.id = id;
         	this.name = name;
         	this.price = price;
-        	list_id.add(id);
-    	} else {
-    		System.err.println("Prato " + id + " já existe.");
-    	}
+        
     	
     }
     

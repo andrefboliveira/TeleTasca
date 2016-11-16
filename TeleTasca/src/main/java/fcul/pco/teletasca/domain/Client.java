@@ -38,7 +38,6 @@ public class Client {
 		else {
 			System.err.println("Cliente " + email + " já existe");
 		}
-
 	}
 
 	/**
@@ -76,8 +75,9 @@ public class Client {
 	 */
 	public static Client fromString(String s) {
 		String[] stringlist = s.split(",");
-		String clientName = stringlist[0].trim();
-		String clientEmail = stringlist[1].trim();
+		String clientEmail = stringlist[0].trim();
+		String clientName = stringlist[1].trim();
+
 
 		return new Client(clientName, clientEmail);
 
