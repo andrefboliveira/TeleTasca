@@ -61,8 +61,17 @@ public class ClientCatalog {
      * 
      */
     public Client getClientByEmail(String email) {
-        return clientsCatalog.get(email);
+        //return clientsCatalog.get(email);
+    	//TODO vê o contrato: "If it is 
+        //not found in the catalog, null is returned."
+    	//confirma se o if está correcto
+        if (getClientByEmail(email) != null) {
+        	return clientsCatalog.get(email);
+        } else {
+            return null;
+        }
     }
+    
     
     /**
      * Adds a client to the catalog.
