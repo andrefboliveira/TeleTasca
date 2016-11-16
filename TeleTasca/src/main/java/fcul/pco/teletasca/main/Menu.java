@@ -173,7 +173,6 @@ public class Menu {
         } else {
                // Definitely no such key
         }
-        }
         catalog.addClient(c);
 		
         

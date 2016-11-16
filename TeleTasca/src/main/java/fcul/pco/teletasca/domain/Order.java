@@ -1,12 +1,13 @@
 package fcul.pco.teletasca.domain;
 
-import java.awt.List;
-import java.sql.Date;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * This class represents an order composed by a date, a client and a list 
@@ -25,6 +26,9 @@ public class Order {
 	private Calendar date;
 	private Client client;
 	private ArrayList<Dish> dish_list = new ArrayList<Dish>();
+//	private Map<Integer, Dish> dishList = new TreeMap<Integer, Dish>();
+    private static String dateFormatString = "yyyy/MM/dd HH:mm";
+
 
 
 	/**
@@ -57,6 +61,7 @@ public class Order {
      */
     public void addDish(Dish d) {
         this.dish_list.add(d);
+//    	this.dishList.put(d.getId(), d);
     }
     
     /**
@@ -65,6 +70,7 @@ public class Order {
      */
     private void removeDish(Dish d) {
     	this.dish_list.remove(d);
+//    	this.dishList.remove(d.getId());
     }
     
     /**
@@ -97,11 +103,20 @@ public class Order {
 		builder.append(",");
 		builder.append(this.client.getEmail());
 		builder.append(",");
-		builder.append(this.date);
+		
+		Date dateValue = this.date.getTime();
+		SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormatString, new Locale("pt", "PT"));
+		String dateString = dateFormat.format(dateValue);
+		builder.append(dateString);
+		
 		for (Dish dish : dish_list) {
 			builder.append(",");
-			builder.append(dish);
+			builder.append(dish.getId());
 		}
+//		for (int dishID : dishList.keySet()) {
+//			builder.append(",");
+//			builder.append(dishID);
+//		}
 		return builder.toString();
 	}
     
@@ -115,23 +130,56 @@ public class Order {
      * separated by commas (,). The string must contain at least four commas.
      */
     public static Order fromString(String s) {
-    	//TODO fazer
 
     	String[] stringlist = s.split(",");
         int orderId = Integer.parseInt(stringlist[0].trim());
+        String clientEmail = stringlist[1].trim();
         
-                
         Calendar orderDate = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", new Locale("pt", "PT"));
-        //orderDate.setTime(dateFormat.parse(stringlist[1].trim()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormatString, new Locale("pt", "PT"));
+        try {
+			orderDate.setTime(dateFormat.parse(stringlist[2].trim()));
+		} catch (ParseException e) {
+			System.err.println("Error parsing date. Use format: " + dateFormatString);
+			e.printStackTrace();
+		}
+        Client c = fcul.pco.teletasca.main.App.clientCatalog.getClientByEmail(clientEmail);
+         
+        Order newOrder = new Order(orderId, orderDate, c);
         
-        String clientEmail = stringlist[2].trim();
+        for (int i = 3; i < stringlist.length; i++) {
+			int dishID = Integer.parseInt(stringlist[i]);
+			Dish d = fcul.pco.teletasca.main.App.dishCatalog.getDishById(dishID);
+			newOrder.addDish(d);
+		}
         
-        List dishList;
-        
-        
-        //return new Order(orderId, orderDate, clientEmail);
-        return null;
+        return newOrder;
     }
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 17;
+		result = prime * result + id;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Order))
+			return false;
+		Order other = (Order) obj;
+		return this.id == other.id;
+	}
 
 }
