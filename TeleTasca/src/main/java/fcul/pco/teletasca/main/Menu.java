@@ -2,8 +2,11 @@
 package fcul.pco.teletasca.main;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
+
+import org.junit.Test.None;
 
 import fcul.pco.teletasca.domain.Client;
 import fcul.pco.teletasca.domain.ClientCatalog;
@@ -96,10 +99,30 @@ public class Menu {
         } while (!end);
     }
     
-//    private static void dishesMenu(Scanner in) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+    private static void dishesMenu(Scanner in) throws IOException {
+		// TODO perceber, refazer, acabar, o que for lol
+        App.dishCatalog.load();
+    	boolean end = false;
+    	do {
+    		for (int i = 1; i < App.dishCatalog.getDishes().size(); i++) {
+                System.out.println(App.dishCatalog.getDishById(i) + "......." + (i));
+    		}
+        System.out.println("Escolhe um prato (0 para terminar):");
+        int option = Menu.nextInt(in);
+        switch (option) {
+			case 1:		//se não pode ser caso i, como é que acedo ao prato i?
+				//acede ao prato i
+				break;
+			case 0:
+				mainMenu(in);
+				break;
+			default:
+				dishesMenu(in);
+				break;
+			}
+    	} while (!end);
+	}		
+
 //
 //	private static void removeDishMenu(Scanner in) {
 //		// TODO Auto-generated method stub
@@ -138,7 +161,8 @@ public class Menu {
 				clientLoginMenu(in);
 				break;
 			case 3:
-				clientOrderMenu(in);
+//				clientOrderMenu(in);
+				dishesMenu(in);
 				break;
 			case 4:
 				//TODO acessar lista de encomendas
@@ -159,33 +183,14 @@ public class Menu {
      * @throws IOException 
      */
     private static void clientRegistrationMenu(Scanner in) throws IOException {
-//        boolean end = false;
         System.out.println("Nome:");
         String name = Menu.nextLine(in);
         System.out.println("Email:");
         String email = Menu.nextLine(in);
-        //TODO guardar nome e email no catálogo de clientes
         Client c = new Client(name, email);
-        ClientCatalog catalog = new ClientCatalog();
-        //
-        if (ClientCatalog.getClientByEmail(email) != null) {
-               // Okay, there's a key but the value is null
-        } else {
-               // Definitely no such key
-        }
-        catalog.addClient(c);
-		
-        
+        App.clientCatalog.addClient(c);		//se o email já existir dá erro?
+        App.clientCatalog.save();
     }
-//        do {
-//            
-//            System.out.println("Log in.....................2");
-//            System.out.println("Encomendar pratos..........3");
-//            System.out.println("Lista de encomendas........4");
-//            System.out.println("Terminar...................5");
-//            System.out.println("> ");
-//            // TODO
-//        } while (!end);
     
     
     /**
@@ -199,17 +204,22 @@ public class Menu {
 		System.out.println("Email:");
 		String email = Menu.nextLine(in);
 		//ver se o email inserido está no catálogo de clientes
+		App.clientCatalog.load();
+		if (App.clientCatalog.equals(email) == true) {
+			App.clientCatalog.getClientByEmail(email);	/*como é que depois a aplicação 
+			sabe que as próximas acções são deste cliente?*/
+		}
 	}
 	
 	
-	/**
-	 * The menu to choose the dishes to order.
-	 * @param in
-	 * @throws IOException
-	 */
-    private static void clientOrderMenu(Scanner in) throws IOException {
-		// TODO Auto-generated method stub	
-	}
+//	/**
+//	 * The menu to choose the dishes to order.
+//	 * @param in
+//	 * @throws IOException
+//	 */
+//    private static void clientOrderMenu(Scanner in) throws IOException {
+//		// TODO Auto-generated method stub	
+//	}
     
     
     
