@@ -28,11 +28,10 @@ public class DishCatalog {
 
 
 	public static void save(Map<Integer,Dish> dishes) throws IOException {
-		PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
+		PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));	//usar nomes applicationconfiguration
     	String header = "id,description,price";
     	
     	writer.write(header);
-    	// for (Integer dishID : dishes.keySet())
     	for (Dish d : dishes.values()) {
     		writer.write("\n");
     		writer.write(d.toString());

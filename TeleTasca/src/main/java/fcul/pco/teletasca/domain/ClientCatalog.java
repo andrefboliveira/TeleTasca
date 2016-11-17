@@ -65,7 +65,7 @@ public class ClientCatalog {
     	//TODO vê o contrato: "If it is 
         //not found in the catalog, null is returned."
     	//confirma se o if está correcto
-        if (getClientByEmail(email) != null) {
+        if (clientsCatalog.keySet().contains(email)) {
         	return clientsCatalog.get(email);
         } else {
             return null;

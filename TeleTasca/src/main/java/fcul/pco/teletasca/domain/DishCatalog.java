@@ -89,6 +89,7 @@ public class DishCatalog {
      */
     public void removeDish(int dishId) {
     	dishesCatalog.remove(dishId);
-    }  
+    }
+
 	
 }

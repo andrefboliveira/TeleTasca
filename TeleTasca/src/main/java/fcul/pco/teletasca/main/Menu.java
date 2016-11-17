@@ -3,6 +3,9 @@ package fcul.pco.teletasca.main;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -10,6 +13,7 @@ import org.junit.Test.None;
 
 import fcul.pco.teletasca.domain.Client;
 import fcul.pco.teletasca.domain.ClientCatalog;
+import fcul.pco.teletasca.domain.Dish;
 
 /**
  * This class deals with the interactions with the user.
@@ -29,7 +33,9 @@ import fcul.pco.teletasca.domain.ClientCatalog;
 
 public class Menu {
     
-    /**
+    private static Client client;
+
+	/**
      * The main menu of the application. It serves to distinguish which kind of 
      * user is interacting with the application. It may be the restaurant 
      * manager or a client.
@@ -38,6 +44,7 @@ public class Menu {
      * @throws IOException 
      */   
     static void mainMenu(Scanner in) throws IOException {
+    	
         boolean end = true; // <- think !
         do {
             System.out.println("Você é: ");
@@ -81,10 +88,10 @@ public class Menu {
             int option = Menu.nextInt(in);
             switch (option) {
 			case 1:
-				//TODO aceder ao menu dos pratos para adicionar
+				addDishMenu(in);
 				break;
 			case 2:
-				//TODO aceder ao menu dos pratos para remover
+				removeDishMenu(in);
 				break;
 			case 3:
 				//TODO mostrar lista de encomendas
@@ -99,40 +106,53 @@ public class Menu {
         } while (!end);
     }
     
-    private static void dishesMenu(Scanner in) throws IOException {
-		// TODO perceber, refazer, acabar, o que for lol
-        App.dishCatalog.load();
-    	boolean end = false;
-    	do {
-    		for (int i = 1; i < App.dishCatalog.getDishes().size(); i++) {
-                System.out.println(App.dishCatalog.getDishById(i) + "......." + (i));
-    		}
-        System.out.println("Escolhe um prato (0 para terminar):");
-        int option = Menu.nextInt(in);
-        switch (option) {
-			case 1:		//se não pode ser caso i, como é que acedo ao prato i?
-				//acede ao prato i
-				break;
-			case 0:
-				mainMenu(in);
-				break;
-			default:
-				dishesMenu(in);
-				break;
+    
+    /**
+     * The menu for adding dishes.
+     * 
+     * @param in
+     * @throws IOException
+     */
+	private static void addDishMenu(Scanner in) throws IOException {
+		// TODO 
+		System.out.println("Descrição do prato:");
+		String description = Menu.nextLine(in);
+		System.out.println("Preço:");
+		double price = Menu.nextDouble(in);
+		Dish d = new Dish(description, price);
+        App.dishCatalog.addDish(d);
+        App.dishCatalog.save();
+	}
+	
+	
+    /**
+     * The menu for adding dishes.
+     * 
+     * @param in
+     * @throws IOException
+     */
+	private static void removeDishMenu(Scanner in) throws IOException {
+		// TODO 
+		int i = 0;
+		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
+		Collection dishesList = App.dishCatalog.getDishes();
+		if (dishesList.size() != 0) {
+			for (Dish d : App.dishCatalog.getDishes()) {
+				System.out.println(d.getName() + "......." + i);
+				allDishes.put(i, d);
+				i++;
 			}
-    	} while (!end);
+			int chosenOpt = Menu.nextInt(in);
+			Dish d = allDishes.get(chosenOpt);
+			App.dishCatalog.removeDish(d.getId());
+	        App.dishCatalog.save();
+		} else {
+			System.out.println("Não há pratos a apresentar.\n");
+			
+		}
+		
 	}		
 
-//
-//	private static void removeDishMenu(Scanner in) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	private static void addDishMenu(Scanner in) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 
 	/**
      * A Client may open an account, log in, order dishes and consult his 
@@ -162,7 +182,7 @@ public class Menu {
 				break;
 			case 3:
 //				clientOrderMenu(in);
-				dishesMenu(in);
+				//dishesMenu(in);
 				break;
 			case 4:
 				//TODO acessar lista de encomendas
@@ -204,11 +224,8 @@ public class Menu {
 		System.out.println("Email:");
 		String email = Menu.nextLine(in);
 		//ver se o email inserido está no catálogo de clientes
-		App.clientCatalog.load();
-		if (App.clientCatalog.equals(email) == true) {
-			App.clientCatalog.getClientByEmail(email);	/*como é que depois a aplicação 
-			sabe que as próximas acções são deste cliente?*/
-		}
+//		App.clientCatalog.load();
+		client = App.clientCatalog.getClientByEmail(email);
 	}
 	
 	
