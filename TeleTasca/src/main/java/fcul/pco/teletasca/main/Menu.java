@@ -14,6 +14,8 @@ import org.junit.Test.None;
 import fcul.pco.teletasca.domain.Client;
 import fcul.pco.teletasca.domain.ClientCatalog;
 import fcul.pco.teletasca.domain.Dish;
+import fcul.pco.teletasca.domain.Order;
+import fcul.pco.teletasca.domain.OrderCatalog;
 
 /**
  * This class deals with the interactions with the user.
@@ -62,7 +64,7 @@ public class Menu {
 				managerMenu(in);
 				break;
 			case 3:
-				break;
+				System.exit(0);
 			default:
 				mainMenu(in);
 				break;
@@ -93,10 +95,10 @@ public class Menu {
 			case 2:
 				removeDishMenu(in);
 				break;
-			case 3:
-				//TODO mostrar lista de encomendas
-				break;
 			case 4:
+				showDishes(in);
+				break;
+			case 5:
 				mainMenu(in);
 				break;
 			default:
@@ -106,8 +108,29 @@ public class Menu {
         } while (!end);
     }
     
+	/**
+     * The menu for showing available dishes.
+     * 
+     * @param in
+     * @throws IOException
+     */
+    private static void showDishes(Scanner in) {
+		int i = 0;
+		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
+		Collection<Dish> dishesList = App.dishCatalog.getDishes();
+		if (dishesList.size() != 0) {
+			for (Dish d : App.dishCatalog.getDishes()) {
+				System.out.println(d.getName() + ".........." + i);
+				allDishes.put(i, d);
+				i++;
+			}
+		} else {
+			System.out.println("Não há pratos a apresentar.\n");
+		}
+	}
+
     
-    /**
+	/**
      * The menu for adding dishes.
      * 
      * @param in
@@ -126,7 +149,7 @@ public class Menu {
 	
 	
     /**
-     * The menu for adding dishes.
+     * The menu for removing dishes.
      * 
      * @param in
      * @throws IOException
@@ -135,7 +158,7 @@ public class Menu {
 		// TODO 
 		int i = 0;
 		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
-		Collection dishesList = App.dishCatalog.getDishes();
+		Collection<Dish> dishesList = App.dishCatalog.getDishes();
 		if (dishesList.size() != 0) {
 			for (Dish d : App.dishCatalog.getDishes()) {
 				System.out.println(d.getName() + "......." + i);
@@ -148,9 +171,7 @@ public class Menu {
 	        App.dishCatalog.save();
 		} else {
 			System.out.println("Não há pratos a apresentar.\n");
-			
 		}
-		
 	}		
 
 
@@ -181,11 +202,10 @@ public class Menu {
 				clientLoginMenu(in);
 				break;
 			case 3:
-//				clientOrderMenu(in);
-				//dishesMenu(in);
+				clientOrderMenu(in);
 				break;
 			case 4:
-				//TODO acessar lista de encomendas
+				clientOrderListMenu(in);
 				break;
 			default:
 				clientMenu(in);
@@ -194,6 +214,53 @@ public class Menu {
         } while (!end);
     }
 	
+	/**
+     * The menu for showing the client's list of orders.
+     * 
+     * @param in
+     * @throws IOException
+     */
+    //TODO CONFIRMAR SE ISTO ESTÁ BEM
+    private static void clientOrderListMenu(Scanner in) {
+		int i = 0;
+		HashMap<Integer, Order> allDishes = new HashMap<Integer, Order>();
+		Collection<Order> dishesList = App.orderCatalog.getClientOrders(client);
+		if (dishesList.size() != 0) {
+			for (Order o : App.orderCatalog.getClientOrders(client)) {
+				System.out.println(o + ".........." + i);
+				allDishes.put(i, o);
+				i++;
+			}
+		} else {
+			System.out.println("Não há pratos a apresentar.\n");
+		}
+	}
+
+	/**
+     * The menu for ordering dishes.
+     * 
+     * @param in
+     */
+	private static void clientOrderMenu(Scanner in) {
+		int i = 0;
+		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
+		Collection<Dish> dishesList = App.dishCatalog.getDishes();
+		if (dishesList.size() != 0) {
+			for (Dish d : App.dishCatalog.getDishes()) {
+				System.out.println(d.getName() + ".........." + i);
+				allDishes.put(i, d);
+				i++;
+			}
+			int chosenOpt = Menu.nextInt(in);
+			Dish d = allDishes.get(chosenOpt);
+			int id = d.getId();
+			
+			OrderCatalog.addOrder(id);		//oh caralho como é que converto int para order para dizer que quero adicinoar o prato com aquele id???
+	        App.orderCatalog.save();
+		} else {
+			System.out.println("Não há pratos a apresentar.\n");
+		}
+	}
 
 	/**
      * A menu for the registration of the client's account. 
@@ -208,7 +275,7 @@ public class Menu {
         System.out.println("Email:");
         String email = Menu.nextLine(in);
         Client c = new Client(name, email);
-        App.clientCatalog.addClient(c);		//se o email já existir dá erro?
+        App.clientCatalog.addClient(c);
         App.clientCatalog.save();
     }
     
@@ -223,20 +290,9 @@ public class Menu {
 		// TODO 
 		System.out.println("Email:");
 		String email = Menu.nextLine(in);
-		//ver se o email inserido está no catálogo de clientes
-//		App.clientCatalog.load();
 		client = App.clientCatalog.getClientByEmail(email);
 	}
 	
-	
-//	/**
-//	 * The menu to choose the dishes to order.
-//	 * @param in
-//	 * @throws IOException
-//	 */
-//    private static void clientOrderMenu(Scanner in) throws IOException {
-//		// TODO Auto-generated method stub	
-//	}
     
     
     
