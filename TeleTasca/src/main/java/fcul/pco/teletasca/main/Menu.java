@@ -54,6 +54,8 @@ public class Menu {
             System.out.println("Terminar..................3");
             System.out.println("> ");
             // TODO
+        
+            
             int option = Menu.nextInt(in);
             switch (option) {
 			case 1:
@@ -63,11 +65,13 @@ public class Menu {
 				managerMenu(in);
 				break;
 			case 3:
-				System.exit(0);
+				end = true;
+				break;
 			default:
 				mainMenu(in);
 				break;
 			}
+			
         } while (!end);
     }
  
@@ -124,8 +128,9 @@ public class Menu {
 				i++;
 			}
 		} else {
-			System.out.println("Não há pratos a apresentar.\n");
+			System.out.println("Não há pratos a apresentar.");
 		}
+		System.out.println("\n");
 	}
 
     
@@ -207,6 +212,7 @@ public class Menu {
 				clientOrderListMenu(in);
 				break;
 			case 5:
+				mainMenu(in);
 				break;
 			default:
 				clientMenu(in);
