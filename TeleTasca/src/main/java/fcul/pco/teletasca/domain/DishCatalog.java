@@ -36,6 +36,8 @@ public class DishCatalog {
      */
     public void save() throws IOException {
     	fcul.pco.teletasca.persistence.DishCatalog.save(dishesCatalog);
+    	System.out.println("\nWrote DishCatalog\n");
+
     }
     
     /**
@@ -45,6 +47,8 @@ public class DishCatalog {
      */
     public void load() throws IOException {
     	dishesCatalog = fcul.pco.teletasca.persistence.DishCatalog.load();
+    	System.out.println("\nLoaded DishCatalog\n");
+
     }
     
     

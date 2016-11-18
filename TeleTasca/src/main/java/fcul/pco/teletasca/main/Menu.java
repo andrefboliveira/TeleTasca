@@ -35,7 +35,6 @@ import fcul.pco.teletasca.domain.OrderCatalog;
 
 public class Menu {
     
-    private static Client client;
 
 	/**
      * The main menu of the application. It serves to distinguish which kind of 
@@ -207,6 +206,8 @@ public class Menu {
 			case 4:
 				clientOrderListMenu(in);
 				break;
+			case 5:
+				break;
 			default:
 				clientMenu(in);
 				break;
@@ -224,9 +225,9 @@ public class Menu {
     private static void clientOrderListMenu(Scanner in) {
 		int i = 0;
 		HashMap<Integer, Order> allDishes = new HashMap<Integer, Order>();
-		Collection<Order> dishesList = App.orderCatalog.getClientOrders(client);
+		Collection<Order> dishesList = App.orderCatalog.getClientOrders(App.currentClient);
 		if (dishesList.size() != 0) {
-			for (Order o : App.orderCatalog.getClientOrders(client)) {
+			for (Order o : App.orderCatalog.getClientOrders(App.currentClient)) {
 				System.out.println(o + ".........." + i);
 				allDishes.put(i, o);
 				i++;
@@ -255,8 +256,8 @@ public class Menu {
 			Dish d = allDishes.get(chosenOpt);
 			int id = d.getId();
 			
-			OrderCatalog.addOrder(id);		//oh caralho como é que converto int para order para dizer que quero adicinoar o prato com aquele id???
-	        App.orderCatalog.save();
+			//OrderCatalog.addOrder(id);		//oh caralho como é que converto int para order para dizer que quero adicinoar o prato com aquele id???
+	        //App.orderCatalog.save();
 		} else {
 			System.out.println("Não há pratos a apresentar.\n");
 		}
@@ -287,10 +288,10 @@ public class Menu {
      * @throws IOException
      */
 	private static void clientLoginMenu(Scanner in) throws IOException {
-		// TODO 
+		// TODO Nao faz confirmação se o cliente existe. senão: informa e repete o menu
 		System.out.println("Email:");
 		String email = Menu.nextLine(in);
-		client = App.clientCatalog.getClientByEmail(email);
+		App.currentClient = App.clientCatalog.getClientByEmail(email);
 	}
 	
     

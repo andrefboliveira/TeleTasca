@@ -3,10 +3,20 @@
 
 package fcul.pco.teletasca.persistence;
 
+import fcul.pco.teletasca.domain.Dish;
 import fcul.pco.teletasca.domain.Order;
+
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 
 /**
@@ -19,14 +29,32 @@ import java.util.List;
  * @author Tânia Maldonado 44745
  */
 public class OrderCatalog {
+	
+	private static String file = fcul.pco.teletasca.main.ApplicationConfiguration.ROOT_DIRECTORY + fcul.pco.teletasca.main.ApplicationConfiguration.ORDER_CATALOG_FILENAME;
 
     public static void save(List<Order> orders) throws IOException {
-        // TODO
+    	PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+    	String header = "id,client email,date of order,dish";
+    	writer.write(header);
+    	for (Order o : orders) {
+    		writer.write("\n");
+    		writer.write(o.toString());
+		}
+    	writer.close();
     }
 
     public static List<Order> load() throws FileNotFoundException {
-        // TODO
-        return null;
+    	List<Order> orderCatalog = new ArrayList<Order>();
+    	Scanner inputFile = new Scanner(new FileReader(file));
+    	
+    	inputFile.nextLine();
+    	while (inputFile.hasNextLine()) {
+    		String line = inputFile.nextLine();
+    		Order o = Order.fromString(line);
+    		orderCatalog.add(o);
+		}
+    	inputFile.close();
+    	return orderCatalog;
     }
     
 

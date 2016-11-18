@@ -37,6 +37,8 @@ public class OrderCatalog {
 	 */
 	public void save() throws IOException {
     	fcul.pco.teletasca.persistence.OrderCatalog.save(this.getOrders());
+    	System.out.println("\nWrote OrderCatalog\n");
+
 	}
 
 	/**
@@ -45,6 +47,7 @@ public class OrderCatalog {
 	 */
 	public void load() throws FileNotFoundException {
 		List<Order> listOrders = fcul.pco.teletasca.persistence.OrderCatalog.load();
+    	System.out.println("\nLoaded OrderCatalog\n");
 		this.setOrders(listOrders);
 	}
 

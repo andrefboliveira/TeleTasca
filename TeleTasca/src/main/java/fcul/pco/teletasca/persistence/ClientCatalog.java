@@ -25,11 +25,11 @@ import java.util.Scanner;
  */
 public class ClientCatalog {
 	
-	private static String fileName = "ClientCatalog.csv";
+	private static String file = fcul.pco.teletasca.main.ApplicationConfiguration.ROOT_DIRECTORY + fcul.pco.teletasca.main.ApplicationConfiguration.CLIENT_CATALOG_FILENAME;
 
 
     public static void save(Map<String,Client> clients) throws IOException {
-    	PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
+    	PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)));
     	String header = "email,name";
     	writer.write(header);
     	for (Client c : clients.values()) {
@@ -37,12 +37,11 @@ public class ClientCatalog {
     		writer.write(c.toString());
 		}
     	writer.close();
-    	System.out.println("Wrote ClientCatalog to " + fileName);
     }
 
     public static Map<String,Client> load() throws FileNotFoundException {
     	Map<String, Client> clientsCatalog = new HashMap<String, Client>();    	
-    	Scanner inputFile = new Scanner(new FileReader(fileName));
+    	Scanner inputFile = new Scanner(new FileReader(file));
     	
     	inputFile.nextLine();
     	while (inputFile.hasNextLine()) {
@@ -53,7 +52,6 @@ public class ClientCatalog {
 		}
     	
     	inputFile.close();
-    	
     	return clientsCatalog;
     }
 

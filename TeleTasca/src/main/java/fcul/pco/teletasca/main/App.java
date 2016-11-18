@@ -98,20 +98,12 @@ public class App {
     }
     
     public static void main(String [] args) throws IOException {
-//		// Test Dish
-//		Dish d1 = new Dish("Cozido", 5.95);
-//		Dish d2 = new Dish("Bolonhesa", 7.0);	
-//		DishCatalog cat = new DishCatalog();
-//		cat.addDish(d1);
-//		cat.addDish(d2);
-    	
     	initialize();
-        dishCatalog.load();
-        clientCatalog.load();
+//        dishCatalog.load();
+//        clientCatalog.load();
 //        orderCatalog.load();
-        // interactiveMode();
-//        executeAllUseCases();
         interactiveMode();
+//        executeAllUseCases();
     }
     
 }

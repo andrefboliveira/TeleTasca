@@ -24,11 +24,11 @@ import java.util.Scanner;
  */
 public class DishCatalog {
 	
-	private static String fileName = "DishCatalog.csv";
+	private static String file = fcul.pco.teletasca.main.ApplicationConfiguration.ROOT_DIRECTORY + fcul.pco.teletasca.main.ApplicationConfiguration.DISH_CATALOG_FILENAME;
 
 
 	public static void save(Map<Integer,Dish> dishes) throws IOException {
-		PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));	//usar nomes applicationconfiguration
+		PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)));
     	String header = "id,description,price";
     	
     	writer.write(header);
@@ -37,12 +37,11 @@ public class DishCatalog {
     		writer.write(d.toString());
 		}
     	writer.close();
-    	System.out.println("Wrote DishCatalog to " + fileName);
 	}
 
 	public static Map<Integer,Dish> load() throws IOException {
 		Map<Integer,Dish> dishesCatalog = new HashMap<Integer,Dish>();    	
-    	Scanner inputFile = new Scanner(new FileReader(fileName));
+    	Scanner inputFile = new Scanner(new FileReader(file));
     	
     	inputFile.nextLine();
     	while (inputFile.hasNextLine()) {
@@ -51,8 +50,7 @@ public class DishCatalog {
     		int dishID = d.getId();
     		dishesCatalog.put(dishID, d);
 		}
-    	inputFile.close();
-    	
+    	inputFile.close();    	
     	return dishesCatalog;
 	}
 }
