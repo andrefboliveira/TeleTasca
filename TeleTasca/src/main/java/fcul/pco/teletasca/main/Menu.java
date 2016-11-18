@@ -1,8 +1,10 @@
 
 package fcul.pco.teletasca.main;
 
+import java.util.List;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,7 +47,7 @@ public class Menu {
      * @throws IOException 
      */   
     static void mainMenu(Scanner in) throws IOException {
-        boolean end = true; // <- think !
+        boolean end = false; // <- think !
         do {
             System.out.println("Você é: ");
             System.out.println("Cliente...................1");
@@ -53,7 +55,7 @@ public class Menu {
             System.out.println("Terminar..................3");
             System.out.println("> ");
             // TODO
-        
+            
             
             int option = Menu.nextInt(in);
             switch (option) {
@@ -67,7 +69,7 @@ public class Menu {
 				end = true;
 				break;
 			default:
-				mainMenu(in);
+				end = false;
 				break;
 			}
 			
@@ -89,6 +91,7 @@ public class Menu {
             System.out.println("Consultar as encomendas....4");
             System.out.println("Terminar...................5");
             System.out.println("> ");
+            
             int option = Menu.nextInt(in);
             switch (option) {
 			case 1:
@@ -101,12 +104,13 @@ public class Menu {
 				showDishes(in);
 				break;
 			case 5:
-				mainMenu(in);
+				end = true;
 				break;
 			default:
-				managerMenu(in);
+				end = false;
 				break;
 			}
+			
         } while (!end);
     }
     
@@ -148,6 +152,7 @@ public class Menu {
 		Dish d = new Dish(description, price);
         App.dishCatalog.addDish(d);
         App.dishCatalog.save();
+        
 	}
 	
 	
@@ -246,28 +251,78 @@ public class Menu {
      * The menu for ordering dishes.
      * 
      * @param in
+	 * @throws IOException 
      */
-	private static void clientOrderMenu(Scanner in) {
-		int i = 0;
+	private static void clientOrderMenu(Scanner in) throws IOException {
+		Calendar date = getDate(in);
+		
+		Order newOrder = new Order(date, App.currentClient);
+		
 		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
+		List<Integer> chosenDishes = chooseDishes (in, allDishes);
+
+		for (Integer chosenDish : chosenDishes) {
+			Dish d = allDishes.get(chosenDish);
+			newOrder.addDish(d);
+		}
+		
+		App.orderCatalog.addOrder(newOrder);
+		App.orderCatalog.save();
+
+		
+	}
+
+	private static Calendar getDate (Scanner in) {
+		System.out.println("Data da entrega [dd/mm/yyyy]: ");
+		int[] dateInt = Menu.nextDate(in);
+		int day = dateInt[0];
+		int month = dateInt[1];
+		int year = dateInt[2];
+		
+		System.out.println("Hora da entrega [hh:mm]: ");
+		int[] timeInt = Menu.nextTime(in);
+		int hour = timeInt[0];
+		int minutes = timeInt[1];
+		
+		Calendar date = Calendar.getInstance();
+		date.set(year, month, day, hour, minutes);
+		
+		return date;
+	}
+	
+	private static List<Integer> chooseDishes (Scanner in, HashMap<Integer, Dish> allDishes) {
+		List<Integer> chosenDishes = new ArrayList<Integer>();
+
 		Collection<Dish> dishesList = App.dishCatalog.getDishes();
-		if (dishesList.size() != 0) {
+		int chosenOption = -1;
+		if (!dishesList.isEmpty()) {
+			int i = 0;
 			for (Dish d : App.dishCatalog.getDishes()) {
-				System.out.println(d.getName() + ".........." + i);
 				allDishes.put(i, d);
 				i++;
 			}
-			int chosenOpt = Menu.nextInt(in);
-			Dish d = allDishes.get(chosenOpt);
-			int id = d.getId();
-			
-			//OrderCatalog.addOrder(id);		//oh caralho como é que converto int para order para dizer que quero adicinoar o prato com aquele id???
-	        //App.orderCatalog.save();
-		} else {
-			System.out.println("Não há pratos a apresentar.\n");
-		}
-	}
+			do {
+				for (int dishNum : allDishes.keySet()) {
+					Dish d = allDishes.get(dishNum);
+					System.out.println(d.getName() + ".........." + dishNum);
+				}
+				System.out.println("Escolhe um prato (0 para terminar): ");
+				chosenOption = Menu.nextInt(in);
+				chosenDishes.add(chosenOption);
+	        	
+	        } while (chosenOption > 0);
+		
+	        return chosenDishes;
 
+			
+    	} else {
+			System.out.println("Não há pratos a apresentar.");
+			return null;
+    	}	
+        
+	}
+		
+	
 	/**
      * A menu for the registration of the client's account. 
      * 

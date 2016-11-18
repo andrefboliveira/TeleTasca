@@ -9,6 +9,7 @@ import java.io.IOException;
 import fcul.pco.teletasca.domain.DishCatalog;
 import fcul.pco.teletasca.domain.OrderCatalog;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -99,10 +100,23 @@ public class App {
     
     public static void main(String [] args) throws IOException {
     	initialize();
-//        dishCatalog.load();
-//        clientCatalog.load();
-//        orderCatalog.load();
-        interactiveMode();
+    	try {
+    		dishCatalog.load();
+		} catch (FileNotFoundException e) {
+			dishCatalog.save();
+		}
+    	try {
+    		clientCatalog.load();
+		} catch (FileNotFoundException e) {
+			clientCatalog.save();
+		}
+    	try {
+    		orderCatalog.load();
+		} catch (FileNotFoundException e) {
+			orderCatalog.save();
+		}
+        
+    	interactiveMode();
 //        executeAllUseCases();
     }
     
