@@ -121,19 +121,20 @@ public class Menu {
      * @throws IOException
      */
     private static void showDishes(Scanner in) {
-		int i = 0;
-		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
-		Collection<Dish> dishesList = App.dishCatalog.getDishes();
-		if (dishesList.size() != 0) {
-			for (Dish d : App.dishCatalog.getDishes()) {
-				System.out.println(d.getName() + ".........." + i);
-				allDishes.put(i, d);
-				i++;
-			}
-		} else {
-			System.out.println("Não há pratos a apresentar.");
-		}
-		System.out.println("\n");
+    	//TODO ir às orders e não às dishes!!
+//		int i = 0;
+//		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
+//		Collection<Dish> dishesList = App.dishCatalog.getDishes();
+//		if (dishesList.size() != 0) {
+//			for (Dish d : App.dishCatalog.getDishes()) {
+//				System.out.println(d.getName() + ".........." + i);
+//				allDishes.put(i, d);
+//				i++;
+//			}
+//		} else {
+//			System.out.println("Não há pratos a apresentar.");
+//		}
+//		System.out.println("\n");
 	}
 
     
@@ -233,18 +234,19 @@ public class Menu {
      */
     //TODO CONFIRMAR SE ISTO ESTÁ BEM
     private static void clientOrderListMenu(Scanner in) {
-		int i = 0;
-		HashMap<Integer, Order> allDishes = new HashMap<Integer, Order>();
-		Collection<Order> dishesList = App.orderCatalog.getClientOrders(App.currentClient);
-		if (dishesList.size() != 0) {
-			for (Order o : App.orderCatalog.getClientOrders(App.currentClient)) {
-				System.out.println(o + ".........." + i);
-				allDishes.put(i, o);
-				i++;
-			}
-		} else {
-			System.out.println("Não há pratos a apresentar.\n");
-		}
+    	//TODO para aparecer apenas as encomendas do cliente!
+//		int i = 0;
+//		HashMap<Integer, Order> allDishes = new HashMap<Integer, Order>();
+//		Collection<Order> dishesList = App.orderCatalog.getClientOrders(App.currentClient);
+//		if (dishesList.size() != 0) {
+//			for (Order o : App.orderCatalog.getClientOrders(App.currentClient)) {
+//				System.out.println(o);
+//				allDishes.put(i, o);
+//				i++;
+//			}
+//		} else {
+//			System.out.println("Não há pratos a apresentar.\n");
+//		}
 	}
 
 	/**
@@ -261,7 +263,7 @@ public class Menu {
 		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
 		List<Integer> chosenDishes = chooseDishes (in, allDishes);
 
-		for (Integer chosenDish : chosenDishes) {
+		for (Integer chosenDish : chosenDishes) {	//tratar null
 			Dish d = allDishes.get(chosenDish);
 			newOrder.addDish(d);
 		}
@@ -296,7 +298,7 @@ public class Menu {
 		Collection<Dish> dishesList = App.dishCatalog.getDishes();
 		int chosenOption = -1;
 		if (!dishesList.isEmpty()) {
-			int i = 0;
+			int i = 1;
 			for (Dish d : App.dishCatalog.getDishes()) {
 				allDishes.put(i, d);
 				i++;
