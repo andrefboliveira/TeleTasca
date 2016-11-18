@@ -53,6 +53,8 @@ public class Menu {
             System.out.println("Terminar..................3");
             System.out.println("> ");
             // TODO
+        
+            
             int option = Menu.nextInt(in);
             switch (option) {
 			case 1:
@@ -62,11 +64,13 @@ public class Menu {
 				managerMenu(in);
 				break;
 			case 3:
-				System.exit(0);
+				end = true;
+				break;
 			default:
 				mainMenu(in);
 				break;
 			}
+			
         } while (!end);
     }
  
