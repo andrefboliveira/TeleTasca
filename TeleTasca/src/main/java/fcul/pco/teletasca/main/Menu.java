@@ -45,7 +45,6 @@ public class Menu {
      * @throws IOException 
      */   
     static void mainMenu(Scanner in) throws IOException {
-    	
         boolean end = true; // <- think !
         do {
             System.out.println("Você é: ");
@@ -124,8 +123,9 @@ public class Menu {
 				i++;
 			}
 		} else {
-			System.out.println("Não há pratos a apresentar.\n");
+			System.out.println("Não há pratos a apresentar.");
 		}
+		System.out.println("\n");
 	}
 
     
@@ -207,6 +207,7 @@ public class Menu {
 				clientOrderListMenu(in);
 				break;
 			case 5:
+				mainMenu(in);
 				break;
 			default:
 				clientMenu(in);
