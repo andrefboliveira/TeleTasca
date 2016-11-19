@@ -29,7 +29,8 @@ public class DishCatalog {
         dishesCatalog = new TreeMap<Integer, Dish>();
     }
     
-    /**
+
+	/**
      * Saves a catalog to a file.
      * 
      * @throws IOException 

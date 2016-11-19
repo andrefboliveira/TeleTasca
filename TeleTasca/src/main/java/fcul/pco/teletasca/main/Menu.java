@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -37,7 +38,7 @@ import fcul.pco.teletasca.domain.OrderCatalog;
 
 public class Menu {
     
-
+	// tratar null. ex: clientNewOrderMenu
 	/**
      * The main menu of the application. It serves to distinguish which kind of 
      * user is interacting with the application. It may be the restaurant 
@@ -46,19 +47,18 @@ public class Menu {
      * @param in a Scanner instance that correspond to the input of the program
      * @throws IOException 
      */   
-    static void mainMenu(Scanner in) throws IOException {
-        boolean end = false; // <- think !
-        do {
-            System.out.println("Você é: ");
-            System.out.println("Cliente...................1");
-            System.out.println("Gerente...................2");
-            System.out.println("Terminar..................3");
-            System.out.println("> ");
-            // TODO
-            
-            
-            int option = Menu.nextInt(in);
-            switch (option) {
+	static void mainMenu(Scanner in) throws IOException {
+		boolean end = false;
+		do {
+			System.out.println("Você é: ");
+			System.out.println("Cliente...................1");
+			System.out.println("Gerente...................2");
+			System.out.println("Terminar..................3");
+			System.out.println("> ");
+
+			int option = Menu.nextInt(in);
+			
+			switch (option) {
 			case 1:
 				clientMenu(in);
 				break;
@@ -72,10 +72,10 @@ public class Menu {
 				end = false;
 				break;
 			}
-			
-        } while (!end);
-    }
- 
+		} while (!end);
+	}
+	
+
     /**
      * The restaurant manager may add or remove dishes, and consult the list of
      * orders that were made by clients.
@@ -93,6 +93,7 @@ public class Menu {
             System.out.println("> ");
             
             int option = Menu.nextInt(in);
+            
             switch (option) {
 			case 1:
 				addDishMenu(in);
@@ -101,41 +102,19 @@ public class Menu {
 				removeDishMenu(in);
 				break;
 			case 4:
-				showDishes(in);
+				managerShowOrders();
 				break;
 			case 5:
 				end = true;
 				break;
 			default:
-				end = false;
+//				end = false;
 				break;
 			}
-			
         } while (!end);
     }
     
-	/**
-     * The menu for showing available dishes.
-     * 
-     * @param in
-     * @throws IOException
-     */
-    private static void showDishes(Scanner in) {
-    	//TODO ir às orders e não às dishes!!
-//		int i = 0;
-//		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
-//		Collection<Dish> dishesList = App.dishCatalog.getDishes();
-//		if (dishesList.size() != 0) {
-//			for (Dish d : App.dishCatalog.getDishes()) {
-//				System.out.println(d.getName() + ".........." + i);
-//				allDishes.put(i, d);
-//				i++;
-//			}
-//		} else {
-//			System.out.println("Não há pratos a apresentar.");
-//		}
-//		System.out.println("\n");
-	}
+	
 
     
 	/**
@@ -145,15 +124,15 @@ public class Menu {
      * @throws IOException
      */
 	private static void addDishMenu(Scanner in) throws IOException {
-		// TODO 
-		System.out.println("Descrição do prato:");
+		System.out.print("Descrição do prato: ");
 		String description = Menu.nextLine(in);
-		System.out.println("Preço:");
+
+		System.out.print("Preço: ");
 		double price = Menu.nextDouble(in);
+		
 		Dish d = new Dish(description, price);
         App.dishCatalog.addDish(d);
         App.dishCatalog.save();
-        
 	}
 	
 	
@@ -164,25 +143,32 @@ public class Menu {
      * @throws IOException
      */
 	private static void removeDishMenu(Scanner in) throws IOException {
-		// TODO 
-		int i = 0;
-		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
 		Collection<Dish> dishesList = App.dishCatalog.getDishes();
-		if (dishesList.size() != 0) {
-			for (Dish d : App.dishCatalog.getDishes()) {
-				System.out.println(d.getName() + "......." + i);
-				allDishes.put(i, d);
-				i++;
+		if (!dishesList.isEmpty()) {
+			for (Dish dish : dishesList) {
+				System.out.println(formatString(dish.getId(), dish.getName()));
 			}
-			int chosenOpt = Menu.nextInt(in);
-			Dish d = allDishes.get(chosenOpt);
-			App.dishCatalog.removeDish(d.getId());
-	        App.dishCatalog.save();
+			
+			System.out.println("Escolhe um prato: ");
+			int chosenOption = Menu.nextInt(in);
+			App.dishCatalog.removeDish(chosenOption);
+			App.dishCatalog.save();
 		} else {
-			System.out.println("Não há pratos a apresentar.\n");
+			System.err.println("Não há pratos a apresentar.\n");
 		}
-	}		
-
+	}
+	
+	/**
+     * Shows all orders to the manager.
+     * 
+     * @param in
+     * @throws IOException
+     */
+	private static void managerShowOrders() {
+		List<Order> allOrders = App.orderCatalog.getOrders();
+		showOrders(allOrders);
+	}
+    	
 
 	/**
      * A Client may open an account, log in, order dishes and consult his 
@@ -201,8 +187,9 @@ public class Menu {
             System.out.println("Lista de encomendas........4");
             System.out.println("Terminar...................5");
             System.out.println("> ");
-            // TODO
+            
             int option = Menu.nextInt(in);
+            
             switch (option) {
 			case 1:
 				clientRegistrationMenu(in);
@@ -211,121 +198,32 @@ public class Menu {
 				clientLoginMenu(in);
 				break;
 			case 3:
-				clientOrderMenu(in);
+				if (App.currentClient != null) {
+					clientNewOrderMenu(in);
+				} else {
+					System.err.println("Não fez login\n");
+//					end = false;
+				}
 				break;
 			case 4:
-				clientOrderListMenu(in);
+				if (App.currentClient != null) {
+					clientShowOrders();
+				} else {
+					System.err.println("Não fez login\n");
+//					end = false;
+				}
 				break;
 			case 5:
-				mainMenu(in);
+				end = true;
 				break;
 			default:
-				clientMenu(in);
+//				end = false;
 				break;
 			}
         } while (!end);
     }
 	
-	/**
-     * The menu for showing the client's list of orders.
-     * 
-     * @param in
-     * @throws IOException
-     */
-    //TODO CONFIRMAR SE ISTO ESTÁ BEM
-    private static void clientOrderListMenu(Scanner in) {
-    	//TODO para aparecer apenas as encomendas do cliente!
-//		int i = 0;
-//		HashMap<Integer, Order> allDishes = new HashMap<Integer, Order>();
-//		Collection<Order> dishesList = App.orderCatalog.getClientOrders(App.currentClient);
-//		if (dishesList.size() != 0) {
-//			for (Order o : App.orderCatalog.getClientOrders(App.currentClient)) {
-//				System.out.println(o);
-//				allDishes.put(i, o);
-//				i++;
-//			}
-//		} else {
-//			System.out.println("Não há pratos a apresentar.\n");
-//		}
-	}
-
-	/**
-     * The menu for ordering dishes.
-     * 
-     * @param in
-	 * @throws IOException 
-     */
-	private static void clientOrderMenu(Scanner in) throws IOException {
-		Calendar date = getDate(in);
-		
-		Order newOrder = new Order(date, App.currentClient);
-		
-		HashMap<Integer, Dish> allDishes = new HashMap<Integer, Dish>();
-		List<Integer> chosenDishes = chooseDishes (in, allDishes);
-
-		for (Integer chosenDish : chosenDishes) {	//tratar null
-			Dish d = allDishes.get(chosenDish);
-			newOrder.addDish(d);
-		}
-		
-		App.orderCatalog.addOrder(newOrder);
-		App.orderCatalog.save();
-
-		
-	}
-
-	private static Calendar getDate (Scanner in) {
-		System.out.println("Data da entrega [dd/mm/yyyy]: ");
-		int[] dateInt = Menu.nextDate(in);
-		int day = dateInt[0];
-		int month = dateInt[1];
-		int year = dateInt[2];
-		
-		System.out.println("Hora da entrega [hh:mm]: ");
-		int[] timeInt = Menu.nextTime(in);
-		int hour = timeInt[0];
-		int minutes = timeInt[1];
-		
-		Calendar date = Calendar.getInstance();
-		date.set(year, month, day, hour, minutes);
-		
-		return date;
-	}
-	
-	private static List<Integer> chooseDishes (Scanner in, HashMap<Integer, Dish> allDishes) {
-		List<Integer> chosenDishes = new ArrayList<Integer>();
-
-		Collection<Dish> dishesList = App.dishCatalog.getDishes();
-		int chosenOption = -1;
-		if (!dishesList.isEmpty()) {
-			int i = 1;
-			for (Dish d : App.dishCatalog.getDishes()) {
-				allDishes.put(i, d);
-				i++;
-			}
-			do {
-				for (int dishNum : allDishes.keySet()) {
-					Dish d = allDishes.get(dishNum);
-					System.out.println(d.getName() + ".........." + dishNum);
-				}
-				System.out.println("Escolhe um prato (0 para terminar): ");
-				chosenOption = Menu.nextInt(in);
-				chosenDishes.add(chosenOption);
-	        	
-	        } while (chosenOption > 0);
-		
-	        return chosenDishes;
-
-			
-    	} else {
-			System.out.println("Não há pratos a apresentar.");
-			return null;
-    	}	
-        
-	}
-		
-	
-	/**
+    /**
      * A menu for the registration of the client's account. 
      * 
      * @param in
@@ -335,8 +233,10 @@ public class Menu {
     private static void clientRegistrationMenu(Scanner in) throws IOException {
         System.out.println("Nome:");
         String name = Menu.nextLine(in);
+        
         System.out.println("Email:");
         String email = Menu.nextLine(in);
+        
         Client c = new Client(name, email);
         App.clientCatalog.addClient(c);
         App.clientCatalog.save();
@@ -349,15 +249,120 @@ public class Menu {
      * @param in
      * @throws IOException
      */
-	private static void clientLoginMenu(Scanner in) throws IOException {
-		// TODO Nao faz confirmação se o cliente existe. senão: informa e repete o menu
+	private static void clientLoginMenu(Scanner in) throws IOException {		
 		System.out.println("Email:");
 		String email = Menu.nextLine(in);
+
 		App.currentClient = App.clientCatalog.getClientByEmail(email);
+
+		if (App.currentClient == null) {
+			System.err.println("Não existe nenhum utilizador com o email indicado. \n");
+		}
 	}
 	
-    
-    
+
+	/**
+     * The menu for ordering dishes.
+     * 
+     * @param in
+	 * @throws IOException 
+     */
+	private static void clientNewOrderMenu(Scanner in) throws IOException {
+		Calendar date = getDate(in);
+		List<Integer> chosenDishes = chooseDishes(in);
+		
+		if (!chosenDishes.isEmpty()) {
+			Order newOrder = new Order(date, App.currentClient);
+
+			for (Integer chosenDishId : chosenDishes) {
+				Dish d = App.dishCatalog.getDishById(chosenDishId);
+				newOrder.addDish(d);
+			}
+
+			App.orderCatalog.addOrder(newOrder);
+			App.orderCatalog.save();
+		}
+	}
+	
+	
+	/**
+     * The menu for showing the client's list of orders.
+     * 
+     * @throws IOException
+     */
+    private static void clientShowOrders() {
+    	List<Order> clientOrders = App.orderCatalog.getClientOrders(App.currentClient);
+    	showOrders(clientOrders);
+	}
+	
+	
+	/**
+     * The menu for showing orders.
+     * 
+     * @param in
+     * @throws IOException
+     */
+	private static void showOrders(List<Order> listOrders) {
+		if (!listOrders.isEmpty()) {
+			for (Order o : listOrders) {
+				System.out.println(o);
+			}
+		} else {
+			System.err.println("Não há encomendas a apresentar.");
+		}
+	}
+
+	private static Calendar getDate (Scanner in) {
+		System.out.println("Data da entrega [dd/mm/yyyy]: ");
+		int[] dateInt = Menu.nextDate(in);
+		int day = dateInt[0];
+		int month = dateInt[1];
+		int year = dateInt[2];
+
+		System.out.println("Hora da entrega [hh:mm]: ");
+		int[] timeInt = Menu.nextTime(in);
+		int hour = timeInt[0];
+		int minutes = timeInt[1];
+
+		Calendar date = Calendar.getInstance();
+		date.set(year, month, day, hour, minutes);
+
+		return date;
+	}
+	
+	private static List<Integer> chooseDishes (Scanner in) {
+		List<Integer> chosenDishes = new ArrayList<Integer>();
+		int chosenOption;
+		
+		Collection<Dish> dishesList = App.dishCatalog.getDishes();
+		if (!dishesList.isEmpty()) {
+			do {
+				for (Dish d : dishesList) {
+					System.out.println(formatString(d.getId(), d.getName()));
+				}
+				System.out.println("Escolhe um prato (0 para terminar): ");
+				chosenOption = Menu.nextInt(in);
+				chosenDishes.add(chosenOption);
+			} while (chosenOption > 0);
+			return chosenDishes;
+
+		} else {
+			System.err.println("Não há pratos a apresentar.");
+			return null;
+		}  
+	}
+	
+	
+	private static String formatString(int id, String name) {
+    	int maxLength = 40;
+    	int nameLength = name.length();
+    	String idString = String.valueOf(id);
+    	int idLength = idString.length();
+    	int numberRepeats = maxLength-(nameLength+idLength);
+    	String dots = String.join("", Collections.nCopies(numberRepeats, "."));
+    	return name + dots + idString;
+    }
+		
     
     /*
      * The following methods read several kinds of values from a Scanner. 
@@ -442,6 +447,5 @@ public class Menu {
         time[0] = Integer.parseInt(a[0]);
         time[1] = Integer.parseInt(a[1]);
         return time;
-    }
- 
+    } 
 }

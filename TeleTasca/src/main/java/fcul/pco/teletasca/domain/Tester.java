@@ -6,15 +6,14 @@ import java.util.Calendar;
 // DELETE
 public class Tester {
 	public static void main(String[] args) {
-		
-		
+	
 
 //		
 //		System.out.println(catalogo.getClientOrders(c1));
 		
 //		// Test Dish
-		Dish d1 = new Dish("Cozido", 5.95);
-		Dish d2 = new Dish("Bolonhesa", 7.0);
+//		Dish d1 = new Dish("Cozido", 5.95);
+//		Dish d2 = new Dish("Bolonhesa", 7.0);
 //		Dish d3 = Dish.fromString("3, Bacalhau à Brás, 5.95");
 //		
 //		DishCatalog cat = new DishCatalog();
@@ -76,25 +75,25 @@ public class Tester {
 //		System.out.println(c5.getEmail());
 		
 //		//Test OrderCatalog
-		Calendar tempo = Calendar.getInstance();
-		Client c1 = new Client("André", "andrefboliveira@gmail.com");
-		Client c2 = new Client("Tânia", "tanmald@hotmail.com");
-		Order o1 = new Order(tempo, c1);
-		// Order o2 = new Order(tempo, c2);
-		fcul.pco.teletasca.main.App.clientCatalog = new ClientCatalog();
-		fcul.pco.teletasca.main.App.clientCatalog.addClient(c1);
-		fcul.pco.teletasca.main.App.clientCatalog.addClient(c2);
-
-		fcul.pco.teletasca.main.App.dishCatalog = new DishCatalog();
-		fcul.pco.teletasca.main.App.dishCatalog.addDish(d1);
-		fcul.pco.teletasca.main.App.dishCatalog.addDish(d2);
-		Order o3 = Order.fromString("3,tanmald@hotmail.com,2016/11/16 13:00,2,1");
-		o1.addDish(d1);
-//		o2.addDish(d2);
-//		o2.addDish(d1);
-		System.out.println(o1);
-//		System.out.println(o2);
-		System.out.println(o3);
+//		Calendar tempo = Calendar.getInstance();
+//		Client c1 = new Client("André", "andrefboliveira@gmail.com");
+//		Client c2 = new Client("Tânia", "tanmald@hotmail.com");
+//		Order o1 = new Order(tempo, c1);
+//		// Order o2 = new Order(tempo, c2);
+//		fcul.pco.teletasca.main.App.clientCatalog = new ClientCatalog();
+//		fcul.pco.teletasca.main.App.clientCatalog.addClient(c1);
+//		fcul.pco.teletasca.main.App.clientCatalog.addClient(c2);
+//
+//		fcul.pco.teletasca.main.App.dishCatalog = new DishCatalog();
+//		fcul.pco.teletasca.main.App.dishCatalog.addDish(d1);
+//		fcul.pco.teletasca.main.App.dishCatalog.addDish(d2);
+//		Order o3 = Order.fromString("3,tanmald@hotmail.com,2016/11/16 13:00,2,1");
+//		o1.addDish(d1);
+////		o2.addDish(d2);
+////		o2.addDish(d1);
+//		System.out.println(o1);
+////		System.out.println(o2);
+//		System.out.println(o3);
 //		OrderCatalog catalogo = new OrderCatalog();
 //		catalogo.addOrder(o1);
 //		catalogo.addOrder(o2);
