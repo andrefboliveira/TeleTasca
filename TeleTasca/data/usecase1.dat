@@ -1,8 +1,0 @@
-# Caso de uso 1: o gerente adiciona um prato.
-# user = gerente
-2
-1 # adicionar um prato
-bacalhau à braz # descrição do prato
-5.99 # preço
-5 # terminar
-3 # terminar
