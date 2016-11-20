@@ -58,8 +58,12 @@ public class OrderCatalog {
 	 * @param o : an Order instance
 	 */
 	public void addOrder(Order o) {
-		final int orderId = o.getId();
-		this.ordersCatalog.put(orderId, o);
+		if (!o.isNull()) {
+			final int orderId = o.getId();
+			this.ordersCatalog.put(orderId, o);
+		} else {
+			System.err.println("\nEncomenda não instanciada\n");
+		}
 	}
 
 	/**
@@ -69,14 +73,20 @@ public class OrderCatalog {
 	 * @return list of Orders.
 	 */
 	public List<Order> getClientOrders(Client c) {
-		final ArrayList<Order> listOrders = new ArrayList<Order>();
-		for (final Order order : this.ordersCatalog.values()) {
-			final Client client = order.getClient();
-			if (client.equals(c)) {
-				listOrders.add(order);
+		try {
+			final ArrayList<Order> listOrders = new ArrayList<Order>();
+			for (final Order order : this.ordersCatalog.values()) {
+				final Client client = order.getClient();
+				if (client.equals(c)) {
+					listOrders.add(order);
+				}
 			}
+			return listOrders;
+		} catch (NullPointerException e) {
+			System.err.println("\nNão existe o cliente\n");
+			return null;
 		}
-		return listOrders;
+		
 	}
 
 	/**

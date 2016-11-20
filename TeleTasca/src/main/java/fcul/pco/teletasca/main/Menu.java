@@ -90,7 +90,7 @@ public class Menu {
 					if (App.currentClient != null) {
 						Menu.clientNewOrderMenu(in);
 					} else {
-						System.err.println("Não fez login\n");
+						System.err.println("\nNão fez login\n");
 						// end = false;
 					}
 					break;
@@ -98,7 +98,7 @@ public class Menu {
 					if (App.currentClient != null) {
 						Menu.clientShowOrders();
 					} else {
-						System.err.println("Não fez login\n");
+						System.err.println("\nNão fez login\n");
 						// end = false;
 					}
 					break;
@@ -142,7 +142,7 @@ public class Menu {
 		App.currentClient = App.clientCatalog.getClientByEmail(email);
 
 		if (App.currentClient == null) {
-			System.err.println("Não existe nenhum utilizador com o email indicado.\n");
+			System.err.println("\nNão existe nenhum utilizador com o email indicado.\n");
 		}
 	}
 
@@ -226,10 +226,12 @@ public class Menu {
 	private static void addDishMenu(Scanner in) throws IOException {
 		System.out.print("Descrição do prato: ");
 		final String description = Menu.nextLine(in);
-
+		System.out.print("\n");
+		
 		System.out.print("Preço: ");
 		final double price = Menu.nextDouble(in);
-
+		System.out.print("\n");
+		
 		final Dish d = new Dish(description, price);
 		App.dishCatalog.addDish(d);
 		App.dishCatalog.save();
@@ -253,7 +255,7 @@ public class Menu {
 			App.dishCatalog.removeDish(chosenOption);
 			App.dishCatalog.save();
 		} else {
-			System.err.println("Não há pratos a apresentar.\n");
+			System.err.println("\nNão há pratos a apresentar.\n");
 		}
 	}
 
@@ -276,7 +278,7 @@ public class Menu {
 				System.out.println(o);
 			}
 		} else {
-			System.err.println("Não há encomendas a apresentar.\n");
+			System.err.println("\nNão há encomendas a apresentar.\n");
 		}
 	}
 
@@ -326,7 +328,7 @@ public class Menu {
 			return chosenDishes;
 
 		} else {
-			System.err.println("Não há pratos a apresentar.\n");
+			System.err.println("\nNão há pratos a apresentar.\n");
 			return null;
 		}
 	}

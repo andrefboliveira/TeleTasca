@@ -97,6 +97,10 @@ public class App {
 		App.executeUseCase("data/usecase3.dat");
 		App.executeUseCase("data/usecase4.dat");
 		App.executeUseCase("data/usecase5.dat");
+		App.executeUseCase("data/usecase6.dat");
+		App.executeUseCase("data/usecase7.dat");
+		App.executeUseCase("data/usecase8.dat");
+		App.executeUseCase("data/usecase9.dat");
 	}
 
 	/**
@@ -123,9 +127,10 @@ public class App {
 		} catch (final FileNotFoundException e) {
 			App.orderCatalog.save();
 		}
-
+		System.out.println("UseCases:\n");
+		executeAllUseCases();
+		System.out.println("InteractiveMode:\n");
 		App.interactiveMode();
-		// executeAllUseCases();
 	}
 
 }

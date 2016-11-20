@@ -1,7 +1,6 @@
-# Caso de uso 3: cliente tenta fazer encomenda e ver encomendas sem ter login.
-# user = cliente
-1
-3 # fazer encomenda
-4 # ver todas as encomendas do cliente
+# Caso de uso 3: o gerente consulta encomendas quando estas não existem.
+# user = gerente
+2
+4 # consultar encomendas
 5 # terminar
 3 # terminar

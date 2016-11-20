@@ -197,5 +197,27 @@ public class Order {
 		final Order other = (Order) obj;
 		return this.id == other.id;
 	}
+	
+	/**
+	 * Check if instance is null or has null properties.
+	 * @return true if an instance is null else returns false
+	 */
+	public boolean isNull(){
+		// Uses negation to catch unexpected cases. Unless it follows the
+		// expected format it is consideres as null
+		if (this == null) {
+			return true;
+		}
+		if (!(this.id > 0)) {
+			return true;
+		}
+		if (date == null) {
+			return true;
+		}
+		if (this.client.isNull()) {
+			return true;
+		}
+		return false;
+	}
 
 }

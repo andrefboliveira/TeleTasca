@@ -57,8 +57,14 @@ public class DishCatalog {
 	 * @ensures the given dish is added to the dishes catalog.
 	 */
 	public void addDish(Dish d) {
-		final int dishId = d.getId();
-		this.dishesCatalog.put(dishId, d);
+		if (!d.isNull()) {
+			System.out.println(d);
+			final int dishId = d.getId();
+			this.dishesCatalog.put(dishId, d);
+		} else {
+			System.err.println("\nPrato não instanciado\n");
+
+		}
 
 		// Ensure uniqueness in the catalog (not necessary, handled by Dish
 		// constructor):
@@ -103,8 +109,12 @@ public class DishCatalog {
 	 * @requires parameter "dishId" is an int
 	 */
 	public void removeDish(int dishId) {
-		this.dishesCatalog.remove(dishId);
-		Dish.listId.remove(dishId);
+		try {
+			this.dishesCatalog.remove(dishId);
+		} catch (NullPointerException e) {
+			System.err.println("\nPrato não existe\n");
+		}
+		
 	}
 
 }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Dish {
 
 	private static int counter = 1;
-	protected static ArrayList<Integer> listId = new ArrayList<Integer>();
+	private static ArrayList<Integer> listId = new ArrayList<Integer>();
 
 	private int id;
 	private String name;
@@ -50,7 +50,7 @@ public class Dish {
 			this.price = price;
 			Dish.listId.add(id);
 		} else {
-			System.err.println("Prato " + id + " já existe.");
+			System.err.println("\nPrato " + id + " já existe.\n");
 		}
 	}
 
@@ -151,6 +151,28 @@ public class Dish {
 		}
 		final Dish other = (Dish) obj;
 		return this.id == other.id;
+	}
+	
+	/**
+	 * Check if instance is null or has null properties.
+	 * @return true if an instance is null else returns false
+	 */
+	public boolean isNull(){
+		// Uses negation to catch unexpected cases. Unless it follows the
+		// expected format it is consideres as null
+		if (this == null) {
+			return true;
+		}
+		if (!(this.id > 0)) {
+			return true;
+		}
+		if (this.name == null || !(this.name.length() > 0)) {
+			return true;
+		}
+		if (!(this.price >= 0)) {
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -33,7 +33,7 @@ public class Client {
 			this.email = email;
 			Client.emailList.add(email);
 		} else {
-			System.err.println("Cliente " + email + " já existe");
+			System.err.println("\nCliente " + email + " já existe\n");
 		}
 	}
 
@@ -124,5 +124,24 @@ public class Client {
 		final Client other = (Client) obj;
 		return this.email.equals(other.getEmail());
 
+	}
+	
+	/**
+	 * Check if instance is null or has null properties.
+	 * @return true if an instance is null else returns false
+	 */
+	public boolean isNull(){
+		// Uses negation to catch unexpected cases. Unless it follows the
+		// expected format it is consideres as null
+		if (this == null) {
+			return true;
+		}
+		if (this.email == null || !(this.email.length() > 0)) {
+			return true;
+		}
+		if (this.name == null || !(this.name.length() > 0)) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -75,8 +75,13 @@ public class ClientCatalog {
 	 * @ensures the given client is added to the clients catalog.
 	 */
 	public void addClient(Client c) {
-		final String cEmail = c.getEmail();
-		this.clientsCatalog.put(cEmail, c);
+		if (!c.isNull()) {
+			final String cEmail = c.getEmail();
+			this.clientsCatalog.put(cEmail, c);
+		} else {
+			System.err.println("\nCliente não instanciado\n");
+		}
+		
 
 		// Ensure uniqueness in the catalog (not necessary, handled by Client
 		// constructor):
