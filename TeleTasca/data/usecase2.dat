@@ -1,0 +1,11 @@
+# Caso de uso 2: o gerente adiciona um prato.
+# user = gerente
+2
+1 # adicionar um prato
+sopa de legumes # descrição do prato
+1.50 # preço
+1
+sopa da pedra
+2.5
+5 # terminar
+3 # terminar

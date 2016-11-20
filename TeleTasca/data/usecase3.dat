@@ -1,0 +1,6 @@
+# Caso de uso 3: o gerente consulta encomendas quando estas não existem.
+# user = gerente
+2
+4 # consultar encomendas
+5 # terminar
+3 # terminar
