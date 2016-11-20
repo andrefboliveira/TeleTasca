@@ -13,7 +13,8 @@ import java.util.TreeMap;
  * domain.DishCatalog is the only class that "knows" that saving and loading
  * (persistence operations) are actually done in the persistence package.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois 
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  */
@@ -51,10 +52,9 @@ public class DishCatalog {
 	/**
 	 * Adds a new dish to the catalog.
 	 *
-	 * @param d
-	 *            is a Dish instance.
-	 * @requires ESPECIFICAR O CONTRATO
-	 * @ensures ESPECIFICAR O CONTRATO
+	 * @param d : is a Dish instance.
+	 * @requires a Dish as a parameter
+	 * @ensures the given dish is added to the dishes catalog.
 	 */
 	public void addDish(Dish d) {
 		final int dishId = d.getId();
@@ -69,14 +69,14 @@ public class DishCatalog {
 	}
 
 	/**
-	 * Given an Id, returns the corresponding Dish instance. If no instance is
-	 * found, the value null is returned.
+	 * Given an id, returns the corresponding Dish instance. 
+	 * If no instance is found, the value null is returned.
 	 *
-	 * @param id
-	 *            the Id of a Dish
+	 * @param id : the id of a Dish
 	 * @return Dish instance or null
-	 * @requires ESPECIFICAR O CONTRATO
-	 * @ensures ESPECIFICAR O CONTRATO
+	 * @requires parameter "id" is a int
+	 * @ensures returns an instance of dish corresponding to the given id,
+	 * 			or null if there isn't any match for the id.
 	 *
 	 */
 	public Dish getDishById(int id) {
@@ -90,19 +90,17 @@ public class DishCatalog {
 	/**
 	 * Returns a collection of all dishes.
 	 *
-	 * @return a Collection of Dish(es)
+	 * @return a Collection of Dishes
 	 */
 	public Collection<Dish> getDishes() {
 		return this.dishesCatalog.values();
 	}
 
 	/**
-	 * Removes the corresponding dish from the catalog.
+	 * Given an id, removes the corresponding dish from the catalog.
 	 *
-	 * @param dishId
-	 *            an integer value that corresponds to the id of a Dish.
-	 * @requires ESPECIFICAR O CONTRATO
-	 * @ensures ESPECIFICAR O CONTRATO
+	 * @param dishId : an integer value that corresponds to the id of a Dish.
+	 * @requires parameter "dishId" is an int
 	 */
 	public void removeDish(int dishId) {
 		this.dishesCatalog.remove(dishId);

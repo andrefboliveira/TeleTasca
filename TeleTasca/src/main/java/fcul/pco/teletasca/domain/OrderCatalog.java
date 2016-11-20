@@ -15,7 +15,8 @@ import java.util.Map;
  * and loading (persistence operations) are actually done in the persistence
  * package.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois 
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  */
@@ -38,7 +39,6 @@ public class OrderCatalog {
 	public void save() throws IOException {
 		fcul.pco.teletasca.persistence.OrderCatalog.save(this.getOrders());
 		// System.out.println("Wrote OrderCatalog\n");
-
 	}
 
 	/**
@@ -55,8 +55,7 @@ public class OrderCatalog {
 	/**
 	 * Adds an Order instance to the catalog.
 	 *
-	 * @param o
-	 *            an Order instance
+	 * @param o : an Order instance
 	 */
 	public void addOrder(Order o) {
 		final int orderId = o.getId();
@@ -66,8 +65,7 @@ public class OrderCatalog {
 	/**
 	 * Returns a list of orders made by the client c.
 	 *
-	 * @param c
-	 *            a Client instance
+	 * @param c : a Client instance
 	 * @return list of Orders.
 	 */
 	public List<Order> getClientOrders(Client c) {
@@ -84,13 +82,15 @@ public class OrderCatalog {
 	/**
 	 * Returns the list of all orders.
 	 *
-	 * @return A list of Orders.
+	 * @return a list of Orders.
 	 */
 	public List<Order> getOrders() {
 		return new ArrayList<Order>(this.ordersCatalog.values());
 	}
 
 	/**
+	 * A method for adding orders from a list.
+	 * 
 	 * @param listOrders
 	 */
 	public void setOrders(List<Order> listOrders) {

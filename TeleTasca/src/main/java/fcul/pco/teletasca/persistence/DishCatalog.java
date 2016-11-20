@@ -16,7 +16,8 @@ import fcul.pco.teletasca.domain.Dish;
  * This class is responsible for saving and loading the Dish catalog. The
  * filenames are defined in the ApplicationConfiguration class.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois 
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  */
@@ -26,7 +27,9 @@ public class DishCatalog {
 			+ fcul.pco.teletasca.main.ApplicationConfiguration.DISH_CATALOG_FILENAME;
 
 	/**
-	 * @param dishes
+	 * A method for writing and saving the catalog.
+	 * @param dishes : a map where the integer instance is the key, 
+	 * and dish instance is the corresponding value
 	 * @throws IOException
 	 */
 	public static void save(Map<Integer, Dish> dishes) throws IOException {
@@ -43,7 +46,8 @@ public class DishCatalog {
 	}
 
 	/**
-	 * @return
+	 * A method for loading the catalog.
+	 * @return the dishes catalog
 	 * @throws IOException
 	 */
 	public static Map<Integer, Dish> load() throws IOException {

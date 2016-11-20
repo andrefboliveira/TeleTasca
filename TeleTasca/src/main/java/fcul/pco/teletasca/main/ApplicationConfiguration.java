@@ -3,7 +3,8 @@ package fcul.pco.teletasca.main;
 /**
  * This class defines the constants of the application.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois 
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  */

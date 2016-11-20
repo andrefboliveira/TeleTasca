@@ -3,10 +3,11 @@ package fcul.pco.teletasca.domain;
 import java.util.ArrayList;
 
 /**
- * The client class represent a restaurant client that, after being registered,
- * can log in, order dishes, and consult the list his list of orders.
+ * The client class represents a restaurant client that, after being registered,
+ * can log in, order dishes, and consult his list of orders.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois 
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  *
@@ -19,12 +20,10 @@ public class Client {
 	private String email;
 
 	/**
-	 * Initializes an instance of Client
+	 * Initializes an instance of Client.
 	 *
-	 * @param name
-	 *            : the client's name
-	 * @param email
-	 *            : the client's email address
+	 * @param name : the client's name
+	 * @param email : the client's email address
 	 * @requires email address is unique in the system
 	 */
 	public Client(String name, String email) {
@@ -39,6 +38,7 @@ public class Client {
 	}
 
 	/**
+	 * Getter for the client's email address.
 	 *
 	 * @return returns the client's email address
 	 */
@@ -49,8 +49,7 @@ public class Client {
 	/**
 	 * Creates an instance of Client from a String.
 	 *
-	 * @param s
-	 *            a String
+	 * @param s : a String
 	 * @return an instance of Client
 	 * @requires s is a string that contains the email address of the client and
 	 *           its name, separated by a comma (,). The string must contain
@@ -72,6 +71,12 @@ public class Client {
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
+	/**
+	 * A method that returns a string that
+     * "textually represents" an object.
+     * 
+	 * @return a string representation of the object.
+	 */
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
@@ -85,6 +90,9 @@ public class Client {
 	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
+	/**
+	 * Indicates whether some other object is "equal to" this one.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -96,6 +104,11 @@ public class Client {
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	/**
+	 * Creates and returns a copy of an object.
+	 * 
+	 * @return a copy of an object, in this case an email.
 	 */
 	@Override
 	public boolean equals(Object obj) {
