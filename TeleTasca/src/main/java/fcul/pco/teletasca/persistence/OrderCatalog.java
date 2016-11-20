@@ -18,7 +18,8 @@ import fcul.pco.teletasca.domain.Order;
  * This class is responsible for saving and loading the Order catalog. The
  * filenames are defined in the ApplicationConfiguration class.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  */

@@ -16,7 +16,8 @@ import fcul.pco.teletasca.domain.OrderCatalog;
  * catalogs and an instance of Client that corresponds to the current user
  * (client).
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  */

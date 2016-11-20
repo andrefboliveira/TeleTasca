@@ -6,7 +6,8 @@ import java.util.ArrayList;
 /**
  * This class represents a restaurant dish that can be ordered by a client.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  *

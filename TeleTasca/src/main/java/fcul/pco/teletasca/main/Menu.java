@@ -16,7 +16,8 @@ import fcul.pco.teletasca.domain.Order;
 /**
  * This class deals with the interactions with the user.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  */

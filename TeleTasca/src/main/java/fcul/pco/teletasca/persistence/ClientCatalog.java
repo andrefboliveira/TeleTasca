@@ -17,7 +17,8 @@ import fcul.pco.teletasca.domain.Client;
  * This class is responsible for saving and loading the Client catalog. The
  * filenames are defined in the ApplicationConfiguration class.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  *

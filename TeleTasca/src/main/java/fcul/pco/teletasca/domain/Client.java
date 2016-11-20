@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * The client class represent a restaurant client that, after being registered,
  * can log in, order dishes, and consult the list his list of orders.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  *
