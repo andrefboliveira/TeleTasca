@@ -14,7 +14,7 @@ import java.util.Map;
  * "knows" that saving and loading (persistence operations) are actually done in
  * the persistence package.
  *
- * @author Thibault Langlois
+ * @author Thibault Langlois 
  * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
@@ -38,30 +38,26 @@ public class ClientCatalog {
 	public void save() throws IOException {
 		fcul.pco.teletasca.persistence.ClientCatalog.save(this.clientsCatalog);
 		// System.out.println("Wrote ClientCatalog\n");
-
 	}
 
 	/**
-	 * loads the catalog from a file.
+	 * Loads the catalog from a file.
 	 *
 	 * @throws FileNotFoundException
 	 */
 	public void load() throws FileNotFoundException {
 		this.clientsCatalog = fcul.pco.teletasca.persistence.ClientCatalog.load();
 		// System.out.println("Loaded ClientCatalog\n");
-
 	}
 
 	/**
 	 * Given an email address, the corresponding Client is returned. If it is
 	 * not found in the catalog, null is returned.
 	 *
-	 * @param email
-	 *            a string that contains an email address.
+	 * @param email : a string that contains an email address.
 	 * @return an instance of Client or null.
-	 * @requires DEFINIR O CONTRATO
-	 * @ensures DEFINIR O CONTRATO
-	 *
+	 * @requires a string with the email as a parameter
+	 * @ensures returns the corresponding client or null if it doesn't exist
 	 */
 	public Client getClientByEmail(String email) {
 		if (this.clientsCatalog.containsKey(email)) {
@@ -75,8 +71,8 @@ public class ClientCatalog {
 	 * Adds a client to the catalog.
 	 *
 	 * @param c
-	 * @requires ESPECIFICAR AQUI O CONTRATO.
-	 * @ensures ESPECIFICAR AQUI O CONTRATO.
+	 * @requires a Client as parameter
+	 * @ensures the given client is added to the clients catalog.
 	 */
 	public void addClient(Client c) {
 		final String cEmail = c.getEmail();

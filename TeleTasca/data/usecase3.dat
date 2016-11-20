@@ -1,15 +1,7 @@
-# Caso de uso 3: o gerente adiciona e remove pratos.
-# user = gerente
-2
-1 # adicionar um prato
-sopa de legumes # descrição do prato
-1.50 # preço
+# Caso de uso 3: cliente tenta fazer encomenda e ver encomendas sem ter login.
+# user = cliente
 1
-sopa da pedra
-2.5
-bolonhesa
-4
-2 # remover um prato
-1 # remove o prato 1, neste caso sopa de legumes
+3 # fazer encomenda
+4 # ver todas as encomendas do cliente
 5 # terminar
 3 # terminar

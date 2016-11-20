@@ -22,13 +22,6 @@ import fcul.pco.teletasca.domain.Order;
  * @author Tânia Maldonado 44745
  */
 
-// A classe Menu contém os menus e a interação com utilizador.
-// Deve ser completada (falta por exemplo a leitura dos dados),
-// mas não deve alterar os menus !
-// Para poder ler ficheiros de caso de uso com comentários deverá usar
-// os métodos (fornecidos) nextInt(Scanner in), nextDouble(Scanner in),
-// nextLine(Scanner in), nextDate(Scanner in) e nextTime(Scanner in).
-
 public class Menu {
 
 	/**
@@ -36,8 +29,7 @@ public class Menu {
 	 * user is interacting with the application. It may be the restaurant
 	 * manager or a client.
 	 *
-	 * @param in
-	 *            a Scanner instance that correspond to the input of the program
+	 * @param in : a Scanner instance that correspond to the input of the program
 	 * @throws IOException
 	 */
 	static void mainMenu(Scanner in) throws IOException {
@@ -72,7 +64,7 @@ public class Menu {
 	 * A Client may open an account, log in, order dishes and consult his list
 	 * of orders.
 	 *
-	 * @param in
+	 * @param in : a Scanner instance that correspond to the input of the program.
 	 * @throws IOException
 	 */
 	private static void clientMenu(Scanner in) throws IOException {
@@ -181,7 +173,6 @@ public class Menu {
 
 	/**
 	 * The menu for showing the client's list of orders.
-	 *
 	 */
 	private static void clientShowOrders() {
 		final List<Order> clientOrders = App.orderCatalog.getClientOrders(App.currentClient);
@@ -192,9 +183,7 @@ public class Menu {
 	 * The restaurant manager may add or remove dishes, and consult the list of
 	 * orders that were made by clients.
 	 *
-	 * @param in
-	 *            a Scanner instance that correspond to the input of the
-	 *            program.
+	 * @param in : a Scanner instance that correspond to the input of the program.
 	 * @throws IOException
 	 */
 	private static void managerMenu(Scanner in) throws IOException {
@@ -231,7 +220,7 @@ public class Menu {
 	/**
 	 * The menu for adding dishes.
 	 *
-	 * @param in
+	 * @param in : a Scanner instance that correspond to the input of the program.
 	 * @throws IOException
 	 */
 	private static void addDishMenu(Scanner in) throws IOException {
@@ -249,7 +238,7 @@ public class Menu {
 	/**
 	 * The menu for removing dishes.
 	 *
-	 * @param in
+	 * @param in : a Scanner instance that correspond to the input of the program.
 	 * @throws IOException
 	 */
 	private static void removeDishMenu(Scanner in) throws IOException {
@@ -269,17 +258,15 @@ public class Menu {
 	}
 
 	/**
-	 * Shows all orders to the manager.
-	 *
+	 * A method to show all orders to the manager.
 	 */
-
 	private static void managerShowOrders() {
 		final List<Order> allOrders = App.orderCatalog.getOrders();
 		Menu.showOrders(allOrders);
 	}
 
 	/**
-	 * The menu for showing orders.
+	 * A menu to show all orders.
 	 *
 	 * @param listOrders
 	 */
@@ -294,8 +281,9 @@ public class Menu {
 	}
 
 	/**
-	 * @param in
-	 * @return
+	 * A method to get the date and time of the order.
+	 * @param in : a Scanner instance that correspond to the input of the program.
+	 * @return the date and time of the order
 	 */
 	private static Calendar getDate(Scanner in) {
 		System.out.println("Data da entrega [dd/mm/yyyy]: ");
@@ -316,8 +304,10 @@ public class Menu {
 	}
 
 	/**
-	 * @param in
-	 * @return
+	 * A method for choosing dishes from the catalog. 
+	 * @param in : a Scanner instance that correspond to the input of the program.
+	 * @return a list with the chosen dishes, or null if there aren't 
+	 * any dishes to choose from.
 	 */
 	private static List<Integer> chooseDishes(Scanner in) {
 		final List<Integer> chosenDishes = new ArrayList<Integer>();
@@ -341,6 +331,12 @@ public class Menu {
 		}
 	}
 
+	/**
+	 * A method to format a string.
+	 * @param id : a int representing a unique id
+	 * @param name : a string corresponding to a name
+	 * @return the formatted string
+	 */
 	private static String formatString(int id, String name) {
 		final int maxLength = 40;
 		final int nameLength = name.length();
@@ -360,6 +356,11 @@ public class Menu {
 	 * comments in the use case files. Comments are begin with # and end at the
 	 * end of the line.
 	 */
+	/**
+	 * Reads an int input.
+	 * @param in : a Scanner instance that corresponds to the input of the program.
+	 * @return an integer
+	 */
 	private static int nextInt(Scanner in) {
 		String s = in.nextLine();
 		while (s.startsWith("#")) {
@@ -374,6 +375,11 @@ public class Menu {
 		return Integer.parseInt(s);
 	}
 
+	/**
+	 * Reads a double input.
+	 * @param in : a Scanner instance that corresponds to the input of the program.
+	 * @return a double
+	 */
 	private static double nextDouble(Scanner in) {
 		String s = in.nextLine();
 		while (s.startsWith("#")) {
@@ -388,6 +394,11 @@ public class Menu {
 		return Double.parseDouble(s);
 	}
 
+	/**
+	 * Reads a string input.
+	 * @param in : a Scanner instance that corresponds to the input of the program.
+	 * @return a string
+	 */
 	private static String nextLine(Scanner in) {
 		String s = in.nextLine();
 		while (s.startsWith("#")) {
@@ -401,6 +412,11 @@ public class Menu {
 		return s;
 	}
 
+	/**
+	 * Reads a date input.
+	 * @param in : a Scanner instance that corresponds to the input of the program.
+	 * @return a date in the format of an array of integers.
+	 */
 	private static int[] nextDate(Scanner in) {
 		String s = in.nextLine();
 		while (s.startsWith("#")) {
@@ -418,6 +434,11 @@ public class Menu {
 		return d;
 	}
 
+	/**
+	 * Reads a time input.
+	 * @param in : a Scanner instance that corresponds to the input of the program.
+	 * @return a time in the format of an array of integers.
+	 */
 	private static int[] nextTime(Scanner in) {
 		// int d, m, y;
 		String s = in.nextLine();

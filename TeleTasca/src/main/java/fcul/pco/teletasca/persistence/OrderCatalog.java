@@ -18,7 +18,7 @@ import fcul.pco.teletasca.domain.Order;
  * This class is responsible for saving and loading the Order catalog. The
  * filenames are defined in the ApplicationConfiguration class.
  *
- * @author Thibault Langlois
+ * @author Thibault Langlois 
  * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
@@ -29,7 +29,8 @@ public class OrderCatalog {
 			+ fcul.pco.teletasca.main.ApplicationConfiguration.ORDER_CATALOG_FILENAME;
 
 	/**
-	 * @param orders
+	 * A method for writing and saving the catalog.
+	 * @param orders : a list of orders
 	 * @throws IOException
 	 */
 	public static void save(List<Order> orders) throws IOException {
@@ -46,7 +47,8 @@ public class OrderCatalog {
 	}
 
 	/**
-	 * @return
+	 * A method for loading the catalog.
+	 * @return the orders catalog
 	 * @throws FileNotFoundException
 	 */
 	public static List<Order> load() throws FileNotFoundException {

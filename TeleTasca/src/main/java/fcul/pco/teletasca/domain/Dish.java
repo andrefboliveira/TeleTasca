@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * This class represents a restaurant dish that can be ordered by a client.
  *
- * @author Thibault Langlois
+ * @author Thibault Langlois 
  * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
@@ -22,19 +22,27 @@ public class Dish {
 	private double price;
 
 	/**
-	 * Initialize a Dish instance
+	 * Initializes a Dish instance.
 	 *
-	 * @param name
-	 *            the description of the dish
-	 * @param price
-	 *            the dish price
+	 * @param name : the description of the dish
+	 * @param price : the dish price
+	 * @requires parameter "name" is a string, and "price" is a double
 	 */
-
 	public Dish(String name, double price) {
 		this(Dish.counter, name, price);
 		Dish.counter++;
 	}
 
+	/**
+	 * Creates a private Dish instance with a specific id, 
+	 * only for managing purposes.
+	 * 
+	 * @param id : a unique id for a dish
+	 * @param name : the description of the dish
+	 * @param price : the dish price
+	 * @requires parameter "id" is an int, "name" is a string, and "price" 
+	 * 			 is a double
+	 */
 	private Dish(int id, String name, double price) {
 		if (!Dish.listId.contains(id)) {
 			this.id = id;
@@ -44,19 +52,20 @@ public class Dish {
 		} else {
 			System.err.println("Prato " + id + " já existe.");
 		}
-
 	}
 
 	/**
+	 * A getter for the dish unique id.
 	 *
-	 * @return the dish Id
+	 * @return the dish id
+	 * @requires the dish has an id
 	 */
 	public int getId() {
 		return this.id;
 	}
 
 	/**
-	 *
+	 * A getter for the dish name/description.
 	 * @return the dish description
 	 */
 	public String getName() {
@@ -66,14 +75,13 @@ public class Dish {
 	/**
 	 * Creates a Dish instance from a string.
 	 *
-	 * @param s
-	 *            a string that describes a dish
+	 * @param s : a string that describes a dish
 	 * @return a Dish instance
-	 * @requires s is a string that contains the Id, the name of a dish and its
-	 *           price. separated by a comma (,). The string must contain
+	 * @requires s is a string that contains the id, the name of a dish and its
+	 *           price, separated by a comma (,). The string must contain
 	 *           exactly two commas.
-	 * @ensures the returned value d is such that d.getName() is equal to the is
-	 *          equal to the name specified in s.
+	 * @ensures the returned value d is such that d.getName() is equal to the
+	 *          name specified in s.
 	 *
 	 */
 	public static Dish fromString(String s) {
@@ -88,6 +96,12 @@ public class Dish {
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
+	 */
+	/**
+	 * A method that returns a string that
+     * "textually represents" an object.
+     * 
+	 * @return a string representation of the object.
 	 */
 	@Override
 	public String toString() {
@@ -104,6 +118,9 @@ public class Dish {
 	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
+	/**
+	 * Indicates whether some other object is "equal to" this one.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,6 +132,11 @@ public class Dish {
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	/**
+	 * Creates and returns a copy of an object.
+	 * 
+	 * @return a copy of an object, in this case an email.
 	 */
 	@Override
 	public boolean equals(Object obj) {

@@ -1,8 +1,21 @@
-# Caso de uso 5: o gerente consulta as encomendas.
+# Caso de uso 5: cliente tenta fazer encomenda quando não existem pratos.
+# remover os pratos existentes:
 # user = gerente
 2
-4 # consultar as encomendas
-1,tanmald@hotmail.com,2016/10/17 20:20,2,3
-2,tanmald@hotmail.com,2016/11/23 14:00,2
+2 # remover um prato
+1 # remove o prato 1, neste caso bacalhau à braz
+2 # remover um prato
+2 # remove o prato 2, neste caso sopa de legumes
+2 # remover um prato
+3 # remove o prato 3, neste caso sopa da pedra
+5 # terminar
+# user = cliente
+1
+2 # fazer login
+andrefboliveira@gmail.com # email do cliente (existe)
+3 # encomendar pratos
+01/12/2016 # data da entrega
+15:02 # hora da entrega
+4 # ver todas as encomendas do cliente
 5 # terminar
 3 # terminar

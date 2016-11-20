@@ -11,7 +11,7 @@ import java.util.Locale;
  * This class represents an order composed by a date, a client and a list of
  * dishes.
  *
- * @author Thibault Langlois
+ * @author Thibault Langlois 
  * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
@@ -27,12 +27,10 @@ public class Order {
 	private static String dateFormatString = "yyyy/MM/dd HH:mm";
 
 	/**
-	 * Initializes an Order instance
+	 * Initializes an Order instance.
 	 *
-	 * @param date
-	 *            a Calendar instance (with time).
-	 * @param client
-	 *            an instance of Client.
+	 * @param date : a Calendar instance (with time).
+	 * @param client : an instance of Client.
 	 */
 	public Order(Calendar date, Client client) {
 		this(Order.counter, date, client);
@@ -40,14 +38,12 @@ public class Order {
 	}
 
 	/**
-	 * Creates an Order instance.
+	 * Creates a private Order instance with a specific id, 
+	 * only for managing purposes.
 	 *
-	 * @param id
-	 *            of the order
-	 * @param date
-	 *            of order
-	 * @param client
-	 *            who made the order.
+	 * @param id : unique id of the order
+	 * @param date : date of the order
+	 * @param client : who made the order.
 	 */
 	private Order(int id, Calendar date, Client client) {
 		this.id = id;
@@ -65,26 +61,25 @@ public class Order {
 	/**
 	 * Adds a dish to the order.
 	 *
-	 * @param d
-	 *            a Dish instance
+	 * @param d : a Dish instance
 	 */
 	public void addDish(Dish d) {
 		this.dishList.add(d);
 	}
 
 	/**
-	 * Returns the client that made this order.
+	 * Returns the client who made the order.
 	 *
-	 * @return a Client instance.
+	 * @return a Client instance
 	 */
 	public Client getClient() {
 		return this.client;
 	}
 
 	/**
-	 * A getter for the order Id.
+	 * A getter for the order unique id.
 	 *
-	 * @return the id
+	 * @return the id of the order
 	 */
 	public int getId() {
 		return this.id;
@@ -93,8 +88,7 @@ public class Order {
 	/**
 	 * Creates an Order instance from a string.
 	 *
-	 * @param s:
-	 *            a string that contains the id, the client's email address, the
+	 * @param s : a string that contains the id, the client's email address, the
 	 *            date and the list of Dishes ids that compose the order.
 	 * @return an Order instance
 	 * @requires s is a string that contains the Id, the client's email address,
@@ -133,6 +127,10 @@ public class Order {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	/**
 	 * Prints correctly to the .csv file.
 	 *
@@ -140,10 +138,6 @@ public class Order {
 	 * @return a string that contains the id, the client's email address, the
 	 *         date and the list of Dishes ids that compose the order, following
 	 *         .csv format.
-	 */
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
@@ -162,13 +156,15 @@ public class Order {
 			builder.append(",");
 			builder.append(dish.getId());
 		}
-
 		return builder.toString();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
+	 */
+	/**
+	 * Indicates whether some other object is "equal to" this one. 
 	 */
 	@Override
 	public int hashCode() {
@@ -181,6 +177,11 @@ public class Order {
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	/**
+	 * Creates and returns a copy of an object.
+	 * 
+	 * @return a copy of an object, in this case an email.
 	 */
 	@Override
 	public boolean equals(Object obj) {

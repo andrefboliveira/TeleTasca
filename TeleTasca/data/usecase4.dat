@@ -1,27 +1,13 @@
-# Caso de uso 4: o cliente cria uma conta, faz login, realiza duas encomendas e pede uma listagem das mesmas.
+# Caso de uso 4: cliente tenta fazer login sem ter criado conta, depois cria conta e faz login.
 # user = cliente
 1
+2 # fazer login
+andrefboliveira@gmail.com # email do cliente (não existe)
 1 # criar conta
-//TODO - menus de criaÃ§Ã£o de conta!
-# nome
-TÃ¢nia
-# email
-tanmald@hotmail.com
-2 # login
-tanmald@hotmail.com
-3 # encomendar pratos
-17/10/2016 # data da entrega
-20:20 # hora da entrega
-2 # sopa da pedra
-3 # bolonhesa
-0 # terminar
-3 # encomendar pratos
-23/11/2016
-14:00
-2 # sopa da pedra
-0 # terminar
-4 # lista de encomendas
-1,tanmald@hotmail.com,2016/10/17 20:20,2,3
-2,tanmald@hotmail.com,2016/11/23 14:00,2
+André Oliveira # nome do cliente
+andrefboliveira@gmail.com # email do cliente
+2 # fazer login
+andrefboliveira@gmail.com # email do cliente (existe)
+4 # ver todas as encomendas do cliente (para testar se tem login feito)
 5 # terminar
 3 # terminar

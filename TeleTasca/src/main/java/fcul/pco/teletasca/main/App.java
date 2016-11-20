@@ -16,7 +16,7 @@ import fcul.pco.teletasca.domain.OrderCatalog;
  * catalogs and an instance of Client that corresponds to the current user
  * (client).
  *
- * @author Thibault Langlois
+ * @author Thibault Langlois 
  * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
@@ -28,6 +28,9 @@ public class App {
 	public static OrderCatalog orderCatalog;
 	public static Client currentClient = null;
 
+	/**
+	 * Initializes (creates) the catalogs.
+	 */
 	private static void initialize() {
 		App.dishCatalog = new DishCatalog();
 		App.clientCatalog = new ClientCatalog();
@@ -53,15 +56,22 @@ public class App {
 	 * called a use-case contains a sequence of inputs that allows testing some
 	 * functionalities of the application. A use-case file may contain comments
 	 * (useful to make it easy to understand). Comments begin with the #
-	 * character and extend until the end of the line. Here is an example of
-	 * use-case file: -------- # Caso de uso 1: o gerente adiciona um prato. #
-	 * user = gerente 2 1 # adicionar um prato bacalhau à braz # descrição do
-	 * prato 5.99 # preço 5 # terminar 3 # terminar -------
+	 * character and extend until the end of the line. 
+	 * 
+	 * Here is an example of use-case file: 
+	 * -------- 
+	 * # Caso de uso 1: o gerente adiciona um prato. 
+	 * # user = gerente 
+	 * 2 
+	 * 1 # adicionar um prato 
+	 * bacalhau à braz # descrição do prato 
+	 * 5.99 # preço 
+	 * 5 # terminar 
+	 * 3 # terminar 
+	 * -------
 	 *
-	 *
-	 * @param useCaseFileName
-	 *            A String that represents the name of a file that contains a
-	 *            use-case.
+	 * @param useCaseFileName : A String that represents the name of a file 
+	 * that contains a use-case.
 	 * @throws IOException
 	 * @requires the contents of the file must be correct with respect of the
 	 *           menus (see class Menu) and the input data expected by the
@@ -78,7 +88,7 @@ public class App {
 	}
 
 	/**
-	 *
+	 * A method to execute all use cases.  
 	 * @throws IOException
 	 */
 	public static void executeAllUseCases() throws IOException {
@@ -89,6 +99,12 @@ public class App {
 		App.executeUseCase("data/usecase5.dat");
 	}
 
+	/**
+	 * The main method.
+	 * 
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		App.initialize();
 		// Loads the Catalogs; if they don't exist creates new empty ones

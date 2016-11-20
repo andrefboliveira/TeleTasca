@@ -17,7 +17,7 @@ import fcul.pco.teletasca.domain.Client;
  * This class is responsible for saving and loading the Client catalog. The
  * filenames are defined in the ApplicationConfiguration class.
  *
- * @author Thibault Langlois
+ * @author Thibault Langlois 
  * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
@@ -29,7 +29,9 @@ public class ClientCatalog {
 			+ fcul.pco.teletasca.main.ApplicationConfiguration.CLIENT_CATALOG_FILENAME;
 
 	/**
-	 * @param clients
+	 * A method for writing and saving the catalog.
+	 * @param clients : a map where the string instance is the key, and client
+	 * instance is the corresponding value
 	 * @throws IOException
 	 */
 	public static void save(Map<String, Client> clients) throws IOException {
@@ -46,7 +48,8 @@ public class ClientCatalog {
 	}
 
 	/**
-	 * @return
+	 * A method for loading the catalog.
+	 * @return the clients catalog
 	 * @throws FileNotFoundException
 	 */
 	public static Map<String, Client> load() throws FileNotFoundException {
