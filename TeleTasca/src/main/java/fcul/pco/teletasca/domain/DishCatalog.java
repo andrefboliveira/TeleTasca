@@ -58,7 +58,6 @@ public class DishCatalog {
 	 */
 	public void addDish(Dish d) {
 		if (!d.isNull()) {
-			System.out.println(d);
 			final int dishId = d.getId();
 			this.dishesCatalog.put(dishId, d);
 		} else {
