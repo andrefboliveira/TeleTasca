@@ -70,7 +70,7 @@ public class OrderCatalog {
 	 * Returns a list of orders made by the client c.
 	 *
 	 * @param c : a Client instance
-	 * @return list of Orders.
+	 * @return list of Orders the where done by the client specified.
 	 */
 	public List<Order> getClientOrders(Client c) {
 		try {
@@ -99,7 +99,7 @@ public class OrderCatalog {
 	}
 
 	/**
-	 * A method for adding orders from a list.
+	 * A method for adding orders from a list (to the Map).
 	 * 
 	 * @param listOrders
 	 */

@@ -132,9 +132,10 @@ public class Order {
 	 * @see java.lang.Object#toString()
 	 */
 	/**
-	 * Prints correctly to the .csv file.
+	 * A method that returns a string that "textually represents" an object.
+	 * Composed of the unique client's id, order date, associated client and 
+	 * the list of dishes ordered.
 	 *
-	 * @requires and id, the client email and a date.
 	 * @return a string that contains the id, the client's email address, the
 	 *         date and the list of Dishes ids that compose the order, following
 	 *         .csv format.
@@ -164,7 +165,7 @@ public class Order {
 	 * @see java.lang.Object#hashCode()
 	 */
 	/**
-	 * Indicates whether some other object is "equal to" this one. 
+	 * Generates hashCode for a given order instance based on the unique id.
 	 */
 	@Override
 	public int hashCode() {
@@ -179,9 +180,9 @@ public class Order {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	/**
-	 * Creates and returns a copy of an object.
+	 * Indicates whether some other order is "equal to" this one.
 	 * 
-	 * @return a copy of an object, in this case an email.
+	 * @return true if the orders are the same, false otherwise.
 	 */
 	@Override
 	public boolean equals(Object obj) {

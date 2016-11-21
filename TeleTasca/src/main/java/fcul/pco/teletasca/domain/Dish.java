@@ -98,10 +98,11 @@ public class Dish {
 	 * @see java.lang.Object#toString()
 	 */
 	/**
-	 * A method that returns a string that
-     * "textually represents" an object.
-     * 
-	 * @return a string representation of the object.
+	 * A method that returns a string that "textually represents" an object.
+	 * Composed of the unique dish's id, description and price.
+	 * 
+	 * @return a string that contains the dish id, description and price,
+	 *         following .csv format.
 	 */
 	@Override
 	public String toString() {
@@ -119,7 +120,7 @@ public class Dish {
 	 * @see java.lang.Object#hashCode()
 	 */
 	/**
-	 * Indicates whether some other object is "equal to" this one.
+	 * Generates hashCode for a given dish instance based on the unique id.
 	 */
 	@Override
 	public int hashCode() {
@@ -134,9 +135,9 @@ public class Dish {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	/**
-	 * Creates and returns a copy of an object.
+	 * Indicates whether some other dish is "equal to" this one.
 	 * 
-	 * @return a copy of an object, in this case an email.
+	 * @return true if the dishes are the same, false otherwise.
 	 */
 	@Override
 	public boolean equals(Object obj) {

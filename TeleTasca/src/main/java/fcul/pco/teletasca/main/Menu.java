@@ -131,7 +131,8 @@ public class Menu {
 	}
 
 	/**
-	 * The log in menu.
+	 * The log in menu. Makes the current client be the client instance that
+	 * matches the given email (if it exists, or null otherwise)
 	 *
 	 * @param in
 	 */
@@ -334,7 +335,7 @@ public class Menu {
 	}
 
 	/**
-	 * A method to format a string.
+	 * A method to format a string (justify text).
 	 * @param id : a int representing a unique id
 	 * @param name : a string corresponding to a name
 	 * @return the formatted string

@@ -105,7 +105,7 @@ public class DishCatalog {
 	 * Given an id, removes the corresponding dish from the catalog.
 	 *
 	 * @param dishId : an integer value that corresponds to the id of a Dish.
-	 * @requires parameter "dishId" is an int
+	 * @requires parameter "dishId" is an int (and is the Map key)
 	 */
 	public void removeDish(int dishId) {
 		try {

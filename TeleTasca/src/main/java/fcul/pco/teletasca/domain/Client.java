@@ -6,8 +6,7 @@ import java.util.ArrayList;
  * The client class represents a restaurant client that, after being registered,
  * can log in, order dishes, and consult his list of orders.
  *
- * @author Thibault Langlois 
- * Alunos:
+ * @author Thibault Langlois Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  *
@@ -22,8 +21,10 @@ public class Client {
 	/**
 	 * Initializes an instance of Client.
 	 *
-	 * @param name : the client's name
-	 * @param email : the client's email address
+	 * @param name
+	 *            : the client's name
+	 * @param email
+	 *            : the client's email address
 	 * @requires email address is unique in the system
 	 */
 	public Client(String name, String email) {
@@ -49,7 +50,8 @@ public class Client {
 	/**
 	 * Creates an instance of Client from a String.
 	 *
-	 * @param s : a String
+	 * @param s
+	 *            : a String
 	 * @return an instance of Client
 	 * @requires s is a string that contains the email address of the client and
 	 *           its name, separated by a comma (,). The string must contain
@@ -72,10 +74,11 @@ public class Client {
 	 * @see java.lang.Object#toString()
 	 */
 	/**
-	 * A method that returns a string that
-     * "textually represents" an object.
-     * 
-	 * @return a string representation of the object.
+	 * A method that returns a string that "textually represents" an object.
+	 * Composed of the unique client's email and name.
+	 * 
+	 * @return a string that contains client's email address and name, following
+	 *         .csv format.       
 	 */
 	@Override
 	public String toString() {
@@ -91,7 +94,7 @@ public class Client {
 	 * @see java.lang.Object#hashCode()
 	 */
 	/**
-	 * Indicates whether some other object is "equal to" this one.
+	 * Generates hashCode for a given client instance based on the unique email.
 	 */
 	@Override
 	public int hashCode() {
@@ -106,9 +109,9 @@ public class Client {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	/**
-	 * Creates and returns a copy of an object.
+	 * Indicates whether some other client is "equal to" this one.
 	 * 
-	 * @return a copy of an object, in this case an email.
+	 * @return true if the clients are the same, false otherwise.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -125,12 +128,13 @@ public class Client {
 		return this.email.equals(other.getEmail());
 
 	}
-	
+
 	/**
 	 * Check if instance is null or has null properties.
+	 * 
 	 * @return true if an instance is null else returns false
 	 */
-	public boolean isNull(){
+	public boolean isNull() {
 		// Uses negation to catch unexpected cases. Unless it follows the
 		// expected format it is consideres as null
 		if (this == null) {
