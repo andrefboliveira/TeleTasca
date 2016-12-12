@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  */
 public class Client {
-
+	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
 	private static ArrayList<String> emailList = new ArrayList<String>();
 
 	private String name;

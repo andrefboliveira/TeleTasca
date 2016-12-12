@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  */
 public class Dish {
-
+	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
 	private static int counter = 1;
 	private static ArrayList<Integer> listId = new ArrayList<Integer>();
 

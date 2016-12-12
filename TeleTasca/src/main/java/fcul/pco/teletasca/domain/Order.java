@@ -17,6 +17,7 @@ import java.util.Locale;
  * @author Tânia Maldonado 44745
  */
 public class Order {
+	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
 
 	private static int counter = 1;
 	private int id;
