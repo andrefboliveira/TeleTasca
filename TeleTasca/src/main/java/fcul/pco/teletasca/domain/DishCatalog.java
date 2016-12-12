@@ -3,6 +3,7 @@ package fcul.pco.teletasca.domain;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -21,12 +22,21 @@ import java.util.TreeMap;
 public class DishCatalog {
 
 	private Map<Integer, Dish> dishesCatalog;
-
+	
+	private static DishCatalog dishCatInst = new DishCatalog();
+	
 	/**
 	 * Creates an empty catalog.
 	 */
-	public DishCatalog() {
+	private DishCatalog() {
 		this.dishesCatalog = new TreeMap<Integer, Dish>();
+	}
+	
+	/**
+	 * @return
+	 */
+	public static DishCatalog getDishCatalog(){
+		return dishCatInst;
 	}
 
 	/**

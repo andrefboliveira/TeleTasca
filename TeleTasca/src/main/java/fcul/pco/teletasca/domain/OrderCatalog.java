@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * The class represents the sets of Orders known on the system. Note that load
@@ -23,12 +24,21 @@ import java.util.Map;
 public class OrderCatalog {
 
 	private final Map<Integer, Order> ordersCatalog;
+	
+	private static OrderCatalog orderCatInst = new OrderCatalog();
 
 	/**
 	 * Creates an empty Order catalog.
 	 */
-	public OrderCatalog() {
+	private OrderCatalog() {
 		this.ordersCatalog = new HashMap<Integer, Order>();
+	}
+	
+	/**
+	 * @return
+	 */
+	public static OrderCatalog getOrderCatalog(){
+		return orderCatInst;
 	}
 
 	/**

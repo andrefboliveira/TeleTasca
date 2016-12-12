@@ -22,13 +22,24 @@ import java.util.Map;
 public class ClientCatalog {
 
 	private Map<String, Client> clientsCatalog;
-
+	
+	private static ClientCatalog clientCatInst = new ClientCatalog();
+	
+	
 	/**
 	 * Creates an empty catalog.
 	 */
-	public ClientCatalog() {
+	private ClientCatalog() {
 		this.clientsCatalog = new HashMap<String, Client>();
 	}
+	
+	/**
+	 * @return
+	 */
+	public static ClientCatalog getClientCatalog(){
+		return clientCatInst;
+	}
+	
 
 	/**
 	 * Saves the catalog to a file.

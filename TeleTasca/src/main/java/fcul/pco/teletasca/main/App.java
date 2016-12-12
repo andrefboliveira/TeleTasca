@@ -32,9 +32,9 @@ public class App {
 	 * Initializes (creates) the catalogs.
 	 */
 	private static void initialize() {
-		App.dishCatalog = new DishCatalog();
-		App.clientCatalog = new ClientCatalog();
-		App.orderCatalog = new OrderCatalog();
+		App.dishCatalog = fcul.pco.teletasca.domain.DishCatalog.getDishCatalog();
+		App.clientCatalog = fcul.pco.teletasca.domain.ClientCatalog.getClientCatalog();
+		App.orderCatalog = fcul.pco.teletasca.domain.OrderCatalog.getOrderCatalog();
 	}
 
 	/**
