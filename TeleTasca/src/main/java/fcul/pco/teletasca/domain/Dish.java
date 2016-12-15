@@ -15,10 +15,13 @@ import java.util.ArrayList;
 
 /*TODO extends NutritionFacts*/
 public class Dish extends NutritionFacts {
+	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
+
 
 	private static int counter = 1;
-	private static ArrayList<Integer> listId = new ArrayList<Integer>();
+	private static DishCatalog currentCatalog = fcul.pco.teletasca.main.App.dishCatalog;
 
+	
 	private int id;
 	private String name;
 	private double price;
@@ -74,13 +77,13 @@ public class Dish extends NutritionFacts {
 	 * 			 is a double
 	 * se isto antes não dava erro, porque é que agora dá ao inserir o resto dos parâmetros??
 	 */
+
 	private Dish(int id, String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
 		super(servingSize, servings, calories, fat, sodium, carbohydrate);
-		if (!Dish.listId.contains(id)) {
+		if (currentCatalog.getDishById(id) != null) {
 			this.id = id;
 			this.name = name;
 			this.price = price;
-			Dish.listId.add(id);
 		} else {
 			System.err.println("\nPrato " + id + " já existe.\n");
 		}
@@ -210,28 +213,6 @@ public class Dish extends NutritionFacts {
 		}
 		final Dish other = (Dish) obj;
 		return this.id == other.id;
-	}
-	
-	/**
-	 * Check if instance is null or has null properties.
-	 * @return true if an instance is null else returns false
-	 */
-	public boolean isNull(){
-		// Uses negation to catch unexpected cases. Unless it follows the
-		// expected format it is consideres as null
-		if (this == null) {
-			return true;
-		}
-		if (!(this.id > 0)) {
-			return true;
-		}
-		if (this.name == null || !(this.name.length() > 0)) {
-			return true;
-		}
-		if (!(this.price >= 0)) {
-			return true;
-		}
-		return false;
 	}
 
 

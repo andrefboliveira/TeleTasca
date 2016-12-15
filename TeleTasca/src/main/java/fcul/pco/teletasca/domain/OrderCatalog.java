@@ -68,12 +68,8 @@ public class OrderCatalog {
 	 * @param o : an Order instance
 	 */
 	public void addOrder(Order o) {
-		if (!o.isNull()) {
-			final int orderId = o.getId();
-			this.ordersCatalog.put(orderId, o);
-		} else {
-			System.err.println("\nEncomenda não instanciada\n");
-		}
+		final int orderId = o.getId();
+		this.ordersCatalog.put(orderId, o);
 	}
 
 	/**
