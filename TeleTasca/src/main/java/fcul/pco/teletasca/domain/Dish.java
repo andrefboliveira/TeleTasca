@@ -12,16 +12,25 @@ import java.util.ArrayList;
  * @author Tânia Maldonado 44745
  *
  */
-public class Dish {
+
+/*TODO extends NutritionFacts*/
+public class Dish extends NutritionFacts {
 	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
+
+
 	private static int counter = 1;
-	
 	private static DishCatalog currentCatalog = fcul.pco.teletasca.main.App.dishCatalog;
 
 	
 	private int id;
 	private String name;
 	private double price;
+	private DishType dishType;
+	private boolean available; /*implementar*/
+	
+	public enum DishType {
+		STANDARD, LIGHT, FORTWO
+	}
 
 	/**
 	 * Initializes a Dish instance.
@@ -30,9 +39,31 @@ public class Dish {
 	 * @param price : the dish price
 	 * @requires parameter "name" is a string, and "price" is a double
 	 */
-	public Dish(String name, double price) {
-		this(Dish.counter, name, price);
-		Dish.counter++;
+	
+	private void setDishType() {
+		if (getServings() > 1) {
+			this.dishType = DishType.FORTWO;
+		} else if (getCalories() <= 500) {
+			this.dishType = DishType.LIGHT;
+		} else {
+			this.dishType = DishType.STANDARD;
+		}
+	}
+	
+	/*
+	 * adicionar atributos de nutritionfacts, lá dentro com super chamar atributos de nutrition facts
+	 * adicinar if para distinguir os tipos de prato ex servings > 1 - fortwo, etc
+	 * this.dishType = DishType.FORTWO;
+	 * NOS DOIS CONSTRUTORES
+	 * (int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate)
+	 */
+	public Dish(String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
+		super(servingSize, servings, calories, fat, sodium, carbohydrate);
+		this.counter++;
+		this.name = name;
+		this.price = price;
+
+		setDishType(); 
 	}
 
 	/**
@@ -44,8 +75,11 @@ public class Dish {
 	 * @param price : the dish price
 	 * @requires parameter "id" is an int, "name" is a string, and "price" 
 	 * 			 is a double
+	 * se isto antes não dava erro, porque é que agora dá ao inserir o resto dos parâmetros??
 	 */
-	private Dish(int id, String name, double price) {
+
+	private Dish(int id, String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
+		super(servingSize, servings, calories, fat, sodium, carbohydrate);
 		if (currentCatalog.getDishById(id) != null) {
 			this.id = id;
 			this.name = name;
@@ -53,6 +87,7 @@ public class Dish {
 		} else {
 			System.err.println("\nPrato " + id + " já existe.\n");
 		}
+		setDishType();
 	}
 
 	/**
@@ -71,6 +106,14 @@ public class Dish {
 	 */
 	public String getName() {
 		return this.name;
+	}
+	
+	/**
+	 * A getter for the dish type.
+	 * @return the dish type
+	 */
+	public DishType getDishType() {
+		return dishType;
 	}
 
 	/**
@@ -115,6 +158,29 @@ public class Dish {
 		builder.append(this.price);
 		return builder.toString();
 	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String quickFacts() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append(this.name);
+		builder.append("...");
+		builder.append(this.price);
+		builder.append(" EUR...");
+		builder.append(this.getServings());
+		builder.append(" serving(s)...");
+		builder.append(this.getCalories());
+		builder.append(" kcal...");
+		builder.append(this.getFat());
+		builder.append("g of fat...");
+		builder.append(this.getSodium());
+		builder.append("mg of sodium...");
+		builder.append(this.getCarbohydrate());
+		builder.append("g of carbohydrates...");
+		return builder.toString();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -154,5 +220,7 @@ public class Dish {
 		final Dish other = (Dish) obj;
 		return this.id == other.id;
 	}
+
+
 
 }
