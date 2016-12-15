@@ -67,8 +67,9 @@ public class DishCatalog {
 	 * @ensures the given dish is added to the dishes catalog.
 	 */
 	public void addDish(Dish d) {
-		if (!d.isNull()) {
-			final int dishId = d.getId();
+		final int dishId = d.getId();
+		if (this.getDishById(dishId) != null) {
+			
 			this.dishesCatalog.put(dishId, d);
 		} else {
 			System.err.println("\nPrato não instanciado\n");

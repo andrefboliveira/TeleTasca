@@ -4,7 +4,9 @@ package fcul.pco.teletasca.domain;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * The class represents the sets of Clients known (registered) on the system.
@@ -40,7 +42,7 @@ public class ClientCatalog {
 		return clientCatInst;
 	}
 	
-
+	
 	/**
 	 * Saves the catalog to a file.
 	 *
@@ -86,20 +88,13 @@ public class ClientCatalog {
 	 * @ensures the given client is added to the clients catalog.
 	 */
 	public void addClient(Client c) {
-		if (!c.isNull()) {
-			final String cEmail = c.getEmail();
+		final String cEmail = c.getEmail();
+		if (this.getClientByEmail(cEmail) != null) {
 			this.clientsCatalog.put(cEmail, c);
 		} else {
-			System.err.println("\nCliente não instanciado\n");
+
 		}
 		
-
-		// Ensure uniqueness in the catalog (not necessary, handled by Client
-		// constructor):
-		/*
-		 * if (!this.clientsCatalog.keySet().contains(cEmail)) {
-		 * this.clientsCatalog.put(cEmail, c); }
-		 */
 	}
 
 }

@@ -26,6 +26,10 @@ public class Order {
 	private ArrayList<Dish> dishList = new ArrayList<Dish>();
 	private static ArrayList<Integer> listId = new ArrayList<Integer>();
 	private static String dateFormatString = "yyyy/MM/dd HH:mm";
+	
+	private static ClientCatalog currentClientCatalog = fcul.pco.teletasca.main.App.clientCatalog;
+
+	
 
 	/**
 	 * Initializes an Order instance.
@@ -110,22 +114,18 @@ public class Order {
 			System.err.println("Error parsing date. Use format: " + Order.dateFormatString);
 			e.printStackTrace();
 		}
-		final Client c = fcul.pco.teletasca.main.App.clientCatalog.getClientByEmail(clientEmail);
+		final Client c = currentClientCatalog.getClientByEmail(clientEmail);
 
-		if (c != null) {
-			final Order newOrder = new Order(orderId, orderDate, c);
 
-			for (int i = 3; i < stringList.length; i++) {
-				final int dishID = Integer.parseInt(stringList[i]);
-				final Dish d = fcul.pco.teletasca.main.App.dishCatalog.getDishById(dishID);
-				if (d != null) {
-					newOrder.addDish(d);
-				}
-			}
-			return newOrder;
-		} else {
-			return null;
+		final Order newOrder = new Order(orderId, orderDate, c);
+
+		for (int i = 3; i < stringList.length; i++) {
+			final int dishID = Integer.parseInt(stringList[i]);
+			final Dish d = fcul.pco.teletasca.main.App.dishCatalog.getDishById(dishID);
+			newOrder.addDish(d);
 		}
+		return newOrder;
+	
 	}
 
 	/*
@@ -200,26 +200,6 @@ public class Order {
 		return this.id == other.id;
 	}
 	
-	/**
-	 * Check if instance is null or has null properties.
-	 * @return true if an instance is null else returns false
-	 */
-	public boolean isNull(){
-		// Uses negation to catch unexpected cases. Unless it follows the
-		// expected format it is consideres as null
-		if (this == null) {
-			return true;
-		}
-		if (!(this.id > 0)) {
-			return true;
-		}
-		if (date == null) {
-			return true;
-		}
-		if (this.client.isNull()) {
-			return true;
-		}
-		return false;
-	}
+	
 
 }

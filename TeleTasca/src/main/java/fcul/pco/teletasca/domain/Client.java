@@ -1,6 +1,5 @@
 package fcul.pco.teletasca.domain;
 
-import java.util.ArrayList;
 
 /**
  * The client class represents a restaurant client that, after being registered,
@@ -13,10 +12,11 @@ import java.util.ArrayList;
  */
 public class Client {
 	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
-	private static ArrayList<String> emailList = new ArrayList<String>();
 
 	private String name;
 	private String email;
+	
+	private static ClientCatalog currentCatalog = fcul.pco.teletasca.main.App.clientCatalog;
 
 	/**
 	 * Initializes an instance of Client.
@@ -29,10 +29,9 @@ public class Client {
 	 */
 	public Client(String name, String email) {
 
-		if (!Client.emailList.contains(email)) {
+		if (currentCatalog.getClientByEmail(email) != null) {
 			this.name = name;
 			this.email = email;
-			Client.emailList.add(email);
 		} else {
 			System.err.println("\nCliente " + email + " já existe\n");
 		}
@@ -127,25 +126,5 @@ public class Client {
 		final Client other = (Client) obj;
 		return this.email.equals(other.getEmail());
 
-	}
-
-	/**
-	 * Check if instance is null or has null properties.
-	 * 
-	 * @return true if an instance is null else returns false
-	 */
-	public boolean isNull() {
-		// Uses negation to catch unexpected cases. Unless it follows the
-		// expected format it is consideres as null
-		if (this == null) {
-			return true;
-		}
-		if (this.email == null || !(this.email.length() > 0)) {
-			return true;
-		}
-		if (this.name == null || !(this.name.length() > 0)) {
-			return true;
-		}
-		return false;
 	}
 }
