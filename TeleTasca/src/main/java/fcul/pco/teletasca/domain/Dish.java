@@ -31,26 +31,16 @@ public class Dish extends NutritionFacts {
 	public enum DishType {
 		STANDARD, LIGHT, FORTWO
 	}
-
+	
 	/**
 	 * Initializes a Dish instance.
 	 *
 	 * @param name : the description of the dish
 	 * @param price : the dish price
 	 * @requires parameter "name" is a string, and "price" is a double
-	 */
-	
-	private void setDishType() {
-		if (getServings() > 1) {
-			this.dishType = DishType.FORTWO;
-		} else if (getCalories() <= 500) {
-			this.dishType = DishType.LIGHT;
-		} else {
-			this.dishType = DishType.STANDARD;
-		}
-	}
-	
+	 */	
 	/*
+	 * TODO ALTERAR CONSTRUTORES
 	 * adicionar atributos de nutritionfacts, lá dentro com super chamar atributos de nutrition facts
 	 * adicinar if para distinguir os tipos de prato ex servings > 1 - fortwo, etc
 	 * this.dishType = DishType.FORTWO;
@@ -58,12 +48,8 @@ public class Dish extends NutritionFacts {
 	 * (int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate)
 	 */
 	public Dish(String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
-		super(servingSize, servings, calories, fat, sodium, carbohydrate);
-		this.counter++;
-		this.name = name;
-		this.price = price;
-
-		setDishType(); 
+		this(Dish.counter, name, price, servingSize, servings, calories, fat, sodium, carbohydrate);
+		Dish.counter++;
 	}
 
 	/**
@@ -77,19 +63,31 @@ public class Dish extends NutritionFacts {
 	 * 			 is a double
 	 * se isto antes não dava erro, porque é que agora dá ao inserir o resto dos parâmetros??
 	 */
-
 	private Dish(int id, String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
 		super(servingSize, servings, calories, fat, sodium, carbohydrate);
 		if (currentCatalog.getDishById(id) != null) {
 			this.id = id;
 			this.name = name;
 			this.price = price;
+			setDishType();
 		} else {
 			System.err.println("\nPrato " + id + " já existe.\n");
-		}
-		setDishType();
+		}	
 	}
 
+	/**
+	 * 
+	 */
+	private void setDishType() {
+		if (getServings() > 1) {
+			this.dishType = DishType.FORTWO;
+		} else if (getCalories() <= 500) {
+			this.dishType = DishType.LIGHT;
+		} else {
+			this.dishType = DishType.STANDARD;
+		}
+	}
+	
 	/**
 	 * A getter for the dish unique id.
 	 *
@@ -129,12 +127,28 @@ public class Dish extends NutritionFacts {
 	 *
 	 */
 	public static Dish fromString(String s) {
+		/*
+		 * System.out.println(Dish.fromString("arroz de pato, 5, 500, 1, 750, 8, 0.5, 89"));
+		 * ---
+		 * Exception in thread "main" java.lang.NumberFormatException: For input string: "arroz de pato"
+		 *	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+		 *	at java.lang.Integer.parseInt(Integer.java:580)
+		 *	at java.lang.Integer.parseInt(Integer.java:615)
+		 *	at fcul.pco.teletasca.domain.Dish.fromString(Dish.java:135)
+		 *	at fcul.pco.teletasca.domain.tester.main(tester.java:11)
+		 */
 		final String[] stringlist = s.split(",");
 		final int dishId = Integer.parseInt(stringlist[0].trim());
 		final String dishName = stringlist[1].trim();
 		final double dishPrice = Double.parseDouble(stringlist[2].trim());
+		final int dishServingSize = Integer.parseInt(stringlist[3].trim());
+		final int dishServings = Integer.parseInt(stringlist[4].trim());
+		final int dishCalories = Integer.parseInt(stringlist[5].trim());
+		final double dishFat = Double.parseDouble(stringlist[6].trim());
+		final double dishSodium = Double.parseDouble(stringlist[7].trim());
+		final double dishCarbohydrate = Double.parseDouble(stringlist[8].trim());
 
-		return new Dish(dishId, dishName, dishPrice);
+		return new Dish(dishId, dishName, dishPrice, dishServingSize, dishServings, dishCalories, dishFat, dishSodium, dishCarbohydrate);
 	}
 
 	/*
