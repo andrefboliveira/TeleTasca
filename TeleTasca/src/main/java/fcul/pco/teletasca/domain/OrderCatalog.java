@@ -69,7 +69,28 @@ public class OrderCatalog {
 	 */
 	public void addOrder(Order o) {
 		final int orderId = o.getId();
-		this.ordersCatalog.put(orderId, o);
+		if (this.getOrderById(orderId) != null) {
+			this.ordersCatalog.put(orderId, o);
+		}
+	}
+	
+	/**
+	 * Given an id, returns the corresponding Order instance. 
+	 * If no instance is found, the value null is returned.
+	 *
+	 * @param id : the id of a Order
+	 * @return Order instance or null
+	 * @requires parameter "id" is a int
+	 * @ensures returns an instance of order corresponding to the given id,
+	 * 			or null if there isn't any match for the id.
+	 *
+	 */
+	public Order getOrderById(int id) {
+		if (this.ordersCatalog.containsKey(id)) {
+			return this.ordersCatalog.get(id);
+		} else {
+			return null;
+		}
 	}
 
 	/**

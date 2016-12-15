@@ -27,7 +27,9 @@ public class Order {
 	private static ArrayList<Integer> listId = new ArrayList<Integer>();
 	private static String dateFormatString = "yyyy/MM/dd HH:mm";
 	
+	private static OrderCatalog currentCatalog = fcul.pco.teletasca.main.App.orderCatalog;
 	private static ClientCatalog currentClientCatalog = fcul.pco.teletasca.main.App.clientCatalog;
+	private static DishCatalog currentDishCatalog = fcul.pco.teletasca.main.App.dishCatalog;
 
 	
 
@@ -51,9 +53,14 @@ public class Order {
 	 * @param client : who made the order.
 	 */
 	private Order(int id, Calendar date, Client client) {
-		this.id = id;
-		this.date = date;
-		this.client = client;
+		if (currentCatalog.getOrderById(id) != null) {
+			this.id = id;
+			this.date = date;
+			this.client = client;
+		} else {
+			System.err.println("\nEncomenda " + id + " já existe.\n");
+		}
+		
 
 		// To ensure orders are unique, not requested:
 		/*
@@ -121,7 +128,7 @@ public class Order {
 
 		for (int i = 3; i < stringList.length; i++) {
 			final int dishID = Integer.parseInt(stringList[i]);
-			final Dish d = fcul.pco.teletasca.main.App.dishCatalog.getDishById(dishID);
+			final Dish d = currentDishCatalog.getDishById(dishID);
 			newOrder.addDish(d);
 		}
 		return newOrder;
