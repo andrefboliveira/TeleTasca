@@ -66,8 +66,8 @@ public class Dish extends NutritionFacts {
 	// 	 se isto antes não dava erro, porque é que agora dá ao inserir o resto dos parâmetros??
 	private Dish(int id, String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
 		super(servingSize, servings, calories, fat, sodium, carbohydrate);
-		System.out.println(id);
-		if (currentCatalog.getDishById(id) != null) {
+		// Erro comparar com NULO???
+		if (currentCatalog.getDishById(id) == null) {
 			this.id = id;
 			this.name = name;
 			this.price = price;

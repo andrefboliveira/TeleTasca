@@ -53,7 +53,8 @@ public class Order {
 	 * @param client : who made the order.
 	 */
 	private Order(int id, Calendar date, Client client) {
-		if (currentCatalog.getOrderById(id) != null) {
+		// Erro comparar com NULO???
+		if (currentCatalog.getOrderById(id) == null) {
 			this.id = id;
 			this.date = date;
 			this.client = client;
