@@ -17,9 +17,10 @@ import java.util.ArrayList;
 public class Dish extends NutritionFacts {
 	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
 
-
-	private static int counter = 1;
 	private static DishCatalog currentCatalog = fcul.pco.teletasca.main.App.dishCatalog;
+	private static int MaxId = 0;
+	private static int counter = (MaxId > 0) ? MaxId : 1;
+	
 
 	
 	private int id;
@@ -61,14 +62,15 @@ public class Dish extends NutritionFacts {
 	 * @param price : the dish price
 	 * @requires parameter "id" is an int, "name" is a string, and "price" 
 	 * 			 is a double
-	 * se isto antes não dava erro, porque é que agora dá ao inserir o resto dos parâmetros??
 	 */
+	// 	 se isto antes não dava erro, porque é que agora dá ao inserir o resto dos parâmetros??
 	private Dish(int id, String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
 		super(servingSize, servings, calories, fat, sodium, carbohydrate);
 		if (currentCatalog.getDishById(id) != null) {
 			this.id = id;
 			this.name = name;
 			this.price = price;
+			MaxId = id;
 			setDishType();
 		} else {
 			System.err.println("\nPrato " + id + " já existe.\n");

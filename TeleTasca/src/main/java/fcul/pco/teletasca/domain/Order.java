@@ -19,12 +19,12 @@ import java.util.Locale;
 public class Order {
 	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
 
-	private static int counter = 1;
-	private int id;
+	private static int MaxId = 0;
+	private static int counter = (MaxId > 0) ? MaxId : 1;	private int id;
+	
 	private Calendar date;
 	private Client client;
 	private ArrayList<Dish> dishList = new ArrayList<Dish>();
-	private static ArrayList<Integer> listId = new ArrayList<Integer>();
 	private static String dateFormatString = "yyyy/MM/dd HH:mm";
 	
 	private static OrderCatalog currentCatalog = fcul.pco.teletasca.main.App.orderCatalog;
@@ -57,17 +57,10 @@ public class Order {
 			this.id = id;
 			this.date = date;
 			this.client = client;
+			MaxId = id;
 		} else {
 			System.err.println("\nEncomenda " + id + " já existe.\n");
 		}
-		
-
-		// To ensure orders are unique, not requested:
-		/*
-		 * if (!Order.listId.contains(id)) { this.id = id; this.date = date;
-		 * this.client = client; } else { System.err.println("A encomenda " + id
-		 * + " já existe."); }
-		 */
 	}
 
 	/**
@@ -206,7 +199,5 @@ public class Order {
 		final Order other = (Order) obj;
 		return this.id == other.id;
 	}
-	
-	
 
 }
