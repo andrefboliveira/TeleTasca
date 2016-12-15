@@ -2,7 +2,7 @@ package fcul.pco.teletasca.domain;
 
 import java.security.InvalidParameterException;
 
-public class NutritionFacts {
+public abstract class NutritionFacts {
 	
 	private final int servingSize;
 	private final int servings;

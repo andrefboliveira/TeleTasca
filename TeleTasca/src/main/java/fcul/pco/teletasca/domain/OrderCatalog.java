@@ -96,7 +96,6 @@ public class OrderCatalog {
 			System.err.println("\nNão existe o cliente\n");
 			return null;
 		}
-		
 	}
 
 	/**

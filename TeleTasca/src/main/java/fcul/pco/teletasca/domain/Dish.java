@@ -161,21 +161,15 @@ public class Dish extends NutritionFacts {
 	 */
 	@Override
 	public String quickFacts() {
+		/*
+		 * usar método superclasse
+		 */
 		final StringBuilder builder = new StringBuilder();
 		builder.append(this.name);
 		builder.append("...");
 		builder.append(this.price);
 		builder.append(" EUR...");
-		builder.append(this.getServings());
-		builder.append(" serving(s)...");
-		builder.append(this.getCalories());
-		builder.append(" kcal...");
-		builder.append(this.getFat());
-		builder.append("g of fat...");
-		builder.append(this.getSodium());
-		builder.append("mg of sodium...");
-		builder.append(this.getCarbohydrate());
-		builder.append("g of carbohydrates...");
+		builder.append(super.quickFacts());
 		return builder.toString();
 	}
 
