@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 import fcul.pco.teletasca.domain.Client;
 import fcul.pco.teletasca.domain.Dish;
+import fcul.pco.teletasca.domain.Drink;
 import fcul.pco.teletasca.domain.Order;
 
 /**
@@ -24,6 +25,15 @@ import fcul.pco.teletasca.domain.Order;
 
 public class Menu {
 
+	private static Dish selectLightDish(Scanner in) {
+		return null;
+	}
+	
+
+	private static Drink offerDrink(double preço, int menu) {
+		return null;
+	}
+	
 	/**
 	 * The main menu of the application. It serves to distinguish which kind of
 	 * user is interacting with the application. It may be the restaurant
@@ -306,12 +316,23 @@ public class Menu {
 		return date;
 	}
 
+	/* TODO ALTERAR DE ACORDO COM SELECT DISH */
 	/**
 	 * A method for choosing dishes from the catalog. 
 	 * @param in : a Scanner instance that correspond to the input of the program.
 	 * @return a list with the chosen dishes, or null if there aren't 
 	 * any dishes to choose from.
 	 */
+	/*
+	 * O metodo selectDish da segunda versão é obtido a partir do método 
+	 * homónimo da primeira versão, mas tem um parâmetro flag adicional: 
+	 * quando menuTwoPersons = false, o método da segunda versão comporta-se 
+	 * como o método da primeira versão.
+	 * 
+	 */
+	private static Dish selectDish(Scanner in, boolean menuTwoPersons) {
+		return null;
+	}
 	private static List<Integer> chooseDishes(Scanner in) {
 		final List<Integer> chosenDishes = new ArrayList<Integer>();
 
