@@ -10,7 +10,14 @@ public class Tester {
 //		NutritionFacts nut = new NutritionFacts(1, 1, 500, 5, 0.1, 46.7);
 		fcul.pco.teletasca.main.App.dishCatalog = DishCatalog.getDishCatalog();
 		Dish pratoteste = new Dish("arroz de pato", 5, 500, 1, 750, 8, 0.5, 89);
+		new Dish("arroz de pato", 5, 500, 1, 750, 8, 0.5, 89);
+		new Dish("arroz de pato", 5, 500, 1, 750, 8, 0.5, 89);
+		new Dish("arroz de pato", 5, 500, 1, 750, 8, 0.5, 89);
+		new Dish("arroz de pato", 5, 500, 1, 750, 8, 0.5, 89);
+		new Dish("arroz de pato", 5, 500, 1, 750, 8, 0.5, 89);
+
 		System.out.println(pratoteste);
+		System.out.println(new Dish("arroz de pato", 5, 500, 1, 750, 8, 0.5, 89));
 	}
 
 }

@@ -1,11 +1,13 @@
 package fcul.pco.teletasca.domain;
 
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
 
 /**
  * The client class represents a restaurant client that, after being registered,
  * can log in, order dishes, and consult his list of orders.
  *
- * @author Thibault Langlois Alunos:
+ * @author Thibault Langlois
+ * Alunos:
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  *
@@ -25,15 +27,16 @@ public class Client {
 	 *            : the client's name
 	 * @param email
 	 *            : the client's email address
+	 * @throws DuplicatedIdException 
 	 * @requires email address is unique in the system
 	 */
-	public Client(String name, String email) {
+	public Client(String name, String email) throws DuplicatedIdException {
 
 		if (currentCatalog.getClientByEmail(email) != null) {
 			this.name = name;
 			this.email = email;
 		} else {
-			System.err.println("\nCliente " + email + " já existe\n");
+			throw new DuplicatedIdException("O cliente já existe");
 		}
 	}
 
@@ -52,6 +55,7 @@ public class Client {
 	 * @param s
 	 *            : a String
 	 * @return an instance of Client
+	 * @throws DuplicatedIdException 
 	 * @requires s is a string that contains the email address of the client and
 	 *           its name, separated by a comma (,). The string must contain
 	 *           exactly one comma.
@@ -59,7 +63,7 @@ public class Client {
 	 *          email address specified in s and c.name is equal to the name
 	 *          specified in s.
 	 */
-	public static Client fromString(String s) {
+	public static Client fromString(String s) throws DuplicatedIdException {
 		final String[] stringlist = s.split(",");
 		final String clientEmail = stringlist[0].trim();
 		final String clientName = stringlist[1].trim();

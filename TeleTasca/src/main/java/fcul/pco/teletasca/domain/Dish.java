@@ -3,6 +3,8 @@ package fcul.pco.teletasca.domain;
 
 import java.util.ArrayList;
 
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
+
 /**
  * This class represents a restaurant dish that can be ordered by a client.
  *
@@ -15,19 +17,17 @@ import java.util.ArrayList;
 
 /*TODO extends NutritionFacts*/
 public class Dish extends NutritionFacts {
-	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
 
 	private static DishCatalog currentCatalog = fcul.pco.teletasca.main.App.dishCatalog;
-	private static int MaxId = 0;
-	private static int counter = (MaxId > 0) ? MaxId : 1;
-	
-
 	
 	private int id;
 	private String name;
 	private double price;
 	private DishType dishType;
-	private boolean available; /*implementar*/
+	private boolean available;
+	
+	private static int MaxId = 0;
+	private static int counter = (MaxId > 1) ? MaxId : 1;
 	
 	public enum DishType {
 		STANDARD, LIGHT, FORTWO
@@ -38,6 +38,7 @@ public class Dish extends NutritionFacts {
 	 *
 	 * @param name : the description of the dish
 	 * @param price : the dish price
+	 * @throws DuplicatedIdException 
 	 * @requires parameter "name" is a string, and "price" is a double
 	 */	
 	/*
@@ -48,8 +49,9 @@ public class Dish extends NutritionFacts {
 	 * NOS DOIS CONSTRUTORES
 	 * (int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate)
 	 */
-	public Dish(String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
+	public Dish(String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) throws DuplicatedIdException {
 		this(Dish.counter, name, price, servingSize, servings, calories, fat, sodium, carbohydrate);
+		this.available = true;
 		Dish.counter++;
 	}
 
@@ -60,21 +62,25 @@ public class Dish extends NutritionFacts {
 	 * @param id : a unique id for a dish
 	 * @param name : the description of the dish
 	 * @param price : the dish price
+	 * @throws DuplicatedIdException 
 	 * @requires parameter "id" is an int, "name" is a string, and "price" 
 	 * 			 is a double
 	 */
 	// 	 se isto antes não dava erro, porque é que agora dá ao inserir o resto dos parâmetros??
-	private Dish(int id, String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
+	private Dish(int id, String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) throws DuplicatedIdException {
 		super(servingSize, servings, calories, fat, sodium, carbohydrate);
 		// Erro comparar com NULO???
 		if (currentCatalog.getDishById(id) == null) {
 			this.id = id;
 			this.name = name;
 			this.price = price;
-			MaxId = id;
 			setDishType();
+			
+			if (id > MaxId) {
+				MaxId = id;
+			}
 		} else {
-			System.err.println("\nPrato " + id + " já existe.\n");
+			throw new DuplicatedIdException("O prato já existe");
 		}	
 	}
 
@@ -122,6 +128,7 @@ public class Dish extends NutritionFacts {
 	 *
 	 * @param s : a string that describes a dish
 	 * @return a Dish instance
+	 * @throws DuplicatedIdException 
 	 * @requires s is a string that contains the id, the name of a dish and its
 	 *           price, separated by a comma (,). The string must contain
 	 *           exactly two commas.
@@ -129,7 +136,7 @@ public class Dish extends NutritionFacts {
 	 *          name specified in s.
 	 *
 	 */
-	public static Dish fromString(String s) {
+	public static Dish fromString(String s) throws DuplicatedIdException {
 		/*
 		 * System.out.println(Dish.fromString("arroz de pato, 5, 500, 1, 750, 8, 0.5, 89"));
 		 * ---
@@ -173,6 +180,7 @@ public class Dish extends NutritionFacts {
 		builder.append(this.name);
 		builder.append(",");
 		builder.append(this.price);
+		builder.append(super.toString());
 		return builder.toString();
 	}
 	
@@ -181,14 +189,11 @@ public class Dish extends NutritionFacts {
 	 */
 	@Override
 	public String quickFacts() {
-		/*
-		 * usar método superclasse
-		 */
-		final StringBuilder builder = new StringBuilder();
+		StringBuilder builder = new StringBuilder();
 		builder.append(this.name);
 		builder.append("...");
 		builder.append(this.price);
-		builder.append(" EUR...");
+		builder.append(" EUR");
 		builder.append(super.quickFacts());
 		return builder.toString();
 	}
@@ -231,7 +236,4 @@ public class Dish extends NutritionFacts {
 		final Dish other = (Dish) obj;
 		return this.id == other.id;
 	}
-
-
-
 }

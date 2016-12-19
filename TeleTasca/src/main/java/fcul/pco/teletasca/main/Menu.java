@@ -2,6 +2,7 @@
 package fcul.pco.teletasca.main;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -13,6 +14,7 @@ import fcul.pco.teletasca.domain.Client;
 import fcul.pco.teletasca.domain.Dish;
 import fcul.pco.teletasca.domain.Drink;
 import fcul.pco.teletasca.domain.Order;
+import fcul.pco.teletasca.exceptions.InvalidDateException;
 
 /**
  * This class deals with the interactions with the user.
@@ -25,14 +27,7 @@ import fcul.pco.teletasca.domain.Order;
 
 public class Menu {
 
-	private static Dish selectLightDish(Scanner in) {
-		return null;
-	}
 	
-
-	private static Drink offerDrink(double preço, int menu) {
-		return null;
-	}
 	
 	/**
 	 * The main menu of the application. It serves to distinguish which kind of
@@ -311,7 +306,14 @@ public class Menu {
 		final int minutes = timeInt[1];
 
 		final Calendar date = Calendar.getInstance();
-		date.set(year, month, day, hour, minutes);
+		date.setLenient(false);
+		
+		try {
+			date.set(year, month, day, hour, minutes);
+		}
+		catch (IllegalArgumentException e) {
+			throw new InvalidDateException("Erro no parsing da data. Usar formato: " + ApplicationConfiguration.DATE_FORMART);
+		}
 
 		return date;
 	}
@@ -333,6 +335,12 @@ public class Menu {
 	private static Dish selectDish(Scanner in, boolean menuTwoPersons) {
 		return null;
 	}
+	
+	private static Dish selectDish(Scanner in) {
+		return null;
+	}
+	
+	
 	private static List<Integer> chooseDishes(Scanner in) {
 		final List<Integer> chosenDishes = new ArrayList<Integer>();
 
@@ -353,6 +361,15 @@ public class Menu {
 			System.err.println("\nNão há pratos a apresentar.\n");
 			return null;
 		}
+	}
+	
+	private static Dish selectLightDish(Scanner in) {
+		return null;
+	}
+	
+
+	private static Drink offerDrink(double preço, int menu) {
+		return null;
 	}
 
 	/**

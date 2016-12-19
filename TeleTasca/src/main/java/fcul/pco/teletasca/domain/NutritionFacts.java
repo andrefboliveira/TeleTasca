@@ -19,12 +19,12 @@ public abstract class NutritionFacts {
 	 */
 	
 	public NutritionFacts (int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
-		this.servingSize = servingSize;
-		this.servings = servings;
-		this.calories = calories;
-		this.fat = fat;
-		this.sodium = sodium;
-		this.carbohydrate = carbohydrate;
+		this.servingSize = mustBePositive(servingSize, "A quantidade tem de ser > (maior) que 0");
+		this.servings = mustBePositive(servings, "O número de porções tem de ser > (maior) que 0");
+		this.calories = (int) mayBePositive(calories, "As calorias não podem ser um número negativo (< 0), foram inicializadas a 0");
+		this.fat = mayBePositive(fat, "A quantidade de gorduras não podem ser um número negativo (< 0), foi inicializado a 0");
+		this.sodium = mayBePositive(sodium, "A quantidade de sal não podem ser um número negativo (< 0), foi inicializado a 0");
+		this.carbohydrate = mayBePositive(carbohydrate, "A quantidade de hidratos de carbono não podem ser um número negativo (< 0), foi inicializado a 0");	
 	}
 	
 	
@@ -89,7 +89,8 @@ public abstract class NutritionFacts {
 		if (x >= 0.0) { 
 			return x;
 		} else {
-			throw new InvalidParameterException(msg); 
+			System.err.println(msg);
+			return 0.0;
 		}
 	}
 	
@@ -99,6 +100,7 @@ public abstract class NutritionFacts {
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
+		builder.append(",");
 		builder.append(this.servingSize);
 		builder.append(",");
 		builder.append(this.servings);
@@ -111,7 +113,6 @@ public abstract class NutritionFacts {
 		builder.append(",");
 		builder.append(this.carbohydrate);
 		return builder.toString();
-		
 	}
 	
 	/**

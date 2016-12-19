@@ -100,19 +100,15 @@ public class OrderCatalog {
 	 * @return list of Orders the where done by the client specified.
 	 */
 	public List<Order> getClientOrders(Client c) {
-		try {
-			final ArrayList<Order> listOrders = new ArrayList<Order>();
-			for (final Order order : this.ordersCatalog.values()) {
-				final Client client = order.getClient();
-				if (client.equals(c)) {
-					listOrders.add(order);
-				}
+		
+		final ArrayList<Order> listOrders = new ArrayList<Order>();
+		for (final Order order : this.ordersCatalog.values()) {
+			final Client client = order.getClient();
+			if (client.equals(c)) {
+				listOrders.add(order);
 			}
-			return listOrders;
-		} catch (NullPointerException e) {
-			System.err.println("\nNão existe o cliente\n");
-			return null;
 		}
+		return listOrders;
 	}
 
 	/**

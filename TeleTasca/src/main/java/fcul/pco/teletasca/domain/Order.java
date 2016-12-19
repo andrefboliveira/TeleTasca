@@ -7,6 +7,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
+import fcul.pco.teletasca.exceptions.InvalidDateException;
+import fcul.pco.teletasca.exceptions.InvalidIdException;
+
 /**
  * This class represents an order composed by a date, a client and a list of
  * dishes.
@@ -19,13 +23,14 @@ import java.util.Locale;
 public class Order {
 	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
 
-	private static int MaxId = 0;
-	private static int counter = (MaxId > 0) ? MaxId : 1;	private int id;
 	
+	private int id;
 	private Calendar date;
 	private Client client;
 	private ArrayList<Dish> dishList = new ArrayList<Dish>();
-	private static String dateFormatString = "yyyy/MM/dd HH:mm";
+	
+	private static int MaxId = 0;
+	private static int counter = (MaxId > 1) ? MaxId : 1;
 	
 	private static OrderCatalog currentCatalog = fcul.pco.teletasca.main.App.orderCatalog;
 	private static ClientCatalog currentClientCatalog = fcul.pco.teletasca.main.App.clientCatalog;
@@ -38,8 +43,9 @@ public class Order {
 	 *
 	 * @param date : a Calendar instance (with time).
 	 * @param client : an instance of Client.
+	 * @throws DuplicatedIdException 
 	 */
-	public Order(Calendar date, Client client) {
+	public Order(Calendar date, Client client) throws DuplicatedIdException {
 		this(Order.counter, date, client);
 		Order.counter++;
 	}
@@ -51,16 +57,21 @@ public class Order {
 	 * @param id : unique id of the order
 	 * @param date : date of the order
 	 * @param client : who made the order.
+	 * @throws DuplicatedIdException 
 	 */
-	private Order(int id, Calendar date, Client client) {
+	private Order(int id, Calendar date, Client client) throws DuplicatedIdException {
 		// Erro comparar com NULO???
 		if (currentCatalog.getOrderById(id) == null) {
 			this.id = id;
 			this.date = date;
 			this.client = client;
-			MaxId = id;
+			
+			if (id > MaxId) {
+				MaxId = id;
+			}
+			
 		} else {
-			System.err.println("\nEncomenda " + id + " já existe.\n");
+			throw new DuplicatedIdException("A encomenda já existe");
 		}
 	}
 
@@ -97,32 +108,41 @@ public class Order {
 	 * @param s : a string that contains the id, the client's email address, the
 	 *            date and the list of Dishes ids that compose the order.
 	 * @return an Order instance
+	 * @throws InvalidIdException 
+	 * @throws InvalidDateException 
 	 * @requires s is a string that contains the Id, the client's email address,
 	 *           the date and a list of dishes Id separated by commas (,). The
 	 *           string must contain at least four commas.
 	 */
-	public static Order fromString(String s) {
+	public static Order fromString(String s) throws InvalidIdException, InvalidDateException {
 
 		final String[] stringList = s.split(",");
 		final int orderId = Integer.parseInt(stringList[0].trim());
 		final String clientEmail = stringList[1].trim();
 
 		final Calendar orderDate = Calendar.getInstance();
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(Order.dateFormatString, new Locale("pt", "PT"));
+		orderDate.setLenient(false);
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(fcul.pco.teletasca.main.ApplicationConfiguration.DATE_FORMART, new Locale("pt", "PT"));
 		try {
 			orderDate.setTime(dateFormat.parse(stringList[2].trim()));
-		} catch (final ParseException e) {
-			System.err.println("Error parsing date. Use format: " + Order.dateFormatString);
-			e.printStackTrace();
+		} catch (ParseException | IllegalArgumentException e) {
+			throw new InvalidDateException("Erro no parsing da data. Usar formato: " + fcul.pco.teletasca.main.ApplicationConfiguration.DATE_FORMART);
 		}
+		
 		final Client c = currentClientCatalog.getClientByEmail(clientEmail);
-
+		
+		if (c == null) {
+			throw new InvalidIdException("O cliente não existe no catálogo"); 
+		}
 
 		final Order newOrder = new Order(orderId, orderDate, c);
 
 		for (int i = 3; i < stringList.length; i++) {
 			final int dishID = Integer.parseInt(stringList[i]);
 			final Dish d = currentDishCatalog.getDishById(dishID);
+			if (d == null) {
+				throw new InvalidIdException("O prato não existe no catálogo"); 
+			}
 			newOrder.addDish(d);
 		}
 		return newOrder;
@@ -151,7 +171,7 @@ public class Order {
 		builder.append(",");
 
 		final Date dateValue = this.date.getTime();
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(Order.dateFormatString, new Locale("pt", "PT"));
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(fcul.pco.teletasca.main.ApplicationConfiguration.DATE_FORMART, new Locale("pt", "PT"));
 		final String dateString = dateFormat.format(dateValue);
 		builder.append(dateString);
 
