@@ -442,8 +442,18 @@ public class Menu {
 		Collection<Dish> dishesList;
 		if (menuTwoPersons) {
 			dishesList = App.dishCatalog.getDishesByType(DishType.FORTWO);
+			if (dishesList.isEmpty()) {
+				System.err.println("Não há pratos no menu para dois");
+				menuTwoPersons = false;
+				dishesList = App.dishCatalog.getAvailableDishes();
+			}
 		} else {
 			dishesList = App.dishCatalog.getAvailableDishes();
+		}
+		
+		if (dishesList.isEmpty()) {
+			System.err.println("Não há pratos no menu");
+			return null;
 		}
 		
 		for (final Dish d : dishesList) {
@@ -458,6 +468,10 @@ public class Menu {
 	
 	private static Dish selectLightDish(Scanner in) {
 		Collection<Dish> dishesList = App.dishCatalog.getDishesByType(DishType.LIGHT);
+		if (dishesList.isEmpty()) {
+			System.err.println("Não há pratos no menu Light");
+			selectDish(in, false);
+		}
 		for (final Dish d : dishesList) {
 			System.out.println(d.quickFacts() + d.getId());
 		}
