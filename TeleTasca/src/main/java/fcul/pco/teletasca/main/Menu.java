@@ -168,8 +168,8 @@ public class Menu {
 			Calendar date = Menu.getDate(in);
 			Order newOrder = new Order(date, App.currentClient);
 
-			Dish dish;
 			int option;
+			List<Dish> dishList = null;
 
 			boolean end = true;
 			do {
@@ -179,37 +179,22 @@ public class Menu {
 				System.out.println("> ");
 
 				option = Menu.nextInt(in);
-
-				switch (option) {
-					case 1:
-						do {
-							dish = selectDish(in, false);
-							if (dish != null) {
-								newOrder.addDish(dish);
-							}
-						} while (dish != null);
-						break;
-					case 2:
-						do {
-							dish = selectLightDish(in);
-							if (dish != null) {
-								newOrder.addDish(dish);
-							}
-						} while (dish != null);
-						break;
-					case 3:
-						do {
-							dish = selectDish(in, true);
-							if (dish != null) {
-								newOrder.addDish(dish);
-							}
-						} while (dish != null);
-						break;
-					default:
-						end = false;
-						break;
+				
+				if (option >= 1 && option <= 3) {
+					dishList = selectDishes(in, option);
+				} else {
+					end = false;
 				}
+
 			} while (!end);
+			
+			if (dishList != null && !dishList.isEmpty()) {
+				for (Dish dish : dishList) {
+					newOrder.addDish(dish);
+				}
+			} else {
+				System.err.println("A lista de pratos encomendados está vazia");
+			}
 
 			Drink drink = offerDrink(newOrder.sumDishesPrice(), option);
 			if (drink != null) {
@@ -405,7 +390,31 @@ public class Menu {
 	
 	/* TODO ALTERAR DE ACORDO COM SELECT DISH */
 
-
+	
+	private static List<Dish> selectDishes(Scanner in, int option){
+		List<Dish> dishList = new ArrayList<Dish>();
+		Dish dish = null;
+		do {
+			switch (option) {
+				case 1:
+					dish = selectDish(in, false);
+					break;
+				case 2:
+					dish = selectLightDish(in);
+					break;
+				case 3:
+					dish = selectDish(in, true);	
+					break;
+				}
+			if (dish != null) {
+				dishList.add(dish);
+			}
+			
+		} while (dish != null);
+	
+		return dishList;
+	}
+	
 
 	/**
 	 * A method for choosing dishes from the catalog, according to the dish type. 
