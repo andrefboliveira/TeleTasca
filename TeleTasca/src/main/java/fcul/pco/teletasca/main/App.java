@@ -107,6 +107,7 @@ public class App {
 		App.executeUseCase("data/usecase8.dat");
 		App.executeUseCase("data/usecase9.dat");
 		App.executeUseCase("data/usecase10.dat");
+		App.executeUseCase("data/usecase11.dat");
 	}
 
 	/**
