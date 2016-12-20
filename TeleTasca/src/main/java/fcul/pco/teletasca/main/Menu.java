@@ -40,6 +40,7 @@ public class Menu {
 	 */
 	static void mainMenu(Scanner in) throws IOException {
 		boolean end = false;
+		System.out.println("**********************TELETASCA***********************");
 		do {
 			System.out.println("Você é: ");
 			System.out.println("Cliente...................1");
