@@ -141,7 +141,6 @@ public class App {
 			App.orderCatalog.save();
 		} catch (DuplicatedIdException e) {
 			// TODO Auto-generated catch block
-			// Não faz nada porque há garantia que nunca é duplicado no inicio do programa
 			e.printStackTrace();
 		} catch (InvalidDateException e) {
 			// TODO Auto-generated catch block

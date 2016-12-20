@@ -22,6 +22,3 @@ public class BadDataFormatException extends Exception {
 	}
 
 }
-
-
-// TODO falta lançar esta excepção

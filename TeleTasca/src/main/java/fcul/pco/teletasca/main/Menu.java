@@ -386,11 +386,12 @@ public class Menu {
 		return date;
 	}	
 	
-	
-	
-	/* TODO ALTERAR DE ACORDO COM SELECT DISH */
-
-	
+	/**
+	 * A method for choosing dishes from the list, according to the dish type.
+	 * @param in: a Scanner instance that correspond to the input of the program.
+	 * @param option: a int that represents the option chosen.
+	 * @return the chosen dish
+	 */
 	private static List<Dish> selectDishes(Scanner in, int option){
 		List<Dish> dishList = new ArrayList<Dish>();
 		Dish dish = null;
@@ -409,9 +410,7 @@ public class Menu {
 			if (dish != null) {
 				dishList.add(dish);
 			}
-			
 		} while (dish != null);
-	
 		return dishList;
 	}
 	
@@ -477,7 +476,6 @@ public class Menu {
 	 * @return the offered drink
 	 */
 	private static Drink offerDrink(double price, int menu) {
-		
 		// Menu para dois - 3;
 		if (menu == 3 && price > 10.0) {
 			return Drink.WINE;
