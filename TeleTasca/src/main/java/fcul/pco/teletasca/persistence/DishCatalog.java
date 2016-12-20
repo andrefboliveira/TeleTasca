@@ -36,7 +36,7 @@ public class DishCatalog {
 	public static void save(Map<Integer, Dish> dishes) throws IOException {
 		final PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(DishCatalog.file)));
 
-		final String header = "id,description,price";
+		final String header = "id,description,price,servingSize,servings,calories,fat,sodium,carbohydrate";
 		writer.write(header);
 
 		for (final Dish d : dishes.values()) {

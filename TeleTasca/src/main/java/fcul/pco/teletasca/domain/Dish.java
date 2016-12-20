@@ -48,8 +48,7 @@ public class Dish extends NutritionFacts {
 	 * @throws DuplicatedIdException 
 	 */	
 	public Dish(String name, double price, boolean available, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) throws DuplicatedIdException {
-		this(Dish.counter, name, price, available, servingSize, servings, calories, fat, sodium, carbohydrate);
-		Dish.counter++;
+		this(Dish.counter++, name, price, available, servingSize, servings, calories, fat, sodium, carbohydrate);
 	}
 
 	/**
@@ -81,6 +80,7 @@ public class Dish extends NutritionFacts {
 			
 			if (id > MaxId) {
 				MaxId = id;
+				counter = MaxId + 1;
 			}
 		} else {
 			throw new DuplicatedIdException("O prato já existe");

@@ -29,12 +29,13 @@ public class App {
 	public static DishCatalog dishCatalog;
 	public static ClientCatalog clientCatalog;
 	public static OrderCatalog orderCatalog;
-	public static Client currentClient = null;
+	public static Client currentClient;
 
 	/**
 	 * Initializes (creates) the catalogs.
 	 */
 	private static void initialize() {
+		currentClient = null;
 		App.dishCatalog = fcul.pco.teletasca.domain.DishCatalog.getDishCatalog();
 		App.clientCatalog = fcul.pco.teletasca.domain.ClientCatalog.getClientCatalog();
 		App.orderCatalog = fcul.pco.teletasca.domain.OrderCatalog.getOrderCatalog();
@@ -148,9 +149,10 @@ public class App {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("InteractiveMode:\n");
-		App.interactiveMode();
 		System.out.println("UseCases:\n");
 		executeAllUseCases();
+		System.out.println("InteractiveMode:\n");
+		App.interactiveMode();
+		
 	}
 }

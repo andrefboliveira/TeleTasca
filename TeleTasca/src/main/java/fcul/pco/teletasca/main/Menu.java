@@ -95,6 +95,7 @@ public class Menu {
 					break;
 				case 3:
 					if (App.currentClient != null) {
+						System.out.println(App.currentClient);
 						Menu.makeOrder(in);
 					} else {
 						System.err.println("\nDeve fazer log in antes de fazer uma encomenda.\n");

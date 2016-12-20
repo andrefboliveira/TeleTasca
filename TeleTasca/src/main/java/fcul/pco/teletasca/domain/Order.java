@@ -49,8 +49,7 @@ public class Order {
 	 * @throws DuplicatedIdException 
 	 */
 	public Order(Calendar date, Client client) throws DuplicatedIdException {
-		this(Order.counter, date, client);
-		Order.counter++;
+		this(Order.counter++, date, client);
 	}
 
 	/**
@@ -72,8 +71,10 @@ public class Order {
 			
 			if (id > MaxId) {
 				MaxId = id;
+				counter = MaxId + 1;
 			}
 		} else {
+			System.out.println(id);
 			throw new DuplicatedIdException("A encomenda já existe");
 		}
 	}
@@ -149,9 +150,11 @@ public class Order {
 		final String clientEmail = stringList[1].trim();
 
 		final Calendar orderDate = Calendar.getInstance();
-		//orderDate.setLenient(false);
 		final SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormatString, new Locale("pt", "PT"));
+		
+
 		try {
+			dateFormat.setLenient(false);
 			orderDate.setTime(dateFormat.parse(stringList[2].trim()));
 		} catch (ParseException | IllegalArgumentException e) {
 			throw new InvalidDateException("Erro no parsing da data. Usar formato: " + dateFormatString);
