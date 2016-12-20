@@ -1,6 +1,5 @@
 # Caso de uso 3: o cliente regista-se, faz a login, seleciona o menu Light, ordena três pratos e recebe uma bebida em oferta.
-# user: cliente
-1
+1	# user = cliente
 1	# criar conta
 Marco Goa	# nome do cliente
 mgoa@inyour.dreams.pt 	# email do cliente

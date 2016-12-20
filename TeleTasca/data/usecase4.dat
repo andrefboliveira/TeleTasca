@@ -1,7 +1,8 @@
-# Caso de uso 4: cliente tenta fazer encomenda e ver encomendas sem ter login.
-# user = cliente
-1
-3 # fazer encomenda
-4 # ver todas as encomendas do cliente
-5 # terminar
-3 # terminar
+# Caso de uso 4: cliente tenta fazer encomenda e ver encomendas sem ter feito login.
+1	# user = cliente
+3	# encomendar pratos
+# Deve fazer log in antes de fazer uma encomenda
+4 	# ver todas as encomendas do cliente
+# Deve fazer log in antes de ver uma encomenda.
+5 	# terminar
+3 	# terminar

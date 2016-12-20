@@ -102,7 +102,7 @@ public class Menu {
 					if (App.currentClient != null) {
 						Menu.clientShowOrders();
 					} else {
-						System.err.println("\nDeve fazer log in antes de fazer uma encomenda.\n");
+						System.err.println("\nDeve fazer log in antes de ver uma encomenda.\n");
 						// end = false;
 					}
 					break;
