@@ -116,6 +116,13 @@ public class Dish extends NutritionFacts {
 	}
 	
 	/**
+	 * @return the price
+	 */
+	public double getPrice() {
+		return this.price;
+	}
+
+	/**
 	 * @return the available
 	 */
 	public boolean isAvailable() {

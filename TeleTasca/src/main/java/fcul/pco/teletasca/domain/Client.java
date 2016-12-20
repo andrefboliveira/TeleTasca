@@ -32,7 +32,6 @@ public class Client {
 	 * @requires email address is unique in the system
 	 */
 	public Client(String name, String email) throws DuplicatedIdException {
-
 		if (currentCatalog.getClientByEmail(email) == null) {
 			this.name = name;
 			this.email = email;

@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import fcul.pco.teletasca.domain.Client;
 import fcul.pco.teletasca.domain.Dish;
+import fcul.pco.teletasca.domain.Dish.DishType;
 import fcul.pco.teletasca.domain.Drink;
 import fcul.pco.teletasca.domain.Order;
 import fcul.pco.teletasca.exceptions.DuplicatedIdException;
@@ -95,7 +98,7 @@ public class Menu {
 					break;
 				case 3:
 					if (App.currentClient != null) {
-						Menu.clientNewOrderMenu(in);
+						Menu.makeOrder(in);
 					} else {
 						System.err.println("\nNão fez login\n");
 						// end = false;
@@ -162,11 +165,10 @@ public class Menu {
 
 	/**
 	 * The menu for ordering dishes.
-	 *
+	 * 
 	 * @param in
-	 * @throws IOException
 	 */
-	private static void clientNewOrderMenu(Scanner in) throws IOException {
+	private static void makeOrder(Scanner in) {
 		//TODO
 		Calendar date = null;
 		try {
@@ -175,31 +177,78 @@ public class Menu {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		final List<Integer> chosenDishes = Menu.chooseDishes(in);
 
-		if (chosenDishes != null && !chosenDishes.isEmpty()) {
-			//TODO
-			try {
-				Order newOrder = new Order(date, App.currentClient);
-				
-				for (final Integer chosenDishId : chosenDishes) {
-					final Dish d = App.dishCatalog.getDishById(chosenDishId);
-					if (d != null) {
-						newOrder.addDish(d);
-					}
-				}
-
-				App.orderCatalog.addOrder(newOrder);
-				
-			} catch (DuplicatedIdException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			
-			App.orderCatalog.save();
+		Order newOrder = null;
+		try {
+			newOrder = new Order(date, App.currentClient);
+		} catch (DuplicatedIdException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		Dish dish;
+		int option;
+		
+		boolean end = true;
+		do {
+			System.out.println("Menu normal .............1");
+			System.out.println("Menu light ..............2");
+			System.out.println("Menu para dois ......... 3");
+			System.out.println("> ");
+
+			option = Menu.nextInt(in);
+
+			switch (option) {
+				case 1:
+					do {
+						dish = selectDish(in, false);
+						if (dish != null) {
+							newOrder.addDish(dish);
+							
+						}
+					} while (dish != null);
+					break;
+				case 2:
+					do {
+						dish = selectLightDish(in);
+						if (dish != null) {
+							newOrder.addDish(dish);
+						}
+					} while (dish != null);
+					break;
+				case 3:
+					do {
+						dish = selectDish(in, true);
+						if (dish != null) {
+							newOrder.addDish(dish);
+						}
+					} while (dish != null);
+					break;
+				default:
+					end = false;
+					break;
+			}
+		} while (!end);
+		
+		Drink drink = offerDrink(newOrder.sumDishesPrice(), option);
+		if (drink != null) {
+			System.out.println("Parabens! A TeleTasca oferece-lhe uma bebida!");
+			System.out.println(drink.quickFacts());			
+		}
+		
+		try {
+			App.orderCatalog.addOrder(newOrder);
+			App.orderCatalog.save();
+		} catch (DuplicatedIdException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
+	
+	
 
 	/**
 	 * The menu for showing the client's list of orders.
@@ -306,7 +355,7 @@ public class Menu {
 		final Collection<Dish> dishesList = App.dishCatalog.getAvailableDishes();
 		if (dishesList != null && !dishesList.isEmpty()) {
 			for (final Dish dish : dishesList) {
-				System.out.println(Menu.formatString(dish.getId(), dish.getName()));
+				System.out.println(Menu.formatString(dish.getName(), dish.getId()));
 			}
 
 			System.out.println("Escolhe um prato: ");
@@ -366,12 +415,17 @@ public class Menu {
 			date.set(year, month, day, hour, minutes);
 		}
 		catch (IllegalArgumentException e) {
-			throw new InvalidDateException("Erro no parsing da data. Usar formato: " + ApplicationConfiguration.DATE_FORMART);
+			throw new InvalidDateException("Erro no parsing da data. Usar formato indicado");
 		}
 
 		return date;
 	}
 
+	
+	
+	
+	
+	
 	/* TODO ALTERAR DE ACORDO COM SELECT DISH */
 	/**
 	 * A method for choosing dishes from the catalog. 
@@ -387,42 +441,52 @@ public class Menu {
 	 * 
 	 */
 	private static Dish selectDish(Scanner in, boolean menuTwoPersons) {
-		return null;
-	}
-	
-	private static Dish selectDish(Scanner in) {
-		return null;
-	}
-	
-	
-	private static List<Integer> chooseDishes(Scanner in) {
-		final List<Integer> chosenDishes = new ArrayList<Integer>();
-
-		final Collection<Dish> dishesList = App.dishCatalog.getAvailableDishes();
-		if (dishesList != null && !dishesList.isEmpty()) {
-			int chosenOption;
-			do {
-				for (final Dish d : dishesList) {
-					System.out.println(Menu.formatString(d.getId(), d.getName()));
-				}
-				System.out.println("Escolhe um prato (0 para terminar): ");
-				chosenOption = Menu.nextInt(in);
-				chosenDishes.add(chosenOption);
-			} while (chosenOption > 0);
-			return chosenDishes;
-
+		Collection<Dish> dishesList;
+		if (menuTwoPersons) {
+			dishesList = App.dishCatalog.getDishesByType(DishType.FORTWO);
 		} else {
-			System.err.println("\nNão há pratos a apresentar.\n");
-			return null;
+			dishesList = App.dishCatalog.getAvailableDishes();
 		}
+		
+		for (final Dish d : dishesList) {
+			System.out.println(Menu.formatString(d.getName(), d.getId()));
+		}
+		System.out.println("Escolhe um prato (0 para terminar): ");
+		
+		int chosenOption = Menu.nextInt(in);
+		return App.dishCatalog.getDishById(chosenOption);
 	}
+	
 	
 	private static Dish selectLightDish(Scanner in) {
-		return null;
+		Collection<Dish> dishesList = App.dishCatalog.getDishesByType(DishType.LIGHT);
+		for (final Dish d : dishesList) {
+			System.out.println(d.getName() + d.quickFacts() + d.getId());
+		}
+		System.out.println("Escolhe um prato (0 para terminar): ");
+		
+		int chosenOption = Menu.nextInt(in);
+		return App.dishCatalog.getDishById(chosenOption);
 	}
 	
 
-	private static Drink offerDrink(double preço, int menu) {
+	private static Drink offerDrink(double price, int menu) {
+		
+		// Menu para dois - 3;
+		if (menu == 3 && price > 10.0) {
+			return Drink.WINE;
+		} 
+		else if (price > 6.0) {
+			switch (menu) {
+				// Menu normal - 1
+				case 1:
+					return Drink.BEER;
+					
+				// Menu light - 2
+				case 2:
+					return Drink.COCAZERO;
+			}
+		}
 		return null;
 	}
 
@@ -432,7 +496,7 @@ public class Menu {
 	 * @param name : a string corresponding to a name
 	 * @return the formatted string
 	 */
-	private static String formatString(int id, String name) {
+	private static String formatString(String name, int id) {
 		final int maxLength = 40;
 		final int nameLength = name.length();
 		final String idString = String.valueOf(id);

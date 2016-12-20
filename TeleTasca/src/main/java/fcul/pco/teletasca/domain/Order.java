@@ -4,8 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import fcul.pco.teletasca.exceptions.DuplicatedIdException;
@@ -28,7 +28,7 @@ public class Order {
 	private int id;
 	private Calendar date;
 	private Client client;
-	private ArrayList<Dish> dishList;
+	private List<Dish> dishList;
 	
 	private static int MaxId = 0;
 	private static int counter = (MaxId > 1) ? MaxId : 1;
@@ -84,6 +84,14 @@ public class Order {
 	public void addDish(Dish d) {
 		this.dishList.add(d);
 	}
+	
+	/**
+     * Removes a dish from the order. 
+     * @param d 
+     */
+    private void removeDish(Dish d) {
+    	this.dishList.remove(d);
+    }
 
 	/**
 	 * Returns the client who made the order.
@@ -108,6 +116,14 @@ public class Order {
 	 */
 	public Calendar getDate() {
 		return this.date;
+	}
+	
+	public double sumDishesPrice() {
+		double price = 0.0;
+		for (Dish dish : dishList) {
+			price += dish.getPrice();
+		}
+		return price;
 	}
 
 	/**
@@ -151,6 +167,7 @@ public class Order {
 			if (d == null) {
 				throw new InvalidIdException("O prato não existe no catálogo"); 
 			}
+			
 			newOrder.addDish(d);
 		}
 		return newOrder;

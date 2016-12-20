@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import fcul.pco.teletasca.domain.Dish.DishType;
 import fcul.pco.teletasca.exceptions.DuplicatedIdException;
 
 /**
@@ -124,6 +125,22 @@ public class DishCatalog {
 		}
 		return dishCollection;
 	}
+	
+	/**
+	 * Returns a collection of all available dishes of a given type (STANDARD, LIGHT, FORTWO).
+	 *
+	 * @return a Collection of available Dishes of a given type
+	 */
+	public Collection<Dish> getDishesByType(DishType type) {
+		ArrayList<Dish> dishCollection = new ArrayList<Dish>();
+		for (Dish d : this.dishesCatalog.values()) {
+			if (d.isAvailable() && d.getDishType() == type) {
+				dishCollection.add(d);
+			}
+		}
+		return dishCollection;
+	}
+	
 
 
 	/**

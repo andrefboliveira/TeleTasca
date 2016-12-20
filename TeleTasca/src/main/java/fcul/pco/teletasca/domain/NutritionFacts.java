@@ -19,12 +19,12 @@ public abstract class NutritionFacts {
 	 */
 	
 	public NutritionFacts (int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
-		this.servingSize = mustBePositive(servingSize, "O peso tem de ser > (maior) que 0");
-		this.servings = mustBePositive(servings, "O número de pessoas tem de ser > (maior) que 0");
-		this.calories = (int) mayBePositive(calories, "As calorias não podem ser um número negativo (< 0), foram inicializadas a 0");
-		this.fat = mayBePositive(fat, "A quantidade de lípidos não podem ser um número negativo (< 0), foi inicializado a 0");
-		this.sodium = mayBePositive(sodium, "A quantidade de sal não podem ser um número negativo (< 0), foi inicializado a 0");
-		this.carbohydrate = mayBePositive(carbohydrate, "A quantidade de hidratos de carbono não podem ser um número negativo (< 0), foi inicializado a 0");	
+		this.servingSize = mustBePositive(servingSize, "O peso");
+		this.servings = mustBePositive(servings, "O número de pessoas");
+		this.calories = (int) mayBePositive(calories, "As calorias");
+		this.fat = mayBePositive(fat, "A quantidade de lípidos");
+		this.sodium = mayBePositive(sodium, "A quantidade de sal");
+		this.carbohydrate = mayBePositive(carbohydrate, "A quantidade de hidratos de carbono");	
 	}
 	
 	
@@ -81,7 +81,7 @@ public abstract class NutritionFacts {
 		if (x > 0) { 
 			return x;
 		} else {
-			throw new InvalidParameterException(msg); 
+			throw new InvalidParameterException(msg + " tem de ser maior que 0 (não negativo)"); 
 		}
 	}
 	
@@ -89,7 +89,7 @@ public abstract class NutritionFacts {
 		if (x >= 0.0) { 
 			return x;
 		} else {
-			System.err.println(msg);
+			System.err.println(msg + " não pode ser um número negativo (< 0); foi inicializado a 0");
 			return 0.0;
 		}
 	}
