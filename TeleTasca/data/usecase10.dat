@@ -1,23 +1,22 @@
-# Caso de uso 10: o cliente regista-se, faz a login, seleciona o menu Light, ordena três pratos e recebe uma bebida em oferta.
-1 # user = cliente
-1 # criar conta
-Marco Goa # nome do cliente
-mgoa@inyour.dreams.pt  # email do cliente
-# 3 # encomendar pratos
-# Deve fazer log in antes de fazer uma encomenda -> Já foi testado em usecases anteriores
-2 # fazer login
-mgoa@inyour.dreams.pt # email do cliente (existe)
-3 # encomendar pratos
-30/12/2016 # data de entrega
-23:00 # hora de entrega
-2 # menu light
-3 # sopa da pedra
-3 # sopa da pedra
-2 # sopa de legumes
-0 # terminar
-# Parabens! A TeleTasca oferece-ilhe uma bebida!
-# CocaZero...1 servings...0 kcal...0.1g of glucides...
-4 # lista de encomendas
-# 5,mgoa@inyour.dreams.pt,2016/12/30/0/23,3,3,2
-5 # terminar
-3 # terminar
+# Caso de uso 10: o gerente adiciona vários pratos.
+2 # user = gerente
+1  # adicionar um prato
+sopa  de legumes  # descrição do prato
+1.50 # preço
+250  #servingSize
+1  #servings
+290   #calories
+0.8  #fat
+0.1  #sodium
+5.2  #carbohydrate
+1 # adicionar prato
+sopa da pedra  #descrição
+2.5  #preço
+250  #servingSize
+1  #servings
+390  #calories
+1.8   #fat
+0.5  #sodium
+20.2  #carbohydrate
+5  # terminar
+3  # terminar

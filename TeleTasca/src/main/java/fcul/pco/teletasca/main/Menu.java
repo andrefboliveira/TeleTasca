@@ -161,12 +161,7 @@ public class Menu {
 	/**
 	 * The menu for ordering dishes.
 	 * 
-<<<<<<< HEAD
-	 * @param in
-	 * @throws IOException 
-=======
 	 * @param in: a Scanner instance that correspond to the input of the program.
->>>>>>> branch 'Fase2' of https://github.com/prokod3r/TeleTasca.git
 	 */
 	private static void makeOrder(Scanner in) throws IOException {
 		try {
