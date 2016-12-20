@@ -9,7 +9,6 @@ sopa de feijão  # descrição do prato
 29.85  #fat
 2.4  #sodium
 99.5  #carbohydrate
-
 1  # adicionar um prato
 canja  # descrição do prato
 3.10  # preço
@@ -19,7 +18,6 @@ canja  # descrição do prato
 9.85 #fat
 1.4 #sodium
 30.5 #carbohydrate
-
 1  # adicionar um prato
 bolonhesa  # descrição do prato
 4  # preço
@@ -29,7 +27,6 @@ bolonhesa  # descrição do prato
 20.25  #fat
 1.5  #sodium
 68.5  #carbohydrate
-
 2  # remover um prato
 1  # remove o prato 1, neste caso lasagne
 5  # terminar

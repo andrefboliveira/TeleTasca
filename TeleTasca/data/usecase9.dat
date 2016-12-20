@@ -1,6 +1,7 @@
 # Caso de uso 9: cliente tenta fazer encomenda quando não existem pratos.
 # remover os pratos existentes:
 # user = gerente
+2
 2 # remover um prato
 1 # remove o prato 1, lasagne
 2 # remover um prato
@@ -20,6 +21,7 @@ andrefboliveira@gmail.com # email do cliente (existe)
 3 # encomendar pratos
 01/12/2016 # data da entrega
 15:02 # hora da entrega
+1 # Standart
 # lasagne - não disponível
 # sopa de legumes - não disponível
 # sopa da pedra - não disponível

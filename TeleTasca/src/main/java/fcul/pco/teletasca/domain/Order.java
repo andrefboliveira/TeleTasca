@@ -169,12 +169,20 @@ public class Order {
 		final Order newOrder = new Order(orderId, orderDate, c);
 
 		for (int i = 3; i < stringList.length; i++) {
-			final int dishID = Integer.parseInt(stringList[i]);
+			String idString = stringList[i];
+			boolean unavailable = false;
+			if (idString.contains(" - ")) {
+				idString = idString.split(" - ")[0];
+				unavailable = true;				
+			}
+			final int dishID = Integer.parseInt(idString);
 			final Dish d = currentDishCatalog.getDishById(dishID);
 			if (d == null) {
 				throw new InvalidIdException("O prato não existe no catálogo"); 
 			}
-			
+			if (unavailable) {
+				d.setAvailable(false);
+			}
 			newOrder.addDish(d);
 		}
 		return newOrder;
