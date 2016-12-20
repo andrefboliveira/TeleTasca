@@ -2,6 +2,18 @@ package fcul.pco.teletasca.domain;
 
 import java.security.InvalidParameterException;
 
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
+
+/**
+ * This class represents the nutritional facts of a drink/dish 
+ * that can be ordered by a restaurant client.
+ *
+ * @author Thibault Langlois 
+ * Alunos:
+ * @author André Oliveira 45648
+ * @author Tânia Maldonado 44745
+ *
+ */
 public abstract class NutritionFacts {
 	
 	private final int servingSize;
@@ -11,13 +23,20 @@ public abstract class NutritionFacts {
 	private final double sodium;
 	private final double carbohydrate;
 	
-	/**
-	 *  TODO	
-	 *	servingSize e servings têm de ser definidos (maior que 0). A aplicação lança uma exceção
-	 *	de tipo InvalidParameterException (presente na API) SE TENTAR INICIALIZAR um objecto com
-	 *	servingSize ou servings inferiores ou iguais a zero.
-	 */
 	
+	/**
+	 * Initializes a Dish instance with the corresponding nutritional facts.
+	 * 
+	 * @param servingSize
+	 * @param servings
+	 * @param calories
+	 * @param fat
+	 * @param sodium
+	 * @param carbohydrate
+	 * @requires parameters "servingSize", "servings" and "calories" are integers; 
+	 * "price", "fat", "sodium" and "carbohydrate" are doubles; "servingSize" and 
+	 * "servings" parameters must be positive numbers.
+	 */
 	public NutritionFacts (int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) {
 		this.servingSize = mustBePositive(servingSize, "O peso tem de ser > (maior) que 0");
 		this.servings = mustBePositive(servings, "O número de pessoas tem de ser > (maior) que 0");
@@ -29,6 +48,8 @@ public abstract class NutritionFacts {
 	
 	
 	/**
+	 * A getter for the serving size.
+	 * 
 	 * @return the servingSize
 	 */
 	public int getServingSize() {
@@ -36,6 +57,8 @@ public abstract class NutritionFacts {
 	}
 
 	/**
+	 * A getter for the servings. 
+	 * 
 	 * @return the servings
 	 */
 	public int getServings() {
@@ -43,6 +66,8 @@ public abstract class NutritionFacts {
 	}
 
 	/**
+	 * A getter for the number of calories.
+	 * 
 	 * @return the calories
 	 */
 	public int getCalories() {
@@ -50,6 +75,8 @@ public abstract class NutritionFacts {
 	}
 
 	/**
+	 * A getter for the composition of fat.
+	 * 
 	 * @return the fat
 	 */
 	public double getFat() {
@@ -57,6 +84,8 @@ public abstract class NutritionFacts {
 	}
 
 	/**
+	 * A getter for the composition of sodium.
+	 * 
 	 * @return the sodium
 	 */
 	public double getSodium() {
@@ -64,6 +93,8 @@ public abstract class NutritionFacts {
 	}
 
 	/**
+	 * A getter for the composition of carbohydrates.
+	 * 
 	 * @return the carbohydrate
 	 */
 	public double getCarbohydrate() {
@@ -71,11 +102,12 @@ public abstract class NutritionFacts {
 	}
 
 	/**
-	 * Em cada método, o parâmetro de tipo String é 
-	 * utilizado em caso de erro para imprimir a origem do problema.
-	 * @param x
-	 * @param msg
-	 * @return
+	 * A method to classify if the integer is positive.
+	 * 
+	 * @param x, an integer
+	 * @param msg, a string
+	 * @return an integer x if it is positive
+	 * @throws InvalidParameterException if x is not positive
 	 */
 	static int mustBePositive(int x, String msg) {
 		if (x > 0) { 
@@ -85,6 +117,13 @@ public abstract class NutritionFacts {
 		}
 	}
 	
+	/**
+	 * A method to classify if the double is positive.
+	 * 
+	 * @param x, a double
+	 * @param msg, a string
+	 * @return a double x if it is positive, the double 0.0 if not
+	 */
 	static double mayBePositive(double x, String msg) {
 		if (x >= 0.0) { 
 			return x;
@@ -94,6 +133,12 @@ public abstract class NutritionFacts {
 		}
 	}
 	
+	/**
+	 * A method that returns a string that "textually represents" an object,
+	 * composed of the dish/drink nutritional facts.
+	 * 
+	 * @return the serving size, servings, calories, fat, sodium and carbohydrates
+	 */
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -116,11 +161,10 @@ public abstract class NutritionFacts {
 	}
 	
 	/**
-	 * só mostra parte do objecto??? perguntar no fórum
+	 * Returns a user-friendly string with the dish nutritional facts 
+	 * to appear on the application.
 	 * 
-	 * restitui uma String na forma:
-	 * ...1 servings...290 kcal...0.1g of glucides...
-	 * @return
+	 * @return a string with the nutritional facts
 	 */
 	public String quickFacts() {
 		final StringBuilder builder = new StringBuilder();

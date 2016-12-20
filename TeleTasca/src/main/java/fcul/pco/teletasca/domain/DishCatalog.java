@@ -37,7 +37,9 @@ public class DishCatalog {
 	}
 	
 	/**
-	 * @return
+	 * A getter for the dishes catalog.
+	 * 
+	 * @return an instance of a dish catalog
 	 */
 	public static DishCatalog getDishCatalog(){
 		return dishCatInst;
@@ -67,7 +69,7 @@ public class DishCatalog {
 	/**
 	 * Adds a new dish to the catalog.
 	 *
-	 * @param d : is a Dish instance.
+	 * @param d: is a Dish instance.
 	 * @throws DuplicatedIdException 
 	 * @requires a Dish as a parameter
 	 * @ensures the given dish is added to the dishes catalog.
@@ -79,14 +81,13 @@ public class DishCatalog {
 		} else {
 			throw new DuplicatedIdException("O prato já existe");
 		}
-
 	}
 
 	/**
 	 * Given an id, returns the corresponding Dish instance. 
 	 * If no instance is found, the value null is returned.
 	 *
-	 * @param id : the id of a Dish
+	 * @param id: the id of a Dish
 	 * @return Dish instance or null
 	 * @requires parameter "id" is a int
 	 * @ensures returns an instance of dish corresponding to the given id,

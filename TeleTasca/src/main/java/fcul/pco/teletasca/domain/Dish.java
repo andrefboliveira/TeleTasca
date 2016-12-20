@@ -5,6 +5,7 @@ import fcul.pco.teletasca.exceptions.DuplicatedIdException;
 
 /**
  * This class represents a restaurant dish that can be ordered by a client.
+ * Each dish has various corresponding nutritional facts.
  *
  * @author Thibault Langlois 
  * Alunos:
@@ -12,8 +13,6 @@ import fcul.pco.teletasca.exceptions.DuplicatedIdException;
  * @author Tânia Maldonado 44745
  *
  */
-
-/*TODO extends NutritionFacts*/
 public class Dish extends NutritionFacts {
 
 	private static DishCatalog currentCatalog = fcul.pco.teletasca.main.App.dishCatalog;
@@ -24,6 +23,7 @@ public class Dish extends NutritionFacts {
 	private boolean available;
 	
 	private DishType dishType;
+	
 	public enum DishType {
 		STANDARD, LIGHT, FORTWO
 	}
@@ -32,23 +32,21 @@ public class Dish extends NutritionFacts {
 	private static int counter = (MaxId > 1) ? MaxId : 1;
 	
 	
-	
 	/**
-	 * Initializes a Dish instance.
+	 * Initializes a Dish instance with the corresponding nutritional facts.
 	 *
-	 * @param name : the description of the dish
-	 * @param price : the dish price
+	 * @param name: the description of the dish
+	 * @param price: the dish price
+	 * @param servingSize: the serving size, in g, of the dish
+	 * @param servings: the number of servings
+	 * @param calories: the number of calories of the dish, in kcal
+	 * @param fat: the composition of fat, in g
+	 * @param sodium: the composition of sodium, in mg
+	 * @param carbohydrate: the composition of carbohydrates, in g
+	 * @requires parameter "name" is a string; "servingSize", "servings" and "calories"
+	 * 			 are integers; "price", "fat", "sodium" and "carbohydrate" are doubles.
 	 * @throws DuplicatedIdException 
-	 * @requires parameter "name" is a string, and "price" is a double
 	 */	
-	/*
-	 * TODO ALTERAR CONSTRUTORES
-	 * adicionar atributos de nutritionfacts, lá dentro com super chamar atributos de nutrition facts
-	 * adicinar if para distinguir os tipos de prato ex servings > 1 - fortwo, etc
-	 * this.dishType = DishType.FORTWO;
-	 * NOS DOIS CONSTRUTORES
-	 * (int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate)
-	 */
 	public Dish(String name, double price, boolean available, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) throws DuplicatedIdException {
 		this(Dish.counter, name, price, available, servingSize, servings, calories, fat, sodium, carbohydrate);
 		Dish.counter++;
@@ -58,14 +56,19 @@ public class Dish extends NutritionFacts {
 	 * Creates a private Dish instance with a specific id, 
 	 * only for managing purposes.
 	 * 
-	 * @param id : a unique id for a dish
-	 * @param name : the description of the dish
-	 * @param price : the dish price
+	 * @param id: a unique id for a dish
+	 * @param name: the description of the dish
+	 * @param price: the dish price
+	 * @param servingSize: the serving size, in g, of the dish
+	 * @param servings: the number of servings
+	 * @param calories: the number of calories of the dish, in kcal
+	 * @param fat: the composition of fat, in g
+	 * @param sodium: the composition of sodium, in mg
+	 * @param carbohydrate: the composition of carbohydrates, in g
+	 * @requires parameter "name" is a string; "id", "servingSize", "servings" and "calories"
+	 * 			 are integers; "fat", "sodium" and "carbohydrate" are doubles.
 	 * @throws DuplicatedIdException 
-	 * @requires parameter "id" is an int, "name" is a string, and "price" 
-	 * 			 is a double
 	 */
-	// 	 se isto antes não dava erro, porque é que agora dá ao inserir o resto dos parâmetros??
 	private Dish(int id, String name, double price, boolean available, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) throws DuplicatedIdException {
 		super(servingSize, servings, calories, fat, sodium, carbohydrate);
 		// Erro comparar com NULO???
@@ -85,7 +88,9 @@ public class Dish extends NutritionFacts {
 	}
 
 	/**
+	 * Determines the dish type, according to the dish serving/calories.
 	 * 
+	 * @requires a dish with nutritional facts
 	 */
 	private void setDishType() {
 		if (getServings() > 1) {
@@ -109,6 +114,7 @@ public class Dish extends NutritionFacts {
 
 	/**
 	 * A getter for the dish name/description.
+	 * 
 	 * @return the dish description
 	 */
 	public String getName() {
@@ -116,14 +122,18 @@ public class Dish extends NutritionFacts {
 	}
 	
 	/**
-	 * @return the available
+	 * Returns the availability of the dish in the menu.
+	 * 
+	 * @return the availability
 	 */
 	public boolean isAvailable() {
 		return available;
 	}
 
 	/**
-	 * @param available the available to set
+	 * Gives the dish the status "available".
+	 * 
+	 * @param true if available, false if not
 	 */
 	public void setAvailable(boolean available) {
 		this.available = available;
@@ -131,6 +141,7 @@ public class Dish extends NutritionFacts {
 
 	/**
 	 * A getter for the dish type.
+	 * 
 	 * @return the dish type
 	 */
 	public DishType getDishType() {
@@ -140,7 +151,7 @@ public class Dish extends NutritionFacts {
 	/**
 	 * Creates a Dish instance from a string.
 	 *
-	 * @param s : a string that describes a dish
+	 * @param s: a string that describes a dish
 	 * @return a Dish instance
 	 * @throws DuplicatedIdException 
 	 * @requires s is a string that contains the id, the name of a dish and its
@@ -181,11 +192,12 @@ public class Dish extends NutritionFacts {
 	 * @see java.lang.Object#toString()
 	 */
 	/**
-	 * A method that returns a string that "textually represents" an object.
-	 * Composed of the unique dish's id, description and price.
-	 * 
-	 * @return a string that contains the dish id, description and price,
-	 *         following .csv format.
+	 * A method that returns a string that "textually represents" an object,
+	 * composed of the unique dish's id, description, price, and nutritional facts.
+	 * @requires parameter "name" is a string; "servingSize", "servings" and "calories"
+	 * 			 are integers; "fat", "sodium" and "carbohydrate" are doubles.
+	 * @return a string that contains the dish id, description, price, serving size,
+	 * 		   servings, calories, fat, sodium and carbohydrates following .csv format.
 	 */
 	@Override
 	public String toString() {
@@ -202,7 +214,10 @@ public class Dish extends NutritionFacts {
 	}
 	
 	/**
+	 * Returns a user-friendly string with the dish nutritional facts 
+	 * to appear on the application.
 	 * 
+	 * @return a string with the nutritional facts
 	 */
 	@Override
 	public String quickFacts() {

@@ -24,15 +24,12 @@ public class Client {
 	/**
 	 * Initializes an instance of Client.
 	 *
-	 * @param name
-	 *            : the client's name
-	 * @param email
-	 *            : the client's email address
+	 * @param name: the client's name
+	 * @param email: the client's email address
 	 * @throws DuplicatedIdException 
 	 * @requires email address is unique in the system
 	 */
 	public Client(String name, String email) throws DuplicatedIdException {
-
 		if (currentCatalog.getClientByEmail(email) == null) {
 			this.name = name;
 			this.email = email;
@@ -53,8 +50,7 @@ public class Client {
 	/**
 	 * Creates an instance of Client from a String.
 	 *
-	 * @param s
-	 *            : a String
+	 * @param s: a String
 	 * @return an instance of Client
 	 * @throws DuplicatedIdException 
 	 * @requires s is a string that contains the email address of the client and
@@ -70,7 +66,6 @@ public class Client {
 		final String clientName = stringlist[1].trim();
 
 		return new Client(clientName, clientEmail);
-
 	}
 
 	/*
@@ -130,6 +125,5 @@ public class Client {
 		}
 		final Client other = (Client) obj;
 		return this.email.equals(other.getEmail());
-
 	}
 }
