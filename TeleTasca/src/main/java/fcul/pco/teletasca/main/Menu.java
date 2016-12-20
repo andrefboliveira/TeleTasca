@@ -123,7 +123,7 @@ public class Menu {
 	/**
 	 * A menu for the registration of the client's account.
 	 *
-	 * @param in
+	 * @param in : a Scanner instance that correspond to the input of the program.
 	 * @throws IOException
 	 */
 	private static void clientRegistrationMenu(Scanner in) throws IOException {
@@ -146,7 +146,7 @@ public class Menu {
 	 * The log in menu. Makes the current client be the client instance that
 	 * matches the given email (if it exists, or null otherwise)
 	 *
-	 * @param in
+	 * @param in: a Scanner instance that correspond to the input of the program.
 	 */
 	private static void clientLoginMenu(Scanner in) {
 		System.out.println("Email:");
@@ -162,8 +162,12 @@ public class Menu {
 	/**
 	 * The menu for ordering dishes.
 	 * 
+<<<<<<< HEAD
 	 * @param in
 	 * @throws IOException 
+=======
+	 * @param in: a Scanner instance that correspond to the input of the program.
+>>>>>>> branch 'Fase2' of https://github.com/prokod3r/TeleTasca.git
 	 */
 	private static void makeOrder(Scanner in) throws IOException {
 		try {
@@ -232,7 +236,6 @@ public class Menu {
 	}
 	
 	
-
 	/**
 	 * The menu for showing the client's list of orders.
 	 */
@@ -245,7 +248,7 @@ public class Menu {
 	 * The restaurant manager may add or remove dishes, and consult the list of
 	 * orders that were made by clients.
 	 *
-	 * @param in : a Scanner instance that correspond to the input of the program.
+	 * @param in: a Scanner instance that correspond to the input of the program.
 	 * @throws IOException
 	 */
 	private static void managerMenu(Scanner in) throws IOException {
@@ -330,7 +333,7 @@ public class Menu {
 	/**
 	 * The menu for removing dishes.
 	 *
-	 * @param in : a Scanner instance that correspond to the input of the program.
+	 * @param in: a Scanner instance that correspond to the input of the program.
 	 * @throws IOException
 	 */
 	private static void removeDishMenu(Scanner in) throws IOException {
@@ -360,7 +363,7 @@ public class Menu {
 	/**
 	 * A menu to show all orders.
 	 *
-	 * @param listOrders
+	 * @param listOrders: a list with all the orders made
 	 */
 	private static void showOrders(List<Order> listOrders) {
 		if (listOrders != null && !listOrders.isEmpty()) {
@@ -374,7 +377,8 @@ public class Menu {
 
 	/**
 	 * A method to get the date and time of the order.
-	 * @param in : a Scanner instance that correspond to the input of the program.
+	 * 
+	 * @param in: a Scanner instance that correspond to the input of the program.
 	 * @return the date and time of the order
 	 * @throws InvalidDateException 
 	 */
@@ -406,18 +410,14 @@ public class Menu {
 	
 	
 	/* TODO ALTERAR DE ACORDO COM SELECT DISH */
+
+
+
 	/**
-	 * A method for choosing dishes from the catalog. 
-	 * @param in : a Scanner instance that correspond to the input of the program.
-	 * @return a list with the chosen dishes, or null if there aren't 
-	 * any dishes to choose from.
-	 */
-	/*
-	 * O metodo selectDish da segunda versão é obtido a partir do método 
-	 * homónimo da primeira versão, mas tem um parâmetro flag adicional: 
-	 * quando menuTwoPersons = false, o método da segunda versão comporta-se 
-	 * como o método da primeira versão.
+	 * A method for choosing dishes from the catalog, according to the dish type. 
 	 * 
+	 * @param in: a Scanner instance that correspond to the input of the program.
+	 * @return the chosen dish
 	 */
 	private static Dish selectDish(Scanner in, boolean menuTwoPersons) {
 		Collection<Dish> dishesList;
@@ -446,7 +446,11 @@ public class Menu {
 		return App.dishCatalog.getDishById(chosenOption);
 	}
 	
-	
+	/**
+	 * A method for choosing light dishes from the (light dishes) catalog. 
+	 * @param in: a Scanner instance that correspond to the input of the program.
+	 * @return the chosen dish
+	 */
 	private static Dish selectLightDish(Scanner in) {
 		Collection<Dish> dishesList = App.dishCatalog.getDishesByType(DishType.LIGHT);
 		if (dishesList.isEmpty()) {
@@ -463,7 +467,12 @@ public class Menu {
 		return App.dishCatalog.getDishById(chosenOption);
 	}
 	
-
+	/**
+	 * A method for showing an offered drink, if that's the case.
+	 * @param price, the total cost of a client's order
+	 * @param menu, corresponds to the type of menu (light, standard, for two)
+	 * @return the offered drink
+	 */
 	private static Drink offerDrink(double price, int menu) {
 		
 		// Menu para dois - 3;
@@ -486,8 +495,9 @@ public class Menu {
 
 	/**
 	 * A method to format a string (justify text).
-	 * @param id : a int representing a unique id
-	 * @param name : a string corresponding to a name
+	 * 
+	 * @param id: a int representing a unique id
+	 * @param name: a string corresponding to a name
 	 * @return the formatted string
 	 */
 	private static String formatString(String name, int id) {
@@ -530,7 +540,7 @@ public class Menu {
 
 	/**
 	 * Reads a double input.
-	 * @param in : a Scanner instance that corresponds to the input of the program.
+	 * @param in: a Scanner instance that corresponds to the input of the program.
 	 * @return a double
 	 */
 	private static double nextDouble(Scanner in) {
