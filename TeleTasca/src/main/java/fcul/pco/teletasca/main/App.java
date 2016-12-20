@@ -124,35 +124,29 @@ public class App {
 		} catch (final FileNotFoundException e) {
 			App.dishCatalog.save();
 		} catch (DuplicatedIdException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// Do nothing. There is no duplicate id on startup
 		}
 		try {
 			App.clientCatalog.load();
 		} catch (final FileNotFoundException e) {
 			App.clientCatalog.save();
 		} catch (DuplicatedIdException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// Do nothing. There is no duplicate id on startup
 		}
 		try {
 			App.orderCatalog.load();
 		} catch (final FileNotFoundException e) {
 			App.orderCatalog.save();
 		} catch (DuplicatedIdException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// Do nothing. There is no duplicate id on startup
 		} catch (InvalidDateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// Do nothing. File correctly formated on startup
 		} catch (InvalidIdException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// Do nothing. File correctly formated on startup
 		}
 		System.out.println("UseCases:\n");
 		executeAllUseCases();
 		System.out.println("InteractiveMode:\n");
 		App.interactiveMode();
-		
 	}
 }
