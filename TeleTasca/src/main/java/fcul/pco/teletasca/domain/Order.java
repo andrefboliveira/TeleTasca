@@ -22,8 +22,6 @@ import fcul.pco.teletasca.exceptions.InvalidIdException;
  * @author Tânia Maldonado 44745
  */
 public class Order {
-	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
-
 	
 	private int id;
 	private Calendar date;
@@ -34,7 +32,6 @@ public class Order {
 	private static int counter = (MaxId > 1) ? MaxId : 1;
 	
 	private static String dateFormatString = "yyyy/MM/dd HH:mm";
-
 	
 	private static OrderCatalog currentCatalog = fcul.pco.teletasca.main.App.orderCatalog;
 	private static ClientCatalog currentClientCatalog = fcul.pco.teletasca.main.App.clientCatalog;
@@ -62,7 +59,6 @@ public class Order {
 	 * @throws DuplicatedIdException 
 	 */
 	private Order(int id, Calendar date, Client client) throws DuplicatedIdException {
-		// Erro comparar com NULO???
 		if (currentCatalog.getOrderById(id) == null) {
 			this.id = id;
 			this.date = date;
@@ -225,12 +221,12 @@ public class Order {
 		return builder.toString();
 	}
 
+	/**
+	 * Generates hashCode for a given order instance based on the unique id.
+	 */
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
-	 */
-	/**
-	 * Generates hashCode for a given order instance based on the unique id.
 	 */
 	@Override
 	public int hashCode() {
@@ -240,14 +236,14 @@ public class Order {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	/**
 	 * Indicates whether some other order is "equal to" this one.
 	 * 
 	 * @return true if the orders are the same, false otherwise.
+	 */
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {

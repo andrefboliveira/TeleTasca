@@ -143,7 +143,6 @@ public class DishCatalog {
 	}
 	
 
-
 	/**
 	 * Given an id, removes the corresponding dish from the catalog.
 	 *

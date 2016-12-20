@@ -70,7 +70,7 @@ public class Dish extends NutritionFacts {
 	 */
 	private Dish(int id, String name, double price, boolean available, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) throws DuplicatedIdException {
 		super(servingSize, servings, calories, fat, sodium, carbohydrate);
-		// Erro comparar com NULO???
+		
 		if (currentCatalog.getDishById(id) == null) {
 			this.id = id;
 			this.name = name;
@@ -170,16 +170,6 @@ public class Dish extends NutritionFacts {
 	 *
 	 */
 	public static Dish fromString(String s) throws DuplicatedIdException {
-		/*
-		 * System.out.println(Dish.fromString("arroz de pato, 5, 500, 1, 750, 8, 0.5, 89"));
-		 * ---
-		 * Exception in thread "main" java.lang.NumberFormatException: For input string: "arroz de pato"
-		 *	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
-		 *	at java.lang.Integer.parseInt(Integer.java:580)
-		 *	at java.lang.Integer.parseInt(Integer.java:615)
-		 *	at fcul.pco.teletasca.domain.Dish.fromString(Dish.java:135)
-		 *	at fcul.pco.teletasca.domain.tester.main(tester.java:11)
-		 */
 		final String[] stringlist = s.split(",");
 		final int dishId = Integer.parseInt(stringlist[0].trim());
 		final String dishName = stringlist[1].trim();
