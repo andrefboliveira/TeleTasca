@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import fcul.pco.teletasca.domain.Dish;
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
 
 /**
  * This class is responsible for saving and loading the Dish catalog. The
@@ -49,8 +50,9 @@ public class DishCatalog {
 	 * A method for loading the catalog.
 	 * @return the dishes catalog
 	 * @throws IOException
+	 * @throws DuplicatedIdException 
 	 */
-	public static Map<Integer, Dish> load() throws IOException {
+	public static Map<Integer, Dish> load() throws IOException, DuplicatedIdException {
 		final Map<Integer, Dish> dishesCatalog = new HashMap<Integer, Dish>();
 		final Scanner inputFile = new Scanner(new FileReader(DishCatalog.file));
 		inputFile.nextLine(); // to skip header

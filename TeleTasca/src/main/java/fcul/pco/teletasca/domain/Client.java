@@ -14,11 +14,12 @@ import fcul.pco.teletasca.exceptions.DuplicatedIdException;
  */
 public class Client {
 	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
+	
+	private static ClientCatalog currentCatalog = fcul.pco.teletasca.main.App.clientCatalog;
 
 	private String name;
 	private String email;
 	
-	private static ClientCatalog currentCatalog = fcul.pco.teletasca.main.App.clientCatalog;
 
 	/**
 	 * Initializes an instance of Client.
@@ -32,7 +33,7 @@ public class Client {
 	 */
 	public Client(String name, String email) throws DuplicatedIdException {
 
-		if (currentCatalog.getClientByEmail(email) != null) {
+		if (currentCatalog.getClientByEmail(email) == null) {
 			this.name = name;
 			this.email = email;
 		} else {

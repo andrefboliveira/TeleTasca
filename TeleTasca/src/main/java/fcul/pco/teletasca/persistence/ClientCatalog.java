@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import fcul.pco.teletasca.domain.Client;
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
 
 /**
  * This class is responsible for saving and loading the Client catalog. The
@@ -51,8 +52,9 @@ public class ClientCatalog {
 	 * A method for loading the catalog.
 	 * @return the clients catalog
 	 * @throws FileNotFoundException
+	 * @throws DuplicatedIdException 
 	 */
-	public static Map<String, Client> load() throws FileNotFoundException {
+	public static Map<String, Client> load() throws FileNotFoundException, DuplicatedIdException {
 		final Map<String, Client> clientsCatalog = new HashMap<String, Client>();
 		final Scanner inputFile = new Scanner(new FileReader(ClientCatalog.file));
 		inputFile.nextLine(); // to skip header

@@ -10,6 +10,9 @@ import fcul.pco.teletasca.domain.Client;
 import fcul.pco.teletasca.domain.ClientCatalog;
 import fcul.pco.teletasca.domain.DishCatalog;
 import fcul.pco.teletasca.domain.OrderCatalog;
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
+import fcul.pco.teletasca.exceptions.InvalidDateException;
+import fcul.pco.teletasca.exceptions.InvalidIdException;
 
 /**
  * This is the application main class. It holds an instance of each of the
@@ -116,21 +119,36 @@ public class App {
 			App.dishCatalog.load();
 		} catch (final FileNotFoundException e) {
 			App.dishCatalog.save();
+		} catch (DuplicatedIdException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		try {
 			App.clientCatalog.load();
 		} catch (final FileNotFoundException e) {
 			App.clientCatalog.save();
+		} catch (DuplicatedIdException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		try {
 			App.orderCatalog.load();
 		} catch (final FileNotFoundException e) {
 			App.orderCatalog.save();
+		} catch (DuplicatedIdException e) {
+			// TODO Auto-generated catch block
+			// Não faz nada porque ha garantia que nunca é duplicado no inicio do programa
+			e.printStackTrace();
+		} catch (InvalidDateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidIdException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		System.out.println("UseCases:\n");
-		executeAllUseCases();
 		System.out.println("InteractiveMode:\n");
 		App.interactiveMode();
+		System.out.println("UseCases:\n");
+		executeAllUseCases();
 	}
-
 }

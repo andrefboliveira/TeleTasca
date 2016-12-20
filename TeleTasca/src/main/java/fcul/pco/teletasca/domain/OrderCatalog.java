@@ -3,10 +3,15 @@ package fcul.pco.teletasca.domain;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
+import fcul.pco.teletasca.exceptions.InvalidDateException;
+import fcul.pco.teletasca.exceptions.InvalidIdException;
 
 /**
  * The class represents the sets of Orders known on the system. Note that load
@@ -55,8 +60,10 @@ public class OrderCatalog {
 	 * Loads the catalog from a file.
 	 *
 	 * @throws FileNotFoundException
+	 * @throws InvalidIdException 
+	 * @throws InvalidDateException 
 	 */
-	public void load() throws FileNotFoundException {
+	public void load() throws FileNotFoundException, InvalidDateException, InvalidIdException {
 		final List<Order> listOrders = fcul.pco.teletasca.persistence.OrderCatalog.load();
 		// System.out.println("Loaded OrderCatalog\n");
 		this.setOrders(listOrders);
@@ -66,11 +73,14 @@ public class OrderCatalog {
 	 * Adds an Order instance to the catalog.
 	 *
 	 * @param o : an Order instance
+	 * @throws DuplicatedIdException 
 	 */
-	public void addOrder(Order o) {
+	public void addOrder(Order o) throws DuplicatedIdException {
 		final int orderId = o.getId();
-		if (this.getOrderById(orderId) != null) {
+		if (this.getOrderById(orderId) == null) {
 			this.ordersCatalog.put(orderId, o);
+		} else {
+			throw new DuplicatedIdException("A encomenda já existe");
 		}
 	}
 	
@@ -117,15 +127,24 @@ public class OrderCatalog {
 	 * @return a list of Orders.
 	 */
 	public List<Order> getOrders() {
-		return new ArrayList<Order>(this.ordersCatalog.values());
+		List<Order> listOrders = new ArrayList<Order>(this.ordersCatalog.values());
+		listOrders.sort(new Comparator<Order>() {
+	        @Override
+			public int compare(Order o1, Order o2) {
+				return - o1.getDate().compareTo(o2.getDate());
+			}
+		});
+		
+		return listOrders;
 	}
 
 	/**
 	 * A method for adding orders from a list (to the Map).
 	 * 
 	 * @param listOrders
+	 * @throws DuplicatedIdException 
 	 */
-	public void setOrders(List<Order> listOrders) {
+	public void setOrders(List<Order> listOrders) throws DuplicatedIdException {
 		for (final Order order : listOrders) {
 			this.addOrder(order);
 		}

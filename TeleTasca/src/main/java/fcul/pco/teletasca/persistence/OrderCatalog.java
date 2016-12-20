@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import fcul.pco.teletasca.domain.Order;
+import fcul.pco.teletasca.exceptions.InvalidDateException;
+import fcul.pco.teletasca.exceptions.InvalidIdException;
 
 /**
  * This class is responsible for saving and loading the Order catalog. The
@@ -50,8 +52,10 @@ public class OrderCatalog {
 	 * A method for loading the catalog.
 	 * @return the orders catalog
 	 * @throws FileNotFoundException
+	 * @throws InvalidIdException 
+	 * @throws InvalidDateException 
 	 */
-	public static List<Order> load() throws FileNotFoundException {
+	public static List<Order> load() throws FileNotFoundException, InvalidDateException, InvalidIdException {
 		final List<Order> ordersCatalog = new ArrayList<Order>();
 
 		final Scanner inputFile = new Scanner(new FileReader(OrderCatalog.file));

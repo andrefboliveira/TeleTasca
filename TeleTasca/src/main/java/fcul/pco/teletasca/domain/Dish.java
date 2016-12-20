@@ -1,8 +1,6 @@
 // -*- coding: utf-8 -*-
 package fcul.pco.teletasca.domain;
 
-import java.util.ArrayList;
-
 import fcul.pco.teletasca.exceptions.DuplicatedIdException;
 
 /**
@@ -23,15 +21,17 @@ public class Dish extends NutritionFacts {
 	private int id;
 	private String name;
 	private double price;
-	private DishType dishType;
 	private boolean available;
+	
+	private DishType dishType;
+	public enum DishType {
+		STANDARD, LIGHT, FORTWO
+	}
 	
 	private static int MaxId = 0;
 	private static int counter = (MaxId > 1) ? MaxId : 1;
 	
-	public enum DishType {
-		STANDARD, LIGHT, FORTWO
-	}
+	
 	
 	/**
 	 * Initializes a Dish instance.
@@ -49,9 +49,8 @@ public class Dish extends NutritionFacts {
 	 * NOS DOIS CONSTRUTORES
 	 * (int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate)
 	 */
-	public Dish(String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) throws DuplicatedIdException {
-		this(Dish.counter, name, price, servingSize, servings, calories, fat, sodium, carbohydrate);
-		this.available = true;
+	public Dish(String name, double price, boolean available, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) throws DuplicatedIdException {
+		this(Dish.counter, name, price, available, servingSize, servings, calories, fat, sodium, carbohydrate);
 		Dish.counter++;
 	}
 
@@ -67,13 +66,14 @@ public class Dish extends NutritionFacts {
 	 * 			 is a double
 	 */
 	// 	 se isto antes não dava erro, porque é que agora dá ao inserir o resto dos parâmetros??
-	private Dish(int id, String name, double price, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) throws DuplicatedIdException {
+	private Dish(int id, String name, double price, boolean available, int servingSize, int servings, int calories, double fat, double sodium, double carbohydrate) throws DuplicatedIdException {
 		super(servingSize, servings, calories, fat, sodium, carbohydrate);
 		// Erro comparar com NULO???
 		if (currentCatalog.getDishById(id) == null) {
 			this.id = id;
 			this.name = name;
 			this.price = price;
+			this.available = available;
 			setDishType();
 			
 			if (id > MaxId) {
@@ -116,6 +116,20 @@ public class Dish extends NutritionFacts {
 	}
 	
 	/**
+	 * @return the available
+	 */
+	public boolean isAvailable() {
+		return available;
+	}
+
+	/**
+	 * @param available the available to set
+	 */
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+
+	/**
 	 * A getter for the dish type.
 	 * @return the dish type
 	 */
@@ -151,14 +165,15 @@ public class Dish extends NutritionFacts {
 		final int dishId = Integer.parseInt(stringlist[0].trim());
 		final String dishName = stringlist[1].trim();
 		final double dishPrice = Double.parseDouble(stringlist[2].trim());
-		final int dishServingSize = Integer.parseInt(stringlist[3].trim());
-		final int dishServings = Integer.parseInt(stringlist[4].trim());
-		final int dishCalories = Integer.parseInt(stringlist[5].trim());
-		final double dishFat = Double.parseDouble(stringlist[6].trim());
-		final double dishSodium = Double.parseDouble(stringlist[7].trim());
-		final double dishCarbohydrate = Double.parseDouble(stringlist[8].trim());
+		final boolean dishAvalability = Boolean.parseBoolean(stringlist[3].trim());
+		final int dishServingSize = Integer.parseInt(stringlist[4].trim());
+		final int dishServings = Integer.parseInt(stringlist[5].trim());
+		final int dishCalories = Integer.parseInt(stringlist[6].trim());
+		final double dishFat = Double.parseDouble(stringlist[7].trim());
+		final double dishSodium = Double.parseDouble(stringlist[8].trim());
+		final double dishCarbohydrate = Double.parseDouble(stringlist[9].trim());
 
-		return new Dish(dishId, dishName, dishPrice, dishServingSize, dishServings, dishCalories, dishFat, dishSodium, dishCarbohydrate);
+		return new Dish(dishId, dishName, dishPrice, dishAvalability, dishServingSize, dishServings, dishCalories, dishFat, dishSodium, dishCarbohydrate);
 	}
 
 	/*
@@ -180,6 +195,8 @@ public class Dish extends NutritionFacts {
 		builder.append(this.name);
 		builder.append(",");
 		builder.append(this.price);
+		builder.append(",");
+		builder.append(this.available);
 		builder.append(super.toString());
 		return builder.toString();
 	}

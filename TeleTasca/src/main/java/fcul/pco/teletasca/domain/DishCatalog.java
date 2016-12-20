@@ -2,10 +2,14 @@
 package fcul.pco.teletasca.domain;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
 
 /**
  * The class represents the sets of Dishes of the restaurant. Note that load and
@@ -53,8 +57,9 @@ public class DishCatalog {
 	 * Loads a catalog from a file and returns a catalog instance.
 	 *
 	 * @throws IOException
+	 * @throws DuplicatedIdException 
 	 */
-	public void load() throws IOException {
+	public void load() throws IOException, DuplicatedIdException {
 		this.dishesCatalog = fcul.pco.teletasca.persistence.DishCatalog.load();
 		// System.out.println("Loaded DishCatalog\n");
 	}
@@ -63,25 +68,18 @@ public class DishCatalog {
 	 * Adds a new dish to the catalog.
 	 *
 	 * @param d : is a Dish instance.
+	 * @throws DuplicatedIdException 
 	 * @requires a Dish as a parameter
 	 * @ensures the given dish is added to the dishes catalog.
 	 */
-	public void addDish(Dish d) {
+	public void addDish(Dish d) throws DuplicatedIdException {
 		final int dishId = d.getId();
-		if (this.getDishById(dishId) != null) {
-			
+		if (this.getDishById(dishId) == null) {
 			this.dishesCatalog.put(dishId, d);
 		} else {
-			System.err.println("\nPrato não instanciado\n");
-
+			throw new DuplicatedIdException("O prato já existe");
 		}
 
-		// Ensure uniqueness in the catalog (not necessary, handled by Dish
-		// constructor):
-		/*
-		 * if (!this.dishesCatalog.keySet().contains(dishId)) {
-		 * this.dishesCatalog.put(dishId, d); }
-		 */
 	}
 
 	/**
@@ -111,6 +109,22 @@ public class DishCatalog {
 	public Collection<Dish> getDishes() {
 		return this.dishesCatalog.values();
 	}
+	
+	/**
+	 * Returns a collection of all available dishes.
+	 *
+	 * @return a Collection of available Dishes
+	 */
+	public Collection<Dish> getAvailableDishes() {
+		ArrayList<Dish> dishCollection = new ArrayList<Dish>();
+		for (Dish d : this.dishesCatalog.values()) {
+			if (d.isAvailable()) {
+				dishCollection.add(d);
+			}
+		}
+		return dishCollection;
+	}
+
 
 	/**
 	 * Given an id, removes the corresponding dish from the catalog.
@@ -119,12 +133,9 @@ public class DishCatalog {
 	 * @requires parameter "dishId" is an int (and is the Map key)
 	 */
 	public void removeDish(int dishId) {
-		try {
-			this.dishesCatalog.remove(dishId);
-		} catch (NullPointerException e) {
-			System.err.println("\nPrato não existe\n");
-		}
-		
+		Dish d = this.getDishById(dishId);
+		d.setAvailable(false);
+		this.dishesCatalog.put(dishId, d);
 	}
 
 }

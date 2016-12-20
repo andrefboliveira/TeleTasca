@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
+
 /**
  * The class represents the sets of Clients known (registered) on the system.
  * Note that load and save operations are actually done by the class
@@ -57,8 +59,9 @@ public class ClientCatalog {
 	 * Loads the catalog from a file.
 	 *
 	 * @throws FileNotFoundException
+	 * @throws DuplicatedIdException 
 	 */
-	public void load() throws FileNotFoundException {
+	public void load() throws FileNotFoundException, DuplicatedIdException {
 		this.clientsCatalog = fcul.pco.teletasca.persistence.ClientCatalog.load();
 		// System.out.println("Loaded ClientCatalog\n");
 	}
@@ -84,15 +87,16 @@ public class ClientCatalog {
 	 * Adds a client to the catalog.
 	 *
 	 * @param c
+	 * @throws DuplicatedIdException 
 	 * @requires a Client as parameter
 	 * @ensures the given client is added to the clients catalog.
 	 */
-	public void addClient(Client c) {
+	public void addClient(Client c) throws DuplicatedIdException {
 		final String cEmail = c.getEmail();
-		if (this.getClientByEmail(cEmail) != null) {
+		if (this.getClientByEmail(cEmail) == null) {
 			this.clientsCatalog.put(cEmail, c);
 		} else {
-
+			throw new DuplicatedIdException("O cliente já existe");
 		}
 		
 	}

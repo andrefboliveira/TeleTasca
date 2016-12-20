@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
@@ -27,7 +28,7 @@ public class Order {
 	private int id;
 	private Calendar date;
 	private Client client;
-	private ArrayList<Dish> dishList = new ArrayList<Dish>();
+	private ArrayList<Dish> dishList;
 	
 	private static int MaxId = 0;
 	private static int counter = (MaxId > 1) ? MaxId : 1;
@@ -65,11 +66,11 @@ public class Order {
 			this.id = id;
 			this.date = date;
 			this.client = client;
+			dishList = new ArrayList<Dish>();
 			
 			if (id > MaxId) {
 				MaxId = id;
 			}
-			
 		} else {
 			throw new DuplicatedIdException("A encomenda já existe");
 		}
@@ -100,6 +101,13 @@ public class Order {
 	 */
 	public int getId() {
 		return this.id;
+	}
+
+	/**
+	 * @return the date
+	 */
+	public Calendar getDate() {
+		return this.date;
 	}
 
 	/**
@@ -220,5 +228,10 @@ public class Order {
 		final Order other = (Order) obj;
 		return this.id == other.id;
 	}
+
+	
+	
+
+	
 
 }

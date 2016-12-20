@@ -14,6 +14,7 @@ import fcul.pco.teletasca.domain.Client;
 import fcul.pco.teletasca.domain.Dish;
 import fcul.pco.teletasca.domain.Drink;
 import fcul.pco.teletasca.domain.Order;
+import fcul.pco.teletasca.exceptions.DuplicatedIdException;
 import fcul.pco.teletasca.exceptions.InvalidDateException;
 
 /**
@@ -130,8 +131,14 @@ public class Menu {
 		System.out.println("Email:");
 		final String email = Menu.nextLine(in);
 
-		final Client c = new Client(name, email);
-		App.clientCatalog.addClient(c);
+		
+		try {
+			Client c = new Client(name, email);
+			App.clientCatalog.addClient(c);
+		} catch (DuplicatedIdException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		App.clientCatalog.save();
 	}
 
@@ -159,20 +166,36 @@ public class Menu {
 	 * @throws IOException
 	 */
 	private static void clientNewOrderMenu(Scanner in) throws IOException {
-		final Calendar date = Menu.getDate(in);
+		//TODO
+		Calendar date = null;
+		try {
+			date = Menu.getDate(in);
+		} catch (InvalidDateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		final List<Integer> chosenDishes = Menu.chooseDishes(in);
 
 		if (chosenDishes != null && !chosenDishes.isEmpty()) {
-			final Order newOrder = new Order(date, App.currentClient);
-
-			for (final Integer chosenDishId : chosenDishes) {
-				final Dish d = App.dishCatalog.getDishById(chosenDishId);
-				if (d != null) {
-					newOrder.addDish(d);
+			//TODO
+			try {
+				Order newOrder = new Order(date, App.currentClient);
+				
+				for (final Integer chosenDishId : chosenDishes) {
+					final Dish d = App.dishCatalog.getDishById(chosenDishId);
+					if (d != null) {
+						newOrder.addDish(d);
+					}
 				}
+
+				App.orderCatalog.addOrder(newOrder);
+				
+			} catch (DuplicatedIdException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
-			App.orderCatalog.addOrder(newOrder);
+			
 			App.orderCatalog.save();
 		}
 	}
@@ -238,8 +261,37 @@ public class Menu {
 		final double price = Menu.nextDouble(in);
 		System.out.print("\n");
 		
-		final Dish d = new Dish(description, price);
-		App.dishCatalog.addDish(d);
+		System.out.print("Peso: ");
+		final int servingSize = Menu.nextInt(in);
+		System.out.print("\n");
+		
+		System.out.print("Número de pessoas: ");
+		final int servings = Menu.nextInt(in);
+		System.out.print("\n");
+		
+		System.out.print("Calorias: ");
+		final int calories = Menu.nextInt(in);
+		System.out.print("\n");
+		
+		System.out.print("Lípidos: ");
+		final double fat = Menu.nextDouble(in);
+		System.out.print("\n");
+		
+		System.out.print("Sal: ");
+		final double sodium = Menu.nextDouble(in);
+		System.out.print("\n");
+		
+		System.out.print("Hidratos de carbono: ");
+		final double carbohydrate = Menu.nextDouble(in);
+		System.out.print("\n");
+		
+		try {
+			final Dish d = new Dish(description, price, true, servingSize, servings, calories, fat, sodium, carbohydrate);
+			App.dishCatalog.addDish(d);
+		} catch (DuplicatedIdException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		App.dishCatalog.save();
 	}
 
@@ -250,7 +302,7 @@ public class Menu {
 	 * @throws IOException
 	 */
 	private static void removeDishMenu(Scanner in) throws IOException {
-		final Collection<Dish> dishesList = App.dishCatalog.getDishes();
+		final Collection<Dish> dishesList = App.dishCatalog.getAvailableDishes();
 		if (dishesList != null && !dishesList.isEmpty()) {
 			for (final Dish dish : dishesList) {
 				System.out.println(Menu.formatString(dish.getId(), dish.getName()));
@@ -292,8 +344,9 @@ public class Menu {
 	 * A method to get the date and time of the order.
 	 * @param in : a Scanner instance that correspond to the input of the program.
 	 * @return the date and time of the order
+	 * @throws InvalidDateException 
 	 */
-	private static Calendar getDate(Scanner in) {
+	private static Calendar getDate(Scanner in) throws InvalidDateException {
 		System.out.println("Data da entrega [dd/mm/yyyy]: ");
 		final int[] dateInt = Menu.nextDate(in);
 		final int day = dateInt[0];
@@ -344,7 +397,7 @@ public class Menu {
 	private static List<Integer> chooseDishes(Scanner in) {
 		final List<Integer> chosenDishes = new ArrayList<Integer>();
 
-		final Collection<Dish> dishesList = App.dishCatalog.getDishes();
+		final Collection<Dish> dishesList = App.dishCatalog.getAvailableDishes();
 		if (dishesList != null && !dishesList.isEmpty()) {
 			int chosenOption;
 			do {
