@@ -1,0 +1,22 @@
+# Caso de uso 11: o cliente regista-se, faz a login, seleciona o menu Light, ordena três pratos e recebe uma bebida em oferta.
+1 # user = cliente
+1 # criar conta
+Marco Goa # nome do cliente
+mgoa@inyour.dreams.pt  # email do cliente
+3 # encomendar pratos
+30/12/2016 # data de entrega
+23:00 # hora de entrega
+2 # menu light
+8 # sopa da pedra
+8 # sopa da pedra
+7 # sopa de legumes
+0 # terminar
+# Parabens! A TeleTasca oferece-ilhe uma bebida!
+# CocaZero...1 servings...0 kcal...0.1g of glucides...
+4 # lista de encomendas
+# 3,andrefboliveira@gmail.com,2016/12/30 23:00,8,8,7
+5 # terminar
+3 # terminar
+
+
+
