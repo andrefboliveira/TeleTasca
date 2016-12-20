@@ -221,12 +221,12 @@ public class Order {
 		return builder.toString();
 	}
 
-	/**
-	 * Generates hashCode for a given order instance based on the unique id.
-	 */
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
+	 */
+	/**
+	 * Generates hashCode for a given order instance based on the unique id.
 	 */
 	@Override
 	public int hashCode() {
@@ -236,14 +236,14 @@ public class Order {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	/**
 	 * Indicates whether some other order is "equal to" this one.
 	 * 
 	 * @return true if the orders are the same, false otherwise.
-	 */
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
