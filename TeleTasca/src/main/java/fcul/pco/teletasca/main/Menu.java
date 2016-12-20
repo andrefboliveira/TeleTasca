@@ -132,16 +132,14 @@ public class Menu {
 
 		System.out.println("Email:");
 		final String email = Menu.nextLine(in);
-
 		
 		try {
 			Client c = new Client(name, email);
 			App.clientCatalog.addClient(c);
+			App.clientCatalog.save();
 		} catch (DuplicatedIdException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("\nO cliente já existe. Indique outro email\n");
 		}
-		App.clientCatalog.save();
 	}
 
 	/**
@@ -164,84 +162,76 @@ public class Menu {
 	/**
 	 * The menu for ordering dishes.
 	 * 
+<<<<<<< HEAD
+	 * @param in
+	 * @throws IOException 
+=======
 	 * @param in: a Scanner instance that correspond to the input of the program.
+>>>>>>> branch 'Fase2' of https://github.com/prokod3r/TeleTasca.git
 	 */
-	private static void makeOrder(Scanner in) {
-		//TODO
-		Calendar date = null;
+	private static void makeOrder(Scanner in) throws IOException {
 		try {
-			date = Menu.getDate(in);
-		} catch (InvalidDateException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+			Calendar date = Menu.getDate(in);
+			Order newOrder = new Order(date, App.currentClient);
 
-		Order newOrder = null;
-		try {
-			newOrder = new Order(date, App.currentClient);
-		} catch (DuplicatedIdException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		Dish dish;
-		int option;
-		
-		boolean end = true;
-		do {
-			System.out.println("Menu normal .............1");
-			System.out.println("Menu light ..............2");
-			System.out.println("Menu para dois ......... 3");
-			System.out.println("> ");
+			Dish dish;
+			int option;
 
-			option = Menu.nextInt(in);
+			boolean end = true;
+			do {
+				System.out.println("Menu normal .............1");
+				System.out.println("Menu light ..............2");
+				System.out.println("Menu para dois ......... 3");
+				System.out.println("> ");
 
-			switch (option) {
-				case 1:
-					do {
-						dish = selectDish(in, false);
-						if (dish != null) {
-							newOrder.addDish(dish);
-							
-						}
-					} while (dish != null);
-					break;
-				case 2:
-					do {
-						dish = selectLightDish(in);
-						if (dish != null) {
-							newOrder.addDish(dish);
-						}
-					} while (dish != null);
-					break;
-				case 3:
-					do {
-						dish = selectDish(in, true);
-						if (dish != null) {
-							newOrder.addDish(dish);
-						}
-					} while (dish != null);
-					break;
-				default:
-					end = false;
-					break;
+				option = Menu.nextInt(in);
+
+				switch (option) {
+					case 1:
+						do {
+							dish = selectDish(in, false);
+							if (dish != null) {
+								newOrder.addDish(dish);
+							}
+						} while (dish != null);
+						break;
+					case 2:
+						do {
+							dish = selectLightDish(in);
+							if (dish != null) {
+								newOrder.addDish(dish);
+							}
+						} while (dish != null);
+						break;
+					case 3:
+						do {
+							dish = selectDish(in, true);
+							if (dish != null) {
+								newOrder.addDish(dish);
+							}
+						} while (dish != null);
+						break;
+					default:
+						end = false;
+						break;
+				}
+			} while (!end);
+
+			Drink drink = offerDrink(newOrder.sumDishesPrice(), option);
+			if (drink != null) {
+				System.out.println("Parabens! A TeleTasca oferece-lhe uma bebida!");
+				System.out.println(drink.quickFacts());
 			}
-		} while (!end);
-		
-		Drink drink = offerDrink(newOrder.sumDishesPrice(), option);
-		if (drink != null) {
-			System.out.println("Parabens! A TeleTasca oferece-lhe uma bebida!");
-			System.out.println(drink.quickFacts());			
-		}
-		
-		try {
+
 			App.orderCatalog.addOrder(newOrder);
 			App.orderCatalog.save();
-		} catch (DuplicatedIdException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		} catch (InvalidDateException e1) {
+			System.err.println("Erro no formato da data. Indique novamente conforme o formato indicado");
+			makeOrder(in);
+		} catch (DuplicatedIdException e1) {
+			System.err.println("A encomenda já existe");
+			makeOrder(in);
 		}
 	}
 	
@@ -334,11 +324,10 @@ public class Menu {
 		try {
 			final Dish d = new Dish(description, price, true, servingSize, servings, calories, fat, sodium, carbohydrate);
 			App.dishCatalog.addDish(d);
+			App.dishCatalog.save();
 		} catch (DuplicatedIdException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("O prato já existe. Não foi adicionado");
 		}
-		App.dishCatalog.save();
 	}
 
 	/**
@@ -405,18 +394,23 @@ public class Menu {
 		final int hour = timeInt[0];
 		final int minutes = timeInt[1];
 
-		final Calendar date = Calendar.getInstance();
-		//date.setLenient(false);
+		Calendar date = Calendar.getInstance();
+		date.setLenient(false);
 		
 		try {
-			date.set(year, month, day, hour, minutes);
+			date.set(year, month-1, day, hour, minutes);
 		}
 		catch (IllegalArgumentException e) {
 			throw new InvalidDateException("Erro no parsing da data. Usar formato indicado");
 		}
 
 		return date;
-	}
+	}	
+	
+	
+	
+	/* TODO ALTERAR DE ACORDO COM SELECT DISH */
+
 
 
 	/**
@@ -462,6 +456,7 @@ public class Menu {
 		if (dishesList.isEmpty()) {
 			System.err.println("Não há pratos no menu Light");
 			selectDish(in, false);
+			return null;
 		}
 		for (final Dish d : dishesList) {
 			System.out.println(d.quickFacts() + d.getId());
