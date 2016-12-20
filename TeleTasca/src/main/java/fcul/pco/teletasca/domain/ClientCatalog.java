@@ -38,7 +38,9 @@ public class ClientCatalog {
 	}
 	
 	/**
-	 * @return
+	 * A getter for the client catalog.
+	 * 
+	 * @return an instance of a client catalog.
 	 */
 	public static ClientCatalog getClientCatalog(){
 		return clientCatInst;
@@ -47,7 +49,7 @@ public class ClientCatalog {
 	
 	/**
 	 * Saves the catalog to a file.
-	 *
+	 * 
 	 * @throws IOException
 	 */
 	public void save() throws IOException {
@@ -70,7 +72,7 @@ public class ClientCatalog {
 	 * Given an email address, the corresponding Client is returned. If it is
 	 * not found in the catalog, null is returned.
 	 *
-	 * @param email : a string that contains an email address.
+	 * @param email: a string that contains an email address.
 	 * @return an instance of Client or null.
 	 * @requires a string with the email as a parameter
 	 * @ensures returns the corresponding client or null if it doesn't exist
@@ -86,7 +88,7 @@ public class ClientCatalog {
 	/**
 	 * Adds a client to the catalog.
 	 *
-	 * @param c
+	 * @param c, an instance of Client
 	 * @throws DuplicatedIdException 
 	 * @requires a Client as parameter
 	 * @ensures the given client is added to the clients catalog.
@@ -98,7 +100,6 @@ public class ClientCatalog {
 		} else {
 			throw new DuplicatedIdException("O cliente já existe");
 		}
-		
 	}
 
 }

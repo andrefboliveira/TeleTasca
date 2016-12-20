@@ -36,14 +36,13 @@ public class Order {
 	private static OrderCatalog currentCatalog = fcul.pco.teletasca.main.App.orderCatalog;
 	private static ClientCatalog currentClientCatalog = fcul.pco.teletasca.main.App.clientCatalog;
 	private static DishCatalog currentDishCatalog = fcul.pco.teletasca.main.App.dishCatalog;
-
 	
 
 	/**
 	 * Initializes an Order instance.
 	 *
-	 * @param date : a Calendar instance (with time).
-	 * @param client : an instance of Client.
+	 * @param date: a Calendar instance (with time).
+	 * @param client: an instance of Client.
 	 * @throws DuplicatedIdException 
 	 */
 	public Order(Calendar date, Client client) throws DuplicatedIdException {
@@ -55,9 +54,9 @@ public class Order {
 	 * Creates a private Order instance with a specific id, 
 	 * only for managing purposes.
 	 *
-	 * @param id : unique id of the order
-	 * @param date : date of the order
-	 * @param client : who made the order.
+	 * @param id: unique id of the order
+	 * @param date: date of the order
+	 * @param client: who made the order.
 	 * @throws DuplicatedIdException 
 	 */
 	private Order(int id, Calendar date, Client client) throws DuplicatedIdException {
@@ -112,6 +111,8 @@ public class Order {
 	}
 
 	/**
+	 * A getter for the order date.
+	 * 
 	 * @return the date
 	 */
 	public Calendar getDate() {
@@ -129,7 +130,7 @@ public class Order {
 	/**
 	 * Creates an Order instance from a string.
 	 *
-	 * @param s : a string that contains the id, the client's email address, the
+	 * @param s: a string that contains the id, the client's email address, the
 	 *            date and the list of Dishes ids that compose the order.
 	 * @return an Order instance
 	 * @throws InvalidIdException 
@@ -184,7 +185,7 @@ public class Order {
 	 * the list of dishes ordered.
 	 *
 	 * @return a string that contains the id, the client's email address, the
-	 *         date and the list of Dishes ids that compose the order, following
+	 *         date and the list of Dishes id's that compose the order, following
 	 *         .csv format.
 	 */
 	@Override
@@ -203,6 +204,9 @@ public class Order {
 		for (final Dish dish : this.dishList) {
 			builder.append(",");
 			builder.append(dish.getId());
+			if (!dish.isAvailable()) {
+				builder.append(" - não disponível");
+			}
 		}
 		return builder.toString();
 	}
@@ -245,10 +249,5 @@ public class Order {
 		final Order other = (Order) obj;
 		return this.id == other.id;
 	}
-
-	
-	
-
-	
 
 }

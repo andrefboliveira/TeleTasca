@@ -92,18 +92,19 @@ public class App {
 
 	/**
 	 * A method to execute all use cases.  
+	 * 
 	 * @throws IOException
 	 */
 	public static void executeAllUseCases() throws IOException {
-		App.executeUseCase("data/usecase1.dat");
-		App.executeUseCase("data/usecase2.dat");
-		App.executeUseCase("data/usecase3.dat");
-		App.executeUseCase("data/usecase4.dat");
-		App.executeUseCase("data/usecase5.dat");
-		App.executeUseCase("data/usecase6.dat");
-		App.executeUseCase("data/usecase7.dat");
-		App.executeUseCase("data/usecase8.dat");
-		App.executeUseCase("data/usecase9.dat");
+//		App.executeUseCase("data/usecase1.dat");
+//		App.executeUseCase("data/usecase2.dat");
+//		App.executeUseCase("data/usecase3.dat");
+//		App.executeUseCase("data/usecase4.dat");
+//		App.executeUseCase("data/usecase5.dat");
+//		App.executeUseCase("data/usecase6.dat");
+//		App.executeUseCase("data/usecase7.dat");
+//		App.executeUseCase("data/usecase8.dat");
+//		App.executeUseCase("data/usecase9.dat");
 	}
 
 	/**
@@ -137,7 +138,7 @@ public class App {
 			App.orderCatalog.save();
 		} catch (DuplicatedIdException e) {
 			// TODO Auto-generated catch block
-			// Não faz nada porque ha garantia que nunca é duplicado no inicio do programa
+			// Não faz nada porque há garantia que nunca é duplicado no inicio do programa
 			e.printStackTrace();
 		} catch (InvalidDateException e) {
 			// TODO Auto-generated catch block

@@ -40,7 +40,9 @@ public class OrderCatalog {
 	}
 	
 	/**
-	 * @return
+	 * A getter for an order catalog.
+	 * 
+	 * @return an instance of an order catalog.
 	 */
 	public static OrderCatalog getOrderCatalog(){
 		return orderCatInst;
@@ -72,7 +74,7 @@ public class OrderCatalog {
 	/**
 	 * Adds an Order instance to the catalog.
 	 *
-	 * @param o : an Order instance
+	 * @param o: an Order instance
 	 * @throws DuplicatedIdException 
 	 */
 	public void addOrder(Order o) throws DuplicatedIdException {
@@ -88,7 +90,7 @@ public class OrderCatalog {
 	 * Given an id, returns the corresponding Order instance. 
 	 * If no instance is found, the value null is returned.
 	 *
-	 * @param id : the id of a Order
+	 * @param id: the id of a Order
 	 * @return Order instance or null
 	 * @requires parameter "id" is a int
 	 * @ensures returns an instance of order corresponding to the given id,

@@ -1,4 +1,3 @@
-
 package fcul.pco.teletasca.main;
 
 import java.io.IOException;
@@ -28,10 +27,8 @@ import fcul.pco.teletasca.exceptions.InvalidDateException;
  * @author André Oliveira 45648
  * @author Tânia Maldonado 44745
  */
-
 public class Menu {
 
-	
 	
 	/**
 	 * The main menu of the application. It serves to distinguish which kind of
@@ -100,7 +97,7 @@ public class Menu {
 					if (App.currentClient != null) {
 						Menu.makeOrder(in);
 					} else {
-						System.err.println("\nNão fez login\n");
+						System.err.println("\nDeve fazer log in antes de fazer uma encomenda.\n");
 						// end = false;
 					}
 					break;
@@ -108,7 +105,7 @@ public class Menu {
 					if (App.currentClient != null) {
 						Menu.clientShowOrders();
 					} else {
-						System.err.println("\nNão fez login\n");
+						System.err.println("\nDeve fazer log in antes de ver uma encomenda.\n");
 						// end = false;
 					}
 					break;
@@ -299,7 +296,7 @@ public class Menu {
 	/**
 	 * The menu for adding dishes.
 	 *
-	 * @param in : a Scanner instance that correspond to the input of the program.
+	 * @param in: a Scanner instance that correspond to the input of the program.
 	 * @throws IOException
 	 */
 	private static void addDishMenu(Scanner in) throws IOException {
