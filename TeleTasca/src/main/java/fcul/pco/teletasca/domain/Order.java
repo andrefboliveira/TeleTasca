@@ -187,6 +187,9 @@ public class Order {
 		for (final Dish dish : this.dishList) {
 			builder.append(",");
 			builder.append(dish.getId());
+			if (!dish.isAvailable()) {
+				builder.append(" - não disponível");
+			}
 		}
 		return builder.toString();
 	}

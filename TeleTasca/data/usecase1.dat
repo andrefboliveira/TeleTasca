@@ -2,7 +2,13 @@
 # user = gerente
 2
 1 # adicionar um prato
-bacalhau à braz # descrição do prato
-5.99 # preço
+Lasagne # descrição do prato
+7.5 # preço
+650 #servingSize
+1 #servings
+900 #calories
+29.85 #fat
+2.4 #sodium
+99.5 #carbohydrate
 5 # terminar
 3 # terminar

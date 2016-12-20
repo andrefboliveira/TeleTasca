@@ -4,8 +4,20 @@
 1 # adicionar um prato
 sopa de legumes # descrição do prato
 1.50 # preço
+250 #servingSize
+1 #servings
+290 #calories
+0.8 #fat
+0.1 #sodium
+5.2 #carbohydrate
 1
-sopa da pedra
-2.5
+sopa da pedra #descrição
+2.5	#preço
+250 #servingSize
+1 #servings
+390 #calories
+1.8 #fat
+0.5 #sodium
+20.2 #carbohydrate
 5 # terminar
 3 # terminar
