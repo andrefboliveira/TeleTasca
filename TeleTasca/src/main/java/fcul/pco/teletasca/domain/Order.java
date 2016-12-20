@@ -22,8 +22,6 @@ import fcul.pco.teletasca.exceptions.InvalidIdException;
  * @author Tânia Maldonado 44745
  */
 public class Order {
-	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
-
 	
 	private int id;
 	private Calendar date;
@@ -34,7 +32,6 @@ public class Order {
 	private static int counter = (MaxId > 1) ? MaxId : 1;
 	
 	private static String dateFormatString = "yyyy/MM/dd HH:mm";
-
 	
 	private static OrderCatalog currentCatalog = fcul.pco.teletasca.main.App.orderCatalog;
 	private static ClientCatalog currentClientCatalog = fcul.pco.teletasca.main.App.clientCatalog;
@@ -62,7 +59,6 @@ public class Order {
 	 * @throws DuplicatedIdException 
 	 */
 	private Order(int id, Calendar date, Client client) throws DuplicatedIdException {
-		// Erro comparar com NULO???
 		if (currentCatalog.getOrderById(id) == null) {
 			this.id = id;
 			this.date = date;

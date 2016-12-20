@@ -13,7 +13,6 @@ import fcul.pco.teletasca.exceptions.DuplicatedIdException;
  *
  */
 public class Client {
-	// Ver duplicados. Usar catalogo. Verificar no construtor e quando adiciona o catálogo.
 	
 	private static ClientCatalog currentCatalog = fcul.pco.teletasca.main.App.clientCatalog;
 
