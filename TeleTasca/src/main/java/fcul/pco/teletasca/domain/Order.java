@@ -33,6 +33,9 @@ public class Order {
 	private static int MaxId = 0;
 	private static int counter = (MaxId > 1) ? MaxId : 1;
 	
+	private static String dateFormatString = "yyyy/MM/dd HH:mm";
+
+	
 	private static OrderCatalog currentCatalog = fcul.pco.teletasca.main.App.orderCatalog;
 	private static ClientCatalog currentClientCatalog = fcul.pco.teletasca.main.App.clientCatalog;
 	private static DishCatalog currentDishCatalog = fcul.pco.teletasca.main.App.dishCatalog;
@@ -146,12 +149,12 @@ public class Order {
 		final String clientEmail = stringList[1].trim();
 
 		final Calendar orderDate = Calendar.getInstance();
-		orderDate.setLenient(false);
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(fcul.pco.teletasca.main.ApplicationConfiguration.DATE_FORMART, new Locale("pt", "PT"));
+		//orderDate.setLenient(false);
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormatString, new Locale("pt", "PT"));
 		try {
 			orderDate.setTime(dateFormat.parse(stringList[2].trim()));
 		} catch (ParseException | IllegalArgumentException e) {
-			throw new InvalidDateException("Erro no parsing da data. Usar formato: " + fcul.pco.teletasca.main.ApplicationConfiguration.DATE_FORMART);
+			throw new InvalidDateException("Erro no parsing da data. Usar formato: " + dateFormatString);
 		}
 		
 		final Client c = currentClientCatalog.getClientByEmail(clientEmail);
@@ -197,7 +200,7 @@ public class Order {
 		builder.append(",");
 
 		final Date dateValue = this.date.getTime();
-		final SimpleDateFormat dateFormat = new SimpleDateFormat(fcul.pco.teletasca.main.ApplicationConfiguration.DATE_FORMART, new Locale("pt", "PT"));
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(dateFormatString, new Locale("pt", "PT"));
 		final String dateString = dateFormat.format(dateValue);
 		builder.append(dateString);
 

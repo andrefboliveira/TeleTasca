@@ -23,6 +23,4 @@ public class ApplicationConfiguration {
 	public static final String ORDER_CATALOG_FILENAME = "orderCatalog";
 	public static final String CLIENT_CATALOG_FILENAME = "clientCatalog";
 	
-	public static final String DATE_FORMART = "yyyy/MM/dd HH:mm";
-
 }

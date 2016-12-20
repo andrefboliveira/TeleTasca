@@ -406,7 +406,7 @@ public class Menu {
 		final int minutes = timeInt[1];
 
 		final Calendar date = Calendar.getInstance();
-		date.setLenient(false);
+		//date.setLenient(false);
 		
 		try {
 			date.set(year, month, day, hour, minutes);

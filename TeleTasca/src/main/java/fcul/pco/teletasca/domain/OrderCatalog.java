@@ -130,6 +130,7 @@ public class OrderCatalog {
 	 */
 	public List<Order> getOrders() {
 		List<Order> listOrders = new ArrayList<Order>(this.ordersCatalog.values());
+		// Since the method compareTo t
 		listOrders.sort(new Comparator<Order>() {
 	        @Override
 			public int compare(Order o1, Order o2) {
