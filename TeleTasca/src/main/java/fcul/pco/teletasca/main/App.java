@@ -96,15 +96,16 @@ public class App {
 	 * @throws IOException
 	 */
 	public static void executeAllUseCases() throws IOException {
-//		App.executeUseCase("data/usecase1.dat");
-//		App.executeUseCase("data/usecase2.dat");
-//		App.executeUseCase("data/usecase3.dat");
-//		App.executeUseCase("data/usecase4.dat");
-//		App.executeUseCase("data/usecase5.dat");
-//		App.executeUseCase("data/usecase6.dat");
-//		App.executeUseCase("data/usecase7.dat");
-//		App.executeUseCase("data/usecase8.dat");
-//		App.executeUseCase("data/usecase9.dat");
+		App.executeUseCase("data/usecase1.dat");
+		App.executeUseCase("data/usecase2.dat");
+		App.executeUseCase("data/usecase3.dat");
+		App.executeUseCase("data/usecase4.dat");
+		App.executeUseCase("data/usecase5.dat");
+		App.executeUseCase("data/usecase6.dat");
+		App.executeUseCase("data/usecase7.dat");
+		App.executeUseCase("data/usecase8.dat");
+		App.executeUseCase("data/usecase9.dat");
+		App.executeUseCase("data/usecase10.dat");
 	}
 
 	/**

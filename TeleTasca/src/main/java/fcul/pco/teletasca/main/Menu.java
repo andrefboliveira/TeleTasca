@@ -458,9 +458,9 @@ public class Menu {
 	private static Dish selectLightDish(Scanner in) {
 		Collection<Dish> dishesList = App.dishCatalog.getDishesByType(DishType.LIGHT);
 		for (final Dish d : dishesList) {
-			System.out.println(d.getName() + d.quickFacts() + d.getId());
+			System.out.println(d.quickFacts() + d.getId());
 		}
-		System.out.println("Escolhe um prato (0 para terminar): ");
+		System.out.println("Escolhe um prato (0 para terminar): \n");
 		
 		int chosenOption = Menu.nextInt(in);
 		return App.dishCatalog.getDishById(chosenOption);
