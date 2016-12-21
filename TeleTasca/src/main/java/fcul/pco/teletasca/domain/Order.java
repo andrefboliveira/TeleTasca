@@ -215,7 +215,7 @@ public class Order {
 			builder.append(",");
 			builder.append(dish.getId());
 			if (!dish.isAvailable()) {
-				builder.append(" - não disponível");
+				builder.append(" - Não Disponível");
 			}
 		}
 		return builder.toString();
@@ -259,5 +259,4 @@ public class Order {
 		final Order other = (Order) obj;
 		return this.id == other.id;
 	}
-
 }

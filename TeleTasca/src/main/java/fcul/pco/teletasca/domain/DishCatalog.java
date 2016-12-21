@@ -38,9 +38,9 @@ public class DishCatalog {
 	}
 	
 	/**
-	 * A getter for the dishes catalog.
+	 * A getter for the dishes catalog. Padrão Singleton
 	 * 
-	 * @return an instance of a dish catalog
+	 * @return the unique instance of a dish catalog
 	 */
 	public static DishCatalog getDishCatalog(){
 		return dishCatInst;
@@ -128,7 +128,7 @@ public class DishCatalog {
 	}
 	
 	/**
-	 * Returns a collection of all available dishes of a given type (STANDARD, LIGHT, FORTWO).
+	 * Returns a collection of all available dishes of a given type (LIGHT, FORTWO).
 	 *
 	 * @return a Collection of available Dishes of a given type
 	 */

@@ -10,6 +10,7 @@ import fcul.pco.teletasca.domain.Client;
 import fcul.pco.teletasca.domain.ClientCatalog;
 import fcul.pco.teletasca.domain.DishCatalog;
 import fcul.pco.teletasca.domain.OrderCatalog;
+import fcul.pco.teletasca.exceptions.BadDataFormatException;
 import fcul.pco.teletasca.exceptions.DuplicatedIdException;
 import fcul.pco.teletasca.exceptions.InvalidDateException;
 import fcul.pco.teletasca.exceptions.InvalidIdException;
@@ -116,37 +117,49 @@ public class App {
 	 * @param args
 	 * @throws IOException
 	 */
-	public static void main(String[] args) throws IOException {
-		App.initialize();
-		// Loads the Catalogs; if they don't exist creates new empty ones
+	public static void main(String[] args)   {
 		try {
-			App.dishCatalog.load();
-		} catch (final FileNotFoundException e) {
-			App.dishCatalog.save();
-		} catch (DuplicatedIdException e) {
-			// Do nothing. There is no duplicate id on startup
+			try {
+				App.initialize();
+				// Loads the Catalogs; if they don't exist creates new empty
+				// ones
+				try {
+					App.dishCatalog.load();
+				} catch (final FileNotFoundException e) {
+					App.dishCatalog.save();
+				} catch (DuplicatedIdException e) {
+					// Do nothing. There is no duplicate id on startup
+				}
+				try {
+					App.clientCatalog.load();
+				} catch (final FileNotFoundException e) {
+					App.clientCatalog.save();
+				} catch (DuplicatedIdException e) {
+					// Do nothing. There is no duplicate id on startup
+				}
+				try {
+					App.orderCatalog.load();
+				} catch (final FileNotFoundException e) {
+					App.orderCatalog.save();
+				} catch (DuplicatedIdException e) {
+					// Do nothing. There is no duplicate id on startup
+				} catch (InvalidDateException e) {
+					// Do nothing. File correctly formated on startup
+				} catch (InvalidIdException e) {
+					// Do nothing. File correctly formated on startup
+				}
+				System.out.println("UseCases:\n");
+				executeAllUseCases();
+				System.out.println("InteractiveMode:\n");
+				App.interactiveMode();
+			} catch (Exception e) {
+				throw new BadDataFormatException("Unable to procced");
+			}
+
+		} catch (BadDataFormatException e) {
+			System.err.println("Bad Format data. Exit");
+			System.exit(0);
 		}
-		try {
-			App.clientCatalog.load();
-		} catch (final FileNotFoundException e) {
-			App.clientCatalog.save();
-		} catch (DuplicatedIdException e) {
-			// Do nothing. There is no duplicate id on startup
-		}
-		try {
-			App.orderCatalog.load();
-		} catch (final FileNotFoundException e) {
-			App.orderCatalog.save();
-		} catch (DuplicatedIdException e) {
-			// Do nothing. There is no duplicate id on startup
-		} catch (InvalidDateException e) {
-			// Do nothing. File correctly formated on startup
-		} catch (InvalidIdException e) {
-			// Do nothing. File correctly formated on startup
-		}
-		System.out.println("UseCases:\n");
-		executeAllUseCases();
-		System.out.println("InteractiveMode:\n");
-		App.interactiveMode();
+		
 	}
 }

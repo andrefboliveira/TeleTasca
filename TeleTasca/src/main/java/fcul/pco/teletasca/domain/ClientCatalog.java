@@ -38,9 +38,9 @@ public class ClientCatalog {
 	}
 	
 	/**
-	 * A getter for the client catalog.
+	 * A getter for the client catalog. Padrão Singleton
 	 * 
-	 * @return an instance of a client catalog.
+	 * @return the unique instance of a client catalog.
 	 */
 	public static ClientCatalog getClientCatalog(){
 		return clientCatInst;

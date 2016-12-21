@@ -40,9 +40,9 @@ public class OrderCatalog {
 	}
 	
 	/**
-	 * A getter for an order catalog.
+	 * A getter for an order catalog. Padrão Singleton
 	 * 
-	 * @return an instance of an order catalog.
+	 * @return the unique instance of an order catalog.
 	 */
 	public static OrderCatalog getOrderCatalog(){
 		return orderCatInst;
@@ -124,13 +124,17 @@ public class OrderCatalog {
 	}
 
 	/**
-	 * Returns the list of all orders.
+	 * Returns the list of all orders reverse sorted by date.
 	 *
 	 * @return a list of Orders.
 	 */
 	public List<Order> getOrders() {
 		List<Order> listOrders = new ArrayList<Order>(this.ordersCatalog.values());
-		// Since the method compareTo t
+		/* Since the method compareTo is already defined for the field of interest (Calendar)
+		 * there is no need in implementing interfaces.
+		 * Comparable interface also should not be used. Because by defition that defines natural order
+		 * and that is not what we want.
+		*/
 		listOrders.sort(new Comparator<Order>() {
 	        @Override
 			public int compare(Order o1, Order o2) {
