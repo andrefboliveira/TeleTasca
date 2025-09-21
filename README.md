@@ -8,10 +8,14 @@ Java
 # Details
 Pair project
 
-Development of sample application to practice Object-Oriented Programming.
-Java console application to manage customer and food orders for a restaurant
+Development of sample application to practise Object-Oriented Programming.
+Java console application to manage orders for a fictional restaurant. For example, it allows customers to order dishes and the manager to create new dishes entries.
+Data is saved on raw .CSV files.
 
-For more information, please check the [project description](Outros/Enunciado)
+For more information, please check the [project description files](Outros/Enunciado)
+- [Part 1](./Outros/Enunciado/Fase%201.pdf)
+- [Part 2](./Outros/Enunciado/Fase%202.pdf)
+
 
 # Contributors
 - André Filipe Bernardes Oliveira
